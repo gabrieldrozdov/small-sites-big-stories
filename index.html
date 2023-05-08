@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sites & Stories</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+
+		<header class="intro" onclick="introOut(); mainIn();">
+			<div class="intro-content">
+				<h1 class="intro-title">Sites & Stories</h1>
+				<h2 class="intro-subtitle">Interactive narratives<br>told through a library of microsites<br>using as little code as possible</h3>
+			</div>
+			<p class="intro-prompt">Click anywhere to enter the library</p>
+		</header>
+
+		<div class="about">
+
+		</div>
+	
+		<main class="main">
+			<div class="main-link main-link-about" onclick="aboutIn(); mainDown();">About the Library</div>
+			<div class="main-link main-link-prev">Previous story</div>
+			<div class="main-link main-link-next">Next story</div>
+			<div class="main-link main-link-library" onclick="libraryIn(); mainUp();">Browse the Library</div>
+			<div class="main-content">
+				<div class="main-story">
+					<h3 class="story-title">
+						A kid loses their ice cream to a swooping falcon
+						<div class="story-divider"></div>
+						<span class="story-subtitle">A <span class="story-genre">story</span> told in <span class="story-lines">20</span> line<span class="story-lines-plural">s</span> of code</span>
+					</h3>
+					<ul class="story-tags">
+						<li class="story-tag">Tag 1</li>
+						<li class="story-tag">Tag 2</li>
+						<li class="story-tag">Tag 3</li>
+						<li class="story-tag">Tag 4</li>
+					</ul>
+				</div>
+				<div class="main-display">
+					<iframe class="main-iframe" src="https://gabrieldrozdov.github.io/nocode/reallysmall"></iframe>
+				</div>
+				<div class="main-code">
+					<a class="main-code-cdn" href="#" target="_blank">JS LIBRARY: p5.js<span class="tooltip">A “library” is something that lets you extend the functionality of HTML, CSS, or JavaScript with new functions. Examples of libraries include p5.js for programming graphics, Tone.js for sound, ml5.js for machine learning, three.js for 3D graphics, and matter.js for physics simulations.</span></a>
+					<div class="code">
+						<div class="code-html">
+							<div class="code-heading">HTML<span class="tooltip">HTML (HyperText Markup Language) is a programming language used for structuring web pages. Internet browsers read HTML files to show you a website’s content.</span></div>
+							<pre class="code-text"><code id="html" contenteditable="true" oninput="updatePreview();"></code></pre>
+						</div>
+						<div class="code-css">
+							<div class="code-heading">CSS<span class="tooltip">CSS (Cascading Style Sheets) is a programming language used for styling web pages. This includes everything from how typography will look, to how information is laid out and organized. Internet browsers read CSS in conjunction with HTML.</span></div>
+							<pre class="code-text"><code id="css" contenteditable="true" oninput="updatePreview();"></code></pre>
+						</div>
+						<div class="code-js">
+							<div class="code-heading">JavaScript<span class="tooltip">JavaScript (JS) is a programming language used for dynamically modifying web pages. Some uses cases for JS include adding interactive elements, performing computation, or generating data and content. JS is able to manipulate HTML and CSS after the web page loads.</span></div>
+							<pre class="code-text"><code id="js" contenteditable="true" oninput="updatePreview();"></code></pre>
+						</div>
+					</div>
+					<div class="main-code-options">
+						<div class="main-code-option">Reset</div>
+						<a class="main-code-option" href="#" target="_blank">Download</a>
+						<a class="main-code-option" href="#" target="_blank">New&nbsp;Tab</a>
+					</div>
+				</div>
+			</div>
+		</main>
+	
+		<div class="library">
+			<div class="library-return" onclick="libraryDown(); mainIn();">Return to your story</div>
+
+			<div class="library-controls">
+				<div class="sorting">
+					<h4 class="controls-heading">Sorting</h4>
+					<div class="controls-subsection">
+						<ul class="controls-options">
+							<li>Fewest lines of code</li>
+							<li>Most lines of code</li>
+							<li>Title A–Z</li>
+							<li>Title Z–A</li>
+							<li>Genre A–Z</li>
+							<li>Genre Z–A</li>
+							<li>Random (click to shuffle)</li>
+						</ul>
+					</div>
+				</div>
+				<div class="filters">
+					<h4 class="controls-heading">Filters</h4>
+					<div class="controls-subsection">
+						<h5>Lines of Code</h5>
+						<ul class="controls-options">
+							<li>10 or fewer lines of code</li>
+							<li>11–20 lines of code</li>
+							<li>21–30 lines of code</li>
+							<li>31–40 lines of code</li>
+							<li>41–50 lines of code</li>
+							<li>50 or more lines of code</li>
+						</ul>
+					</div>
+					<div class="controls-subsection">
+						<h5>Programming Languages</h5>
+						<ul class="controls-options">
+							<li>HTML</li>
+							<li>HTML+CSS</li>
+							<li>HTML+CSS+JS</li>
+						</ul>
+					</div>
+					<div class="controls-subsection">
+						<h5>Types of Interaction</h5>
+						<ul class="controls-options">
+							<li>Mouse</li>
+							<li>Scroll Wheel</li>
+							<li>Keyboard</li>
+							<li>Camera</li>
+							<li>Microphone</li>
+						</ul>
+					</div>
+					<div class="controls-subsection">
+						<h5>Genre</h5>
+						<ul class="controls-options">
+							<li>Romcom</li>
+							<li>Comedy</li>
+							<li>Drama</li>
+							<li>Mystery</li>
+							<li>Thriller</li>
+							<li>Adventure</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="library-catalog">
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="blue">
+						<h4>This is another story I'd like to tell</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="purple">
+						<h4>Here goes one more story</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="yellow">
+						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="pink">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="green">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="blue">
+						<h4>This is another story I'd like to tell</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="purple">
+						<h4>Here goes one more story</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="yellow">
+						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="pink">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="green">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="blue">
+						<h4>This is another story I'd like to tell</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="purple">
+						<h4>Here goes one more story</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="yellow">
+						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="pink">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="green">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="blue">
+						<h4>This is another story I'd like to tell</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="purple">
+						<h4>Here goes one more story</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="yellow">
+						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="pink">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="green">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="blue">
+						<h4>This is another story I'd like to tell</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="purple">
+						<h4>Here goes one more story</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="yellow">
+						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="pink">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="green">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-item">
+					<div class="library-item-content" data-color="red">
+						<h4>Story name goes</h4>
+					</div>
+				</div>
+				<div class="library-padding"></div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>

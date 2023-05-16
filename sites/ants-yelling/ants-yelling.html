@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ants yelling as loud as they possibly can</title>
+
+<style>
+/* CSS START */
+.container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.ant {
+	font-size: 5px;
+	transition: 1s;
+}
+/* CSS END */
+</style>
+
+</head>
+<body>
+
+<!-- HTML START -->
+<div class="container">
+	<div class="ant">AH</div>
+	<div class="ant">AH</div>
+	<div class="ant">AH</div>
+	<div class="ant">AH</div>
+	<div class="ant">AH</div>
+</div>
+<!-- HTML END -->
+
+<script>
+// JS START
+let ants = document.querySelectorAll(".ant");
+setInterval(() => {
+	let ant = ants[Math.floor(Math.random()*ants.length)];
+	ant.style.fontSize = "20px";
+	setTimeout(() => {ant.style.fontSize = "5px";}, 500);
+}, 500)
+// JS END
+</script>
+
+</body>
+</html>

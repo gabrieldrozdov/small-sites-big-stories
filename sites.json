@@ -1,0 +1,47 @@
+{
+	"ants-yelling": {
+		"title": "A colony of ants yelling as loud as they possibly can",
+		"desc": "Yelling ants are represented by the word “AH” contained in <div> tags in the HTML. The JavaScript uses a setInterval loop that runs every 500 milliseconds. Each time that loop runs, a random ant is selected and set to a large font size. Shortly thereafter, the font size is set back to its original tiny size. CSS is mainly used to center and equally space everything with flexbox.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["21to40"], ["js", "HTML+CSS+JS"], ["loops", "Loops"], ["comedy", "Comedy"], ["nointeraction", "No Interaction"], ["responsive", "Desktop+Mobile"]],
+		"lines": 24,
+		"library": ["p5.js", "https://p5js.org/", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"],
+		"src": "sites/ants-yelling/ants-yelling.html"
+	},
+	"gentle-giant": {
+		"title": "A gentle giant asking for directions to the local bowling alley",
+		"desc": "The giant’s bellowing, gentle voice is represented by huge text with a transparent fill color and super thin outline.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["20less"], ["css", "HTML+CSS"], ["typography", "Typography"], ["comedy", "Comedy"], ["scroll", "Scroll Wheel"], ["responsive", "Desktop+Mobile"]],
+		"lines": 9,
+		"library": [],
+		"src": "sites/gentle-giant/gentle-giant.html"
+	},
+	"panic-button": {
+		"title": "A panic button for someone in dire need of useless entertainment",
+		"desc": "When the button is pressed, the JavaScript combines three letters at random and opens up a new website. To make the website open properly, it has to add “http://” and “.com” to the three-letter combination. This happens in a loop that runs 10 times.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["21to40"], ["js", "HTML+CSS+JS"], ["action", "Action"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
+		"lines": 21,
+		"library": [],
+		"src": "sites/panic-button/panic-button.html"
+	},
+	"precious-gem": {
+		"title": "The most precious gem in the entire world, in the palm of your hands",
+		"desc": "This code uses p5.js to create a whole bunch of triangles. Each triangle has two corners that move across the edges of the screen. The third corner is where the mouse cursor is. All of these triangles are drawn using the “DIFFERENCE” blend mode so that intersections go from white to black, or black to white.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["61-80"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["adventure", "Adventure"], ["mouse", "Mouse"], ["desktop", "Desktop"]],
+		"lines": 76,
+		"library": ["JAVASCRIPT LIBRARY: p5.js", "https://p5js.org/", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"],
+		"src": "sites/precious-gem/precious-gem.html"
+	},
+	"perfect-hue": {
+		"title": "In search of the perfect color for a perfectionist’s living room rug",
+		"desc": "This code uses p5.js to create a whole bunch of triangles. Each triangle has two corners that move across the edges of the screen. The third corner is where the mouse cursor is. All of these triangles are drawn using the “DIFFERENCE” blend mode so that intersections go from white to black, or black to white.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["drama", "Drama"], ["nointeraction", "No Interaction"], ["responsive", "Desktop+Mobile"]],
+		"lines": 36,
+		"library": ["JAVASCRIPT LIBRARY: p5.js", "https://p5js.org/", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"],
+		"src": "sites/perfect-color/perfect-color.html"
+	}
+}

@@ -4,7 +4,11 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sites & Stories</title>
+	<title>Small Sites; Big Stories</title>
+	<meta name="description" content="Interactive narratives shared through a library of microsites using as little code as possible.">
+	<meta name="keywords" content="Web Design, Web Development, Creative Coding, Design Education, Code Education">
+	<meta name="author" content="Gabriel Drozdov">
+	<link rel="icon" type="png" href="assets/favicon.png">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,354 +16,267 @@
 
 		<header class="intro" onclick="introOut(); mainIn();">
 			<div class="intro-content">
-				<h1 class="intro-title">Sites & Stories</h1>
-				<h2 class="intro-subtitle">Interactive narratives<br>told through a library of microsites<br>using as little code as possible</h3>
+				<h1 class="intro-title">Small Sites; Big Stories</h1>
+				<h2 class="intro-subtitle">Interactive narratives<br>shared through a library of microsites<br>using as little code as possible</h3>
 			</div>
-			<p class="intro-prompt">Click anywhere to enter the library</p>
+			<p class="intro-prompt">Click anywhere to read a story</p>
 		</header>
-
-		<div class="about">
-
-		</div>
 	
 		<main class="main">
-			<div class="main-link main-link-about" onclick="aboutIn(); mainDown();">About the Library</div>
-			<div class="main-link main-link-prev">Previous story</div>
-			<div class="main-link main-link-next">Next story</div>
-			<div class="main-link main-link-library" onclick="libraryIn(); mainUp();">Browse the Library</div>
-			<div class="main-content">
-				<div class="main-story">
-					<h3 class="story-title">
-						A kid loses their ice cream to a swooping falcon
-						<div class="story-divider"></div>
-						<span class="story-subtitle">A <span class="story-genre">story</span> told in <span class="story-lines">20</span> line<span class="story-lines-plural">s</span> of code</span>
-					</h3>
-					<ul class="story-tags">
-						<li class="story-tag">Tag 1</li>
-						<li class="story-tag">Tag 2</li>
-						<li class="story-tag">Tag 3</li>
-						<li class="story-tag">Tag 4</li>
-					</ul>
-				</div>
-				<div class="main-display">
-					<iframe class="main-iframe" src="https://gabrieldrozdov.github.io/nocode/reallysmall"></iframe>
-				</div>
-				<div class="main-code">
-					<a class="main-code-cdn" href="#" target="_blank">JS LIBRARY: p5.js<span class="tooltip">A “library” is something that lets you extend the functionality of HTML, CSS, or JavaScript with new functions. Examples of libraries include p5.js for programming graphics, Tone.js for sound, ml5.js for machine learning, three.js for 3D graphics, and matter.js for physics simulations.</span></a>
-					<div class="code">
-						<div class="code-html">
-							<div class="code-heading">HTML<span class="tooltip">HTML (HyperText Markup Language) is a programming language used for structuring web pages. Internet browsers read HTML files to show you a website’s content.</span></div>
-							<pre class="code-text"><code id="html" contenteditable="true" oninput="updatePreview();"></code></pre>
-						</div>
-						<div class="code-css">
-							<div class="code-heading">CSS<span class="tooltip">CSS (Cascading Style Sheets) is a programming language used for styling web pages. This includes everything from how typography will look, to how information is laid out and organized. Internet browsers read CSS in conjunction with HTML.</span></div>
-							<pre class="code-text"><code id="css" contenteditable="true" oninput="updatePreview();"></code></pre>
-						</div>
-						<div class="code-js">
-							<div class="code-heading">JavaScript<span class="tooltip">JavaScript (JS) is a programming language used for dynamically modifying web pages. Some uses cases for JS include adding interactive elements, performing computation, or generating data and content. JS is able to manipulate HTML and CSS after the web page loads.</span></div>
-							<pre class="code-text"><code id="js" contenteditable="true" oninput="updatePreview();"></code></pre>
-						</div>
-					</div>
-					<div class="main-code-options">
-						<div class="main-code-option">Reset</div>
-						<a class="main-code-option" href="#" target="_blank">Download</a>
-						<a class="main-code-option" href="#" target="_blank">New&nbsp;Tab</a>
-					</div>
+
+			<div class="toggle-container toggle-flip">
+				<div class="toggle">
+					<div class="toggle-text" id="toggle-story" onclick="toggleStory();">Show Story Details</div>
 				</div>
 			</div>
+
+			<section class="story" id="story">
+				<div class="story-content">
+					<div class="story-block">
+						<div class="story-lines">
+							<div class="story-lines-number" id="lines">20</div>
+							<div class="story-lines-text">Lines of Code</div>
+						</div>
+					</div>
+					<div class="story-block">
+						<div class="story-caption">Story</div>
+						<h2 class="story-title" id="title">
+							Some sort of story title goes here
+						</h2>
+					</div>
+					<div class="story-block">
+						<div class="story-caption">Breakdown</div>
+						<p class="story-desc" id="desc">
+							Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here.
+						</p>
+					</div>
+					<div class="story-block">
+						<div class="story-caption">Created by</div>
+						<ul class="story-links" id="authors">
+							<li href="#" target="_blank" class="story-link">Firstname Lastname</li>
+							<li href="#" target="_blank" class="story-link">Firstname Lastname</li>
+						</ul>
+					</div>
+					<div class="story-block">
+						<div class="story-caption">Tags</div>
+						<ul class="story-links" id="tags">
+							<li class="story-link">Tag 1</li>
+							<li class="story-link">Tag 2</li>
+							<li class="story-link">Tag 3</li>
+							<li class="story-link">Tag 4</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="preview" id="preview-container" data-story="1" data-code="1">
+				<iframe class="preview-iframe" id="preview" src="https://gabrieldrozdov.github.io/nocode/reallysmall"></iframe>
+			</section>
+
+			<div class="toggle-container">
+				<div class="toggle">
+					<div class="toggle-text" id="toggle-code" onclick="toggleCode();">Show Code Editor</div>
+				</div>
+			</div>
+
+			<section class="code" id="code">
+				<div class="code-library-container" id="library-container">
+					<a class="code-library" href="#" target="_blank" id="library-link">
+						<span id="library-text">JavaScript Library: p5.js</span>
+						<span class="code-tooltip">A “library” is something that lets you extend the functionality of HTML, CSS, or JavaScript with new functions. Examples of libraries include p5.js for programming graphics, Tone.js for sound, ml5.js for machine learning, three.js for 3D graphics, and matter.js for physics simulations.</span>
+					</a>
+				</div>
+				<div class="code-editor-container">
+					<div class="code-editor" spellcheck="false">
+						<div class="code-editor-html">
+							<h3 class="code-editor-language">
+								<span>HTML</span>
+								<span class="code-tooltip">HTML (HyperText Markup Language) is a programming language used for structuring web pages. Internet browsers read HTML files to show you a website’s content.</span>
+							</h3>
+							<pre class="code-editor-plaintext"><code id="html" contenteditable="true" oninput="updatePreview();"></code></pre>
+						</div>
+						<div class="code-editor-css">
+							<h3 class="code-editor-language">
+								<span>CSS</span>
+								<span class="code-tooltip">CSS (Cascading Style Sheets) is a programming language used for styling web pages. This includes everything from how typography will look, to how information is laid out and organized. Internet browsers read CSS in conjunction with HTML.</span>
+							</h3>
+							<pre class="code-editor-plaintext"><code id="css" contenteditable="true" oninput="updatePreview();"></code></pre>
+						</div>
+						<div class="code-editor-js">
+							<h3 class="code-editor-language">
+								<span>JavaScript</span>
+								<span class="code-tooltip">JavaScript (JS) is a programming language used for dynamically modifying web pages. Some uses cases for JS include adding interactive elements, performing computation, or generating data and content. JS is able to manipulate HTML and CSS after the web page loads.</span>
+							</h3>
+							<pre class="code-editor-plaintext"><code id="js" contenteditable="true" oninput="updatePreview();"></code></pre>
+						</div>
+					</div>
+				</div>
+				<div class="code-links">
+					<div class="code-link" onclick="resetPreview();">Reset</div>
+					<a class="code-link" id="download" href="#" download>Download</a>
+					<a class="code-link" id="newtab" href="#" target="_blank">New&nbsp;Tab</a>
+				</div>
+			</section>
+
+			<div class="nav-container">
+				<nav class="nav">
+					<!-- <div class="nav-link" data-active="1">Previous Story</div> -->
+					<div class="nav-link" onclick="catalogIn(); mainUp();">Choose a Story</div>
+					<!-- <div class="nav-link" data-active="1">Next Story</div> -->
+				</nav>
+			</div>
+
 		</main>
 	
-		<div class="library">
-			<div class="library-return" onclick="libraryDown(); mainIn();">Return to your story</div>
+		<div class="catalog">
 
-			<div class="library-controls">
-				<div class="sorting">
-					<h4 class="controls-heading">Sorting</h4>
-					<div class="controls-subsection">
-						<ul class="controls-options">
-							<li>Fewest lines of code</li>
-							<li>Most lines of code</li>
-							<li>Title A–Z</li>
-							<li>Title Z–A</li>
-							<li>Genre A–Z</li>
-							<li>Genre Z–A</li>
-							<li>Random (click to shuffle)</li>
-						</ul>
-					</div>
-				</div>
-				<div class="filters">
-					<h4 class="controls-heading">Filters</h4>
-					<div class="controls-subsection">
-						<h5>Lines of Code</h5>
-						<ul class="controls-options">
-							<li>10 or fewer lines of code</li>
-							<li>11–20 lines of code</li>
-							<li>21–30 lines of code</li>
-							<li>31–40 lines of code</li>
-							<li>41–50 lines of code</li>
-							<li>50 or more lines of code</li>
-						</ul>
-					</div>
-					<div class="controls-subsection">
-						<h5>Programming Languages</h5>
-						<ul class="controls-options">
-							<li>HTML</li>
-							<li>HTML+CSS</li>
-							<li>HTML+CSS+JS</li>
-						</ul>
-					</div>
-					<div class="controls-subsection">
-						<h5>Types of Interaction</h5>
-						<ul class="controls-options">
-							<li>Mouse</li>
-							<li>Scroll Wheel</li>
-							<li>Keyboard</li>
-							<li>Camera</li>
-							<li>Microphone</li>
-						</ul>
-					</div>
-					<div class="controls-subsection">
-						<h5>Genre</h5>
-						<ul class="controls-options">
-							<li>Romcom</li>
-							<li>Comedy</li>
-							<li>Drama</li>
-							<li>Mystery</li>
-							<li>Thriller</li>
-							<li>Adventure</li>
-						</ul>
+			<div class="return-container" onclick="catalogDown(); mainIn();">
+				<div class="return">
+					<div class="return-link">
+						Return to your story
 					</div>
 				</div>
 			</div>
 
-			<div class="library-catalog">
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
+			<div class="controls">
+				<div class="controls-content">
+
+					<div class="controls-section" id="storting">
+						<h4 class="controls-heading">Sorting</h4>
+						<div class="controls-subsection">
+							<ul class="controls-options">
+								<li class="controls-option toggle-sorting" data-sorting="leastcode" data-active="1" onclick="setSorting('leastcode')">Least code</li>
+								<li class="controls-option toggle-sorting" data-sorting="mostcode" data-active="0" onclick="setSorting('mostcode')">Most code</li>
+								<li class="controls-option toggle-sorting" data-sorting="titleaz" data-active="0" onclick="setSorting('titleaz')">Title A–Z</li>
+								<li class="controls-option toggle-sorting" data-sorting="titleza" data-active="0" onclick="setSorting('titleza')">Title Z–A</li>
+								<li class="controls-option toggle-sorting" data-sorting="authoraz" data-active="0" onclick="setSorting('authoraz')">Author A–Z</li>
+								<li class="controls-option toggle-sorting" data-sorting="authorza" data-active="0" onclick="setSorting('authorza')">Author Z–A</li>
+								<li class="controls-option toggle-sorting" data-sorting="random" data-active="0" onclick="setSorting('random')">Random</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="blue">
-						<h4>This is another story I'd like to tell</h4>
+	
+					<div class="controls-section" id="filters">
+						<h4 class="controls-heading">Filters</h4>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Lines of Code</h5>
+							<ul class="controls-options">
+								<li class="controls-option filter-line" data-active="0" data-filter="20less" id="option-20less" onclick="setFilter('20less')">20 or less</li>
+								<li class="controls-option filter-line" data-active="0" data-filter="21to40" id="option-21to40" onclick="setFilter('21to40')">21–40</li>
+								<li class="controls-option filter-line" data-active="0" data-filter="41to60" id="option-41to60" onclick="setFilter('41to60')">41–60</li>
+								<li class="controls-option filter-line" data-active="0" data-filter="61to80" id="option-61to80" onclick="setFilter('61to80')">61–80</li>
+								<li class="controls-option filter-line" data-active="0" data-filter="81to100" id="option-81to100" onclick="setFilter('81to100')">81–100</li>
+								<li class="controls-option filter-line" data-active="0" data-filter="100more" id="option-100more" onclick="setFilter('100more')">more than 100</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Programming Languages</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="html" onclick="setFilter('html')">HTML</li>
+								<li class="controls-option" data-active="0" data-filter="css" onclick="setFilter('css')">HTML+CSS</li>
+								<li class="controls-option" data-active="0" data-filter="js" onclick="setFilter('js')">HTML+CSS+JS</li>
+								<li class="controls-option" data-active="0" data-filter="library" onclick="setFilter('library')">HTML+CSS+JS+Library</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">JavaScript Library</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="p5" onclick="setFilter('p5')">p5.js</li>
+								<li class="controls-option" data-active="0" data-filter="ml5" onclick="setFilter('ml5')">ml5.js</li>
+								<li class="controls-option" data-active="0" data-filter="tone" onclick="setFilter('tone')">Tone.js</li>
+								<li class="controls-option" data-active="0" data-filter="matter" onclick="setFilter('matter')">matter.js</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Types of Interaction</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="mouse" onclick="setFilter('mouse')">Mouse</li>
+								<li class="controls-option" data-active="0" data-filter="click" onclick="setFilter('click')">Click</li>
+								<li class="controls-option" data-active="0" data-filter="scroll" onclick="setFilter('scroll')">Scroll Wheel</li>
+								<li class="controls-option" data-active="0" data-filter="keyboard" onclick="setFilter('keyboard')">Keyboard</li>
+								<li class="controls-option" data-active="0" data-filter="camera" onclick="setFilter('camera')">Camera</li>
+								<li class="controls-option" data-active="0" data-filter="mic" onclick="setFilter('mic')">Microphone</li>
+								<li class="controls-option" data-active="0" data-filter="nointeraction" onclick="setFilter('nointeraction')">No Interaction</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Design Techniques</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="typography" onclick="setFilter('typography')">Typography</li>
+								<li class="controls-option" data-active="0" data-filter="variablefonts" onclick="setFilter('variablefonts')">Variable Fonts</li>
+								<li class="controls-option" data-active="0" data-filter="flexbox" onclick="setFilter('flexbox')">Flexbox</li>
+								<li class="controls-option" data-active="0" data-filter="grid" onclick="setFilter('grid')">Grid</li>
+								<li class="controls-option" data-active="0" data-filter="keyframes" onclick="setFilter('keyframes')">Keyframes</li>
+								<li class="controls-option" data-active="0" data-filter="hover" onclick="setFilter('hover')">Hover States</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Programming Techniques</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="math" onclick="setFilter('math')">Math</li>
+								<li class="controls-option" data-active="0" data-filter="variables" onclick="setFilter('variables')">Variables</li>
+								<li class="controls-option" data-active="0" data-filter="arrays" onclick="setFilter('arrays')">Arrays</li>
+								<li class="controls-option" data-active="0" data-filter="objects" onclick="setFilter('objects')">Objects</li>
+								<li class="controls-option" data-active="0" data-filter="conditional" onclick="setFilter('conditional')">If/Then/Else</li>
+								<li class="controls-option" data-active="0" data-filter="loops" onclick="setFilter('loops')">Loops</li>
+								<li class="controls-option" data-active="0" data-filter="random" onclick="setFilter('random')">Random</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Compatible Devices</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="desktop" onclick="setFilter('desktop')">Desktop</li>
+								<li class="controls-option" data-active="0" data-filter="mobile" onclick="setFilter('mobile')">Mobile</li>
+								<li class="controls-option" data-active="0" data-filter="responsive" onclick="setFilter('responsive')">Desktop+Mobile</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Genre</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="action" onclick="setFilter('action')">Action</li>
+								<li class="controls-option" data-active="0" data-filter="adventure" onclick="setFilter('adventure')">Adventure</li>
+								<li class="controls-option" data-active="0" data-filter="comedy" onclick="setFilter('comedy')">Comedy</li>
+								<li class="controls-option" data-active="0" data-filter="drama" onclick="setFilter('drama')">Drama</li>
+								<li class="controls-option" data-active="0" data-filter="documentary" onclick="setFilter('documentary')">Documentary</li>
+								<li class="controls-option" data-active="0" data-filter="horror" onclick="setFilter('horror')">Horror</li>
+								<li class="controls-option" data-active="0" data-filter="mystery" onclick="setFilter('mystery')">Mystery</li>
+								<li class="controls-option" data-active="0" data-filter="romance" onclick="setFilter('romance')">Romance</li>
+							</ul>
+						</div>
+
+						<div class="controls-subsection">
+							<h5 class="controls-subheading">Author</h5>
+							<ul class="controls-options">
+								<li class="controls-option" data-active="0" data-filter="gabrieldrozdov" onclick="setFilter('gabrieldrozdov')">Gabriel Drozdov</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="purple">
-						<h4>Here goes one more story</h4>
+
+					<div class="controls-clear" data-active="0" onclick="clearFilters();">
+						Clear Filters
 					</div>
+
 				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="yellow">
-						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="pink">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="green">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="blue">
-						<h4>This is another story I'd like to tell</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="purple">
-						<h4>Here goes one more story</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="yellow">
-						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="pink">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="green">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="blue">
-						<h4>This is another story I'd like to tell</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="purple">
-						<h4>Here goes one more story</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="yellow">
-						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="pink">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="green">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="blue">
-						<h4>This is another story I'd like to tell</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="purple">
-						<h4>Here goes one more story</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="yellow">
-						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="pink">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="green">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="blue">
-						<h4>This is another story I'd like to tell</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="purple">
-						<h4>Here goes one more story</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="yellow">
-						<h4>This story has a super long name that's annoying to manage so it's gonna be super long</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="pink">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="green">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-item">
-					<div class="library-item-content" data-color="red">
-						<h4>Story name goes</h4>
-					</div>
-				</div>
-				<div class="library-padding"></div>
 			</div>
+
+			<section class="index">
+				<div class="index-flash"></div>
+				<!-- Builds on page load -->
+				<div class="index-items" id="index">
+					<div class="index-empty" data-active="0">
+						No results match those filters!
+					</div>
+				</div>
+			</section>
+
 		</div>
 
 	</div>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The most precious gem in the entire world, in the palm of your hands</title>
+
+<style>
+/* CSS START */
+/* CSS END */
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+</head>
+<body>
+
+<!-- HTML START -->
+<!-- HTML END -->
+
+<script>
+// JS START
+let triangles = [];
+let numberTriangles = 20;
+
+class Triangle {
+  constructor(x1,y1,x2,y2,x3,y3) {
+    this.points = [x1,y1,x2,y2,x3,y3];
+    this.acc = [1,1,1];
+    this.hue = 0;
+  }
+  move() {
+    this.points[0] = mouseX;
+    this.points[1] = mouseY;
+    
+    for (let i=2; i<this.points.length; i+=2) {
+      this.acc[i/2] += random(-0.2,0.2);
+      if (this.acc[i/2] < -3) {
+        this.acc[i/2] = -3;
+      }
+      if (this.acc[i/2] > 3) {
+        this.acc[i/2] = 3;
+      }
+
+      if (this.points[i] > windowWidth) {
+        this.points[i] = windowWidth;
+      }
+      if (this.points[i] < 0) {
+        this.points[i] = 0;
+      }
+      if (this.points[i+1] > windowHeight) {
+        this.points[i+1] = windowHeight;
+      }
+      if (this.points[i+1] < 0) {
+        this.points[i+1] = 0;
+      }
+
+      if (this.points[i]==0 && this.points[i+1]!=0) {
+        this.points[i+1] -= this.acc[i/2];
+      } else if (this.points[i]==windowWidth && this.points[i+1]!=windowHeight) {
+        this.points[i+1] += this.acc[i/2];
+      } else if (this.points[i+1]==0 && this.points[i]!=windowWidth) {
+        this.points[i] += this.acc[i/2];
+      } else if (this.points[i+1]==windowHeight && this.points[i]!=0) {
+        this.points[i] -= this.acc[i/2];
+      }
+    }
+  }
+  display() {
+    fill("white");
+    beginShape();
+    vertex(this.points[0], this.points[1]);
+    vertex(this.points[2], this.points[3]);
+    vertex(this.points[4], this.points[5]);
+    endShape();
+  }
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  for (let i=0; i<numberTriangles; i++) {
+    append(triangles, "1");
+  }
+  for (let i=0; i<numberTriangles; i++) {
+    triangles[i] = new Triangle(width/2, height/2, random(0,width), 0, random(0,width), height);
+  }
+  noStroke();
+}
+
+function draw() {
+  blendMode(BLEND);
+  background("black");
+  blendMode(DIFFERENCE);
+  for (let i=0; i<numberTriangles; i++) {
+    triangles[i].move();
+    triangles[i].display();
+  }
+}
+// JS END
+</script>
+
+</body>
+</html>

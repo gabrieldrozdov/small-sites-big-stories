@@ -495,3 +495,5 @@ codeEditorJS.addEventListener("paste", function(e) {
 // make tabs just spaces for space sake?
 // split up html, css, js, library tags
 // allow comments in the code
+// scroll story and code to the top when loading new story
+// figure out how to manage assets

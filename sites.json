@@ -43,5 +43,32 @@
 		"lines": 36,
 		"library": ["JAVASCRIPT LIBRARY: p5.js", "https://p5js.org/", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"],
 		"src": "sites/perfect-color/perfect-color.html"
+	},
+	"banana-dealer": {
+		"title": "Desperate for bananas, low on cash, stuck in a volatile economy",
+		"desc": "A loop sets a new cost for bananas every 250ms. When the purchase button is clicked, a function checks if the current banana cost is less than how much money is left. If there’s enough money, a banana is purchased.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["action", "Action"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
+		"lines": 40,
+		"library": [],
+		"src": "sites/banana-dealer/banana-dealer.html"
+	},
+	"accidental-explosions": {
+		"title": "Someone keeps launching missles by accident, and that person might be you",
+		"desc": "Every time you move the mouse, a function generates a new circle that uses a CSS animation to expand.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["horror", "Horror"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
+		"lines": 31,
+		"library": [],
+		"src": "sites/accidental-explosions/accidental-explosions.html"
+	},
+	"dance-audition": {
+		"title": "You’re up on the world’s #1 hit amateur dance show",
+		"desc": "Every time you move the mouse, a function generates a new circle that uses a CSS animation to expand.",
+		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["comedy", "Comedy"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
+		"lines": 27,
+		"library": [],
+		"src": "sites/dance-audition/dance-audition.html"
 	}
 }

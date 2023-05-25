@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Someone keeps launching missles by accident, and that person might be you</title>
+
+<style>
+/* CSS START */
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+.missile {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  opacity: .5;
+  border-radius: 50%;
+  animation: explosion 1s alternate ease-in-out infinite;
+}
+@keyframes explosion {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(2);
+  }
+}
+/* CSS END */
+</style>
+
+</head>
+<body>
+
+<!-- HTML START -->
+<div class="container"></div>
+<!-- HTML END -->
+
+<script>
+// JS START
+let container = document.querySelector(".container");
+function launchMissile(e) {
+  let missile = document.createElement("div");
+  missile.classList.add("missile");
+  missile.style.left = e.clientX + "px";
+  missile.style.top = e.clientY + "px";
+  container.appendChild(missile);
+}
+container.addEventListener("mousemove", launchMissile)
+// JS END
+</script>
+
+</body>
+</html>

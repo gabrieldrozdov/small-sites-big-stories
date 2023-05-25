@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You’re up on the world’s #1 hit amateur dance show</title>
+
+<style>
+/* CSS START */
+.container {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 5vw;
+  width: 100vw;
+  height: 100vh;
+}
+/* CSS END */
+</style>
+
+</head>
+<body>
+
+<!-- HTML START -->
+<div class="container">
+  <h1 id="text">Press <span id="key"></span></h1>
+</div>
+<!-- HTML END -->
+
+<script>
+// JS START
+let keys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+let target = keys[Math.floor(Math.random()*keys.length)];
+let score = 0;
+document.querySelector("#key").innerText = target;
+document.body.addEventListener('keydown', function(e) {
+  if (e.key == target) {
+    score++;
+    target = keys[Math.floor(Math.random()*keys.length)];
+    document.querySelector("#key").innerText = target;
+  } else {
+    document.querySelector("#text").innerHTML = `You FUMBLED! Score: ${score}`;
+  }
+});
+// JS END
+</script>
+
+</body>
+</html>

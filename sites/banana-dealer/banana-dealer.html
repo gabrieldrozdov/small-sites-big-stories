@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desperate for bananas, low on cash, stuck in a volatile economy</title>
+
+<style>
+/* CSS START */
+.container {
+	background-color: yellow;
+	font-size: 32px;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 20px;
+	width: 100vw;
+	height: 100vh;
+}
+/* CSS END */
+</style>
+
+</head>
+<body>
+
+<!-- HTML START -->
+<div class="container">
+	<div>
+		A banana costs $<span id="cost">2</span> right now.
+	</div>
+	<div>
+		You have $<span id="money">20</span> left.
+	</div>
+	<div>
+		You own <span id="bananas">0</span> bananas.
+	</div>
+	<button onclick="buyBanana();">Buy a banana</button>
+</div>
+<!-- HTML END -->
+
+<script>
+// JS START
+let cost = 2;
+let money = 20;
+let bananas = 0;
+setInterval(() => {
+	cost = Math.random()*3;
+	document.querySelector("#cost").innerText = cost.toFixed(2);
+}, 250);
+
+function buyBanana() {
+	if (money > cost) {
+		money = money - cost;
+		bananas++;
+		document.querySelector("#money").innerText = money.toFixed(2);
+		document.querySelector("#bananas").innerText = bananas;
+	}
+}
+// JS END
+</script>
+
+</body>
+</html>

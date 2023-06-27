@@ -2,20 +2,24 @@
 	"ants-yelling": {
 		"title": "A colony of ants yelling as loud as they possibly can",
 		"desc": "Yelling ants are represented by the word “AH” contained in <div> tags in the HTML. The JavaScript uses a setInterval loop that runs every 500 milliseconds. Each time that loop runs, a random ant is selected and set to a large font size. Shortly thereafter, the font size is set back to its original tiny size. CSS is mainly used to center and equally space everything with flexbox.",
-		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"authors": [["johndoe", "john doe"]],
 		"tags": [["21to40"], ["js", "HTML+CSS+JS"], ["loops", "Loops"], ["comedy", "Comedy"], ["nointeraction", "No Interaction"], ["responsive", "Desktop+Mobile"]],
 		"lines": 24,
 		"library": ["p5.js", "https://p5js.org/", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"],
-		"src": "sites/ants-yelling/ants-yelling.html"
+		"src": "sites/ants-yelling/ants-yelling.html",
+		"alpha": "colony-of-ants-yelling-as-loud-as-they-possibly-can",
+		"authoralpha": "doe"
 	},
 	"gentle-giant": {
 		"title": "A gentle giant asking for directions to the local bowling alley",
 		"desc": "The giant’s bellowing, gentle voice is represented by huge text with a transparent fill color and super thin outline.",
-		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
+		"authors": [["parsnippetulli", "parsnip petulli"]],
 		"tags": [["20less"], ["css", "HTML+CSS"], ["typography", "Typography"], ["comedy", "Comedy"], ["scroll", "Scroll Wheel"], ["responsive", "Desktop+Mobile"]],
 		"lines": 9,
 		"library": [],
-		"src": "sites/gentle-giant/gentle-giant.html"
+		"src": "sites/gentle-giant/gentle-giant.html",
+		"alpha": "gentle-giant-asking-for-directions-to-the-local-bowling-alley",
+		"authoralpha": "petulli"
 	},
 	"panic-button": {
 		"title": "A panic button for someone in dire need of useless entertainment",
@@ -24,7 +28,9 @@
 		"tags": [["21to40"], ["js", "HTML+CSS+JS"], ["action", "Action"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
 		"lines": 21,
 		"library": [],
-		"src": "sites/panic-button/panic-button.html"
+		"src": "sites/panic-button/panic-button.html",
+		"alpha": "panic-button-for-someone-in-dire-need-of-useless-entertainment",
+		"authoralpha": "drozdov"
 	},
 	"precious-gem": {
 		"title": "The most precious gem in the entire world, in the palm of your hands",
@@ -33,34 +39,42 @@
 		"tags": [["61-80"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["adventure", "Adventure"], ["mouse", "Mouse"], ["desktop", "Desktop"]],
 		"lines": 76,
 		"library": ["JAVASCRIPT LIBRARY: p5.js", "https://p5js.org/", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"],
-		"src": "sites/precious-gem/precious-gem.html"
+		"src": "sites/precious-gem/precious-gem.html",
+		"alpha": "most-precious-gem-in-the-entire-world-in-the-palm-of-your-hands",
+		"authoralpha": "drozdov"
 	},
 	"perfect-hue": {
 		"title": "In search of the perfect color for a perfectionist’s living room rug",
 		"desc": "This code uses p5.js to create a whole bunch of triangles. Each triangle has two corners that move across the edges of the screen. The third corner is where the mouse cursor is. All of these triangles are drawn using the “DIFFERENCE” blend mode so that intersections go from white to black, or black to white.",
 		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
 		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["drama", "Drama"], ["nointeraction", "No Interaction"], ["responsive", "Desktop+Mobile"]],
-		"lines": 36,
+		"lines": 30,
 		"library": ["JAVASCRIPT LIBRARY: p5.js", "https://p5js.org/", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"],
-		"src": "sites/perfect-color/perfect-color.html"
+		"src": "sites/perfect-color/perfect-color.html",
+		"alpha": "in-search-of-the-perfect-color-for-a-perfectionists-living-room-rug",
+		"authoralpha": "drozdov"
 	},
 	"banana-dealer": {
 		"title": "Desperate for bananas, low on cash, stuck in a volatile economy",
 		"desc": "A loop sets a new cost for bananas every 250ms. When the purchase button is clicked, a function checks if the current banana cost is less than how much money is left. If there’s enough money, a banana is purchased.",
 		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
 		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["action", "Action"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
-		"lines": 40,
+		"lines": 30,
 		"library": [],
-		"src": "sites/banana-dealer/banana-dealer.html"
+		"src": "sites/banana-dealer/banana-dealer.html",
+		"alpha": "desperate-for-bananas-low-on-cash-stuck-in-a-volatile-economy",
+		"authoralpha": "drozdov"
 	},
 	"accidental-explosions": {
 		"title": "Someone keeps launching missles by accident, and that person might be you",
 		"desc": "Every time you move the mouse, a function generates a new circle that uses a CSS animation to expand.",
 		"authors": [["gabrieldrozdov", "Gabriel Drozdov"]],
 		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["horror", "Horror"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
-		"lines": 31,
+		"lines": 30,
 		"library": [],
-		"src": "sites/accidental-explosions/accidental-explosions.html"
+		"src": "sites/accidental-explosions/accidental-explosions.html",
+		"alpha": "someone-keeps-launching-missles-by-accident-and-that-person-might-be-you",
+		"authoralpha": "drozdov"
 	},
 	"dance-audition": {
 		"title": "You’re up on the world’s #1 hit amateur dance show",
@@ -69,6 +83,8 @@
 		"tags": [["21-40"], ["library", "HTML+CSS+JS+Library"], ["p5", "p5.js"], ["comedy", "Comedy"], ["click", "Click"], ["responsive", "Desktop+Mobile"]],
 		"lines": 27,
 		"library": [],
-		"src": "sites/dance-audition/dance-audition.html"
+		"src": "sites/dance-audition/dance-audition.html",
+		"alpha": "youre-up-on-the-worlds-1-hit-amateur-dance-show",
+		"authoralpha": "drozdov"
 	}
 }

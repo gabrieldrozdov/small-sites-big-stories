@@ -19,6 +19,7 @@ function introOut() {
 	intro.style.transform = "translate(0%, -100%)";
 	clearInterval(introAnimation);
 	openStory(Object.keys(jsonBackup)[Math.floor((Math.random()*Object.keys(jsonBackup).length))]);
+	setSorting("random");
 }
 
 // Navigation
@@ -59,11 +60,13 @@ function toggleStory() {
 	let preview = document.querySelector("#preview-container");
 	if (storyView) {
 		toggle.innerText = "Hide Story Details";
+		toggle.dataset.active = 1;
 		story.dataset.active = 0;
 		preview.dataset.story = 0;
 		storyView = false;
 	} else {
 		toggle.innerText = "Show Story Details";
+		toggle.dataset.active = 0;
 		story.dataset.active = 1;
 		preview.dataset.story = 1;
 		storyView = true;
@@ -75,11 +78,13 @@ function toggleCode() {
 	let preview = document.querySelector("#preview-container");
 	if (codeView) {
 		toggle.innerText = "Show Code Editor";
+		toggle.dataset.active = 1;
 		code.dataset.active = 0;
 		preview.dataset.code = 0;
 		codeView = false;
 	} else {
 		toggle.innerText = "Hide Code Editor";
+		toggle.dataset.active = 0;
 		code.dataset.active = 1;
 		preview.dataset.code = 1;
 		codeView = true;
@@ -88,38 +93,75 @@ function toggleCode() {
 
 // Code editor live update
 let codeEditorPreview = document.querySelector(".preview-iframe");
-let codeEditorHTML = document.querySelector("#html");
-let codeEditorCSS = document.querySelector("#css");
-let codeEditorJS = document.querySelector("#js");
+let codeEditorHTMLParent = document.querySelector("#code-editor-html-parent");
+let codeEditorCSSParent = document.querySelector("#code-editor-css-parent");
+let codeEditorJSParent = document.querySelector("#code-editor-js-parent");
+let codeEditorHTML = document.querySelector("#code-editor-html");
+let codeEditorCSS = document.querySelector("#code-editor-css");
+let codeEditorJS = document.querySelector("#code-editor-js");
+
+var CodeMirrorHTML = CodeMirror.fromTextArea(codeEditorHTML, {
+	mode: "htmlmixed",
+	lineNumbers: true,
+	tabSize: 2,
+	theme: "ssbs",
+});
+var CodeMirrorCSS = CodeMirror.fromTextArea(codeEditorCSS, {
+	mode: "css",
+	lineNumbers: true,
+	tabSize: 2,
+	theme: "ssbs",
+});
+var CodeMirrorJS = CodeMirror.fromTextArea(codeEditorJS, {
+	mode: "javascript",
+	lineNumbers: true,
+	tabSize: 2,
+	theme: "ssbs",
+});
+
+CodeMirrorHTML.on("change", function(cm, change) { updatePreview() });
+CodeMirrorCSS.on("change", function(cm, change) { updatePreview() });
+CodeMirrorJS.on("change", function(cm, change) { updatePreview() });
 function updatePreview() {
 	codeEditorPreview.src = "";
 	if (jsonBackup[activeStory]["library"].length > 0) {
-		codeEditorPreview.srcdoc = '<html>' + codeEditorHTML.textContent + '</html>' + '<style>' + codeEditorCSS.textContent + '</style>' + '<script src="' + jsonBackup[activeStory]["library"][2] + '"></script>' + '<script>' + codeEditorJS.textContent + '</script>';
+		codeEditorPreview.srcdoc = '<html>' + CodeMirrorHTML.getValue() + '</html>' + '<style>' + CodeMirrorCSS.getValue() + '</style>' + '<script src="' + jsonBackup[activeStory]["library"][2] + '"></script>' + '<script>' + CodeMirrorJS.getValue() + '</script>';
 	} else {
-		codeEditorPreview.srcdoc = '<html>' + codeEditorHTML.textContent + '</html>' + '<style>' + codeEditorCSS.textContent + '</style>' + '<script>' + codeEditorJS.textContent + '</script>';
+		codeEditorPreview.srcdoc = '<html>' + CodeMirrorHTML.getValue() + '</html>' + '<style>' + CodeMirrorCSS.getValue() + '</style>' + '<script>' + CodeMirrorJS.getValue() + '</script>';
 	}
 }
-codeEditorHTML.addEventListener("keydown", (e) => {
-	fixTabEnter(e, codeEditorHTML);
-})
-codeEditorCSS.addEventListener("keydown", (e) => {
-	fixTabEnter(e, codeEditorCSS);
-})
-codeEditorJS.addEventListener("keydown", (e) => {
-	fixTabEnter(e, codeEditorJS);
-})
-function fixTabEnter(e, editor) {
-	if (e.keyCode === 9) {
-		e.preventDefault();
-		let doc = editor.ownerDocument.defaultView;
-        let sel = doc.getSelection();
-        let range = sel.getRangeAt(0);
-        let tabNode = document.createTextNode('	');
-        range.insertNode(tabNode);
-        range.setStartAfter(tabNode);
-        range.setEndAfter(tabNode); 
-        sel.removeAllRanges();
-        sel.addRange(range);
+
+// Line wrapping
+let editorLineWrap = [false, false, false];
+function toggleWrap(editor) {
+	if (editor == "html") {
+		editorLineWrap[0] = !editorLineWrap[0];
+		CodeMirrorHTML.setOption('lineWrapping', editorLineWrap[0]);
+	}
+	if (editor == "css") {
+		editorLineWrap[1] = !editorLineWrap[1];
+		CodeMirrorCSS.setOption('lineWrapping', editorLineWrap[1]);
+	}
+	if (editor == "js") {
+		editorLineWrap[2] = !editorLineWrap[2];
+		CodeMirrorJS.setOption('lineWrapping', editorLineWrap[2]);
+	}
+}
+
+// Fullscreen
+let editorFullscreen = [false, false, false];
+function toggleFullscreen(editor) {
+	if (editor == "html") {
+		editorFullscreen[0] = !editorFullscreen[0];
+		codeEditorHTMLParent.dataset.fullscreen = editorFullscreen[0];
+	}
+	if (editor == "css") {
+		editorFullscreen[1] = !editorFullscreen[1];
+		codeEditorCSSParent.dataset.fullscreen = editorFullscreen[1];
+	}
+	if (editor == "js") {
+		editorFullscreen[2] = !editorFullscreen[2];
+		codeEditorJSParent.dataset.fullscreen = editorFullscreen[2];
 	}
 }
 
@@ -211,6 +253,13 @@ function flashIndex() {
 
 // Set sorting order
 let activeSorting = "";
+let sortOrder = [];
+function sortNumber() {
+	var numArray = [140000, 104, 99];
+	numArray.sort(function(a, b) {
+	return a - b;
+});
+}
 function setSorting(sorting) {
 	activeSorting = sorting;
 
@@ -222,35 +271,157 @@ function setSorting(sorting) {
 	let activeToggle = document.querySelector(`[data-sorting="${activeSorting}"]`);
 	activeToggle.dataset.active = 1;
 
-	// Sort index items
-	let indexItems = document.querySelectorAll(".index-item");
-	for (let indexItem of indexItems) {
-		let key = indexItem.dataset.key;
-		let entry = jsonBackup[key];
-		if (activeSorting == "leastcode") {
-			indexItem.style.order = entry["lines"];
-		} else if (activeSorting == "mostcode") {
-			indexItem.style.order = -entry["lines"];
-		} else if (activeSorting == "titleaz") {
-			let orderValue = entry["title"].codePointAt(0);
-			indexItem.style.order = parseInt(orderValue);
-		} else if (activeSorting == "titleza") {
-			let orderValue = entry["title"].codePointAt(0);
-			indexItem.style.order = -parseInt(orderValue);
-		} else if (activeSorting == "authoraz") {
-			let orderValue = entry["authors"][0][0].codePointAt(0);
-			indexItem.style.order = parseInt(orderValue);
-		} else if (activeSorting == "authorza") {
-			let orderValue = entry["authors"][0][0].codePointAt(0);
-			indexItem.style.order = -parseInt(orderValue);
-		} else if (activeSorting == "random") {
-			indexItem.style.order = Math.floor(Math.random()*1000);
+	// Calculate and apply sort order
+	sortOrder = [];
+	if (activeSorting == "leastcode") {
+		// Separate entries into sets of unique lines of code (sort lines, then alpha per number of lines) | format: {"lines": {"alpha": key, "alpha": key}}
+		let lineGroups = {};
+		for (let key of Object.keys(jsonBackup)) {
+			let entry = jsonBackup[key];
+			let entryAlpha = entry['alpha'];
+			let entryLines = entry['lines'];
+			if (lineGroups[entryLines] == undefined) {
+				lineGroups[entryLines] = {}; // add new object for each author
+			}
+			lineGroups[entryLines][entryAlpha] = key;
+		}
+		// Sort lines and entries per number of lines
+		for (let key of Object.keys(lineGroups).sort(function(a, b) {return a - b})) { // change sort to numerical instead of by string
+			for (let subkey of Object.keys(lineGroups[key]).sort()) {
+				sortOrder.push(lineGroups[key][subkey]);
+			}
+		}
+		// Apply sorting
+		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+			indexItem.style.order = sortCounter;
+		}
+
+	} else if (activeSorting == "mostcode") {
+		// Separate entries into sets of unique lines of code (sort lines, then alpha per number of lines) | format: {"lines": {"alpha": key, "alpha": key}}
+		let lineGroups = {};
+		for (let key of Object.keys(jsonBackup)) {
+			let entry = jsonBackup[key];
+			let entryAlpha = entry['alpha'];
+			let entryLines = entry['lines'];
+			if (lineGroups[entryLines] == undefined) {
+				lineGroups[entryLines] = {}; // add new object for each author
+			}
+			lineGroups[entryLines][entryAlpha] = key;
+		}
+		// Sort lines and entries per number of lines (reversed)
+		for (let key of Object.keys(lineGroups).sort(function(a, b) {return a - b}).reverse()) { // change sort to numerical instead of by string
+			for (let subkey of Object.keys(lineGroups[key]).sort().reverse()) {
+				sortOrder.push(lineGroups[key][subkey]);
+			}
+		}
+		// Apply sorting
+		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+			indexItem.style.order = sortCounter;
+		}
+
+	} else if (activeSorting == "titleaz") {
+		// Build object containing alpha/key pairs
+		let sortingAlpha = {};
+		for (let key of Object.keys(jsonBackup)) {
+			let entry = jsonBackup[key];
+			let entryAlpha = entry['alpha'];
+			sortingAlpha[entryAlpha] = key;
+		}
+		// Sort alpha keys
+		for (let key of Object.keys(sortingAlpha).sort()) {
+			sortOrder.push(sortingAlpha[key]);
+		}
+		// Apply sorting
+		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+			indexItem.style.order = sortCounter;
+		}
+
+	} else if (activeSorting == "titleza") {
+		// Build object containing alpha/key pairs
+		let sortingAlpha = {};
+		for (let key of Object.keys(jsonBackup)) {
+			let entry = jsonBackup[key];
+			let entryAlpha = entry['alpha'];
+			sortingAlpha[entryAlpha] = key;
+		}
+		// Sort alpha keys (reversed)
+		for (let key of Object.keys(sortingAlpha).sort().reverse()) {
+			sortOrder.push(sortingAlpha[key]);
+		}
+		// Apply sorting
+		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+			indexItem.style.order = sortCounter;
+		}
+
+	} else if (activeSorting == "authoraz") {
+		// Separate entries into sets of unique authors (sort authors, then alpha per author) | format: {"authoralpha": {"alpha": key, "alpha": key}}
+		let authorGroups = {};
+		for (let key of Object.keys(jsonBackup)) {
+			let entry = jsonBackup[key];
+			let entryAlpha = entry['alpha'];
+			let entryAuthorAlpha = entry['authoralpha'];
+			if (authorGroups[entryAuthorAlpha] == undefined) {
+				authorGroups[entryAuthorAlpha] = {}; // add new object for each author
+			}
+			authorGroups[entryAuthorAlpha][entryAlpha] = key;
+		}
+		// Sort author keys and entries per author
+		for (let key of Object.keys(authorGroups).sort()) {
+			for (let subkey of Object.keys(authorGroups[key]).sort()) {
+				sortOrder.push(authorGroups[key][subkey]);
+			}
+		}
+		// Apply sorting
+		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+			indexItem.style.order = sortCounter;
+		}
+
+	} else if (activeSorting == "authorza") {
+		// Separate entries into sets of unique authors (sort authors, then alpha per author) | format: {"authoralpha": {"alpha": key, "alpha": key}}
+		let authorGroups = {};
+		for (let key of Object.keys(jsonBackup)) {
+			let entry = jsonBackup[key];
+			let entryAlpha = entry['alpha'];
+			let entryAuthorAlpha = entry['authoralpha'];
+			if (authorGroups[entryAuthorAlpha] == undefined) {
+				authorGroups[entryAuthorAlpha] = {}; // add new object for each author
+			}
+			authorGroups[entryAuthorAlpha][entryAlpha] = key;
+		}
+		// Sort author keys and entries per author (reversed)
+		for (let key of Object.keys(authorGroups).sort().reverse()) {
+			for (let subkey of Object.keys(authorGroups[key]).sort().reverse()) {
+				sortOrder.push(authorGroups[key][subkey]);
+			}
+		}
+		// Apply sorting
+		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+			indexItem.style.order = sortCounter;
+		}
+
+	} else if (activeSorting == "random") {
+		let indexItems = document.querySelectorAll(".index-item");
+		let randomOrder = {};
+		for (let indexItem of indexItems) {
+			let randomIndex = parseInt(Math.random()*1000000000);
+			randomOrder[randomIndex] = indexItem.dataset.key;
+			indexItem.style.order = randomIndex;
+		}
+		sortOrder = [];
+		for (let key of Object.keys(randomOrder).sort()) {
+			sortOrder.push(randomOrder[key]);
 		}
 	}
 
+	console.log(sortOrder);
 	flashIndex();
 }
-setSorting("random");
 
 // Set filters
 let activeFilters = [];
@@ -334,7 +505,6 @@ function clearFilters() {
 
 	flashIndex();
 }
-
 
 // Load in story
 let activeStory = "";
@@ -440,60 +610,34 @@ function loadPreview() {
 			let jsStartIndex = htmlDoc.indexOf(jsStart) + jsStart.length + 1;
 			let jsEndIndex = htmlDoc.indexOf(jsEnd);
 
-			document.getElementById("html").innerText = htmlDoc.substring(htmlStartIndex, htmlEndIndex);
-			document.getElementById("css").innerText = htmlDoc.substring(cssStartIndex, cssEndIndex);
-			document.getElementById("js").innerText = htmlDoc.substring(jsStartIndex, jsEndIndex);
+			CodeMirrorHTML.getDoc().setValue(htmlDoc.substring(htmlStartIndex, htmlEndIndex));
+			CodeMirrorCSS.getDoc().setValue(htmlDoc.substring(cssStartIndex, cssEndIndex));
+			CodeMirrorJS.getDoc().setValue(htmlDoc.substring(jsStartIndex, jsEndIndex));
 		}
 	};
 	xhttp.open("GET", jsonBackup[activeStory]["src"], true);
 	xhttp.send();
 }
 
-// ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— FIX THIS: paste text without formatting————————————————— ————————————————— ————————————————— ———also needs to work for dragged-in text —————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— ————————————————— —————————————————
-codeEditorHTML.addEventListener("paste", function(e) {
-    // cancel paste
-    e.preventDefault();
-
-    // get text representation of clipboard
-    var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-    // insert text manually
-    document.execCommand("insertHTML", false, text);
-});
-codeEditorCSS.addEventListener("paste", function(e) {
-    // cancel paste
-    e.preventDefault();
-
-    // get text representation of clipboard
-    var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-    // insert text manually
-    document.execCommand("insertHTML", false, text);
-});
-codeEditorJS.addEventListener("paste", function(e) {
-    // cancel paste
-    e.preventDefault();
-
-    // get text representation of clipboard
-    var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-    // insert text manually
-    document.execCommand("insertHTML", false, text);
-});
-
-// TO DO: PREV and NEXT buttons
-// TO DO: sorting that looks deeper than first character
 // TO DO: updated home screen/instructions
 // make some filter categories toggle instead of multiple select
 // make tags and author not need display names
-// make code have coloring
-// number lines in code editor
-// show number of lines per language
 // what counts as a line?
-// add alpha sorting field
 // allow some normal css (margin 0, padding 0, box-sizing)
-// make tabs just spaces for space sake?
 // split up html, css, js, library tags
-// allow comments in the code
-// scroll story and code to the top when loading new story
+// scroll story and code to the top when loading new story (also catalog!)
 // figure out how to manage assets
+
+// add collection functionality
+// - catalog screens allows toggling between stories and collections
+// - need to add json values for collection + collection order
+// - prev/next buttons change story in collection
+
+// for iframe srcdoc image path issues:
+// detect all src fields for audio or image (or font!)
+// set file paths to have prefix automatically
+
+// FREE CODE
+// margins 0, padding 0, box-sizing border box
+// images get max-width of 100%
+// flexbox centered

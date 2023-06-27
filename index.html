@@ -10,6 +10,14 @@
 	<meta name="author" content="Gabriel Drozdov">
 	<link rel="icon" type="png" href="assets/favicon.png">
 	<link rel="stylesheet" href="style.css">
+
+	<!-- CodeMirror -->
+	<script src="cm/codemirror.js"></script>
+	<link rel="stylesheet" href="cm/codemirror.css">
+	<script src="cm/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="cm/mode/xml/xml.js"></script>
+	<script src="cm/mode/css/css.js"></script>
+	<script src="cm/mode/javascript/javascript.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -26,7 +34,7 @@
 
 			<div class="toggle-container toggle-flip">
 				<div class="toggle">
-					<div class="toggle-text" id="toggle-story" onclick="toggleStory();">Show Story Details</div>
+					<div class="toggle-text" id="toggle-story" onclick="toggleStory();" data-active="0">Show Story Details</div>
 				</div>
 			</div>
 
@@ -75,7 +83,7 @@
 
 			<div class="toggle-container">
 				<div class="toggle">
-					<div class="toggle-text" id="toggle-code" onclick="toggleCode();">Show Code Editor</div>
+					<div class="toggle-text" id="toggle-code" onclick="toggleCode();" data-active="0">Show Code Editor</div>
 				</div>
 			</div>
 
@@ -83,31 +91,49 @@
 				<div class="code-library-container" id="library-container">
 					<a class="code-library" href="#" target="_blank" id="library-link">
 						<span id="library-text">JavaScript Library: p5.js</span>
-						<span class="code-tooltip">A “library” is something that lets you extend the functionality of HTML, CSS, or JavaScript with new functions. Examples of libraries include p5.js for programming graphics, Tone.js for sound, ml5.js for machine learning, three.js for 3D graphics, and matter.js for physics simulations.</span>
+						<span class="code-tooltip">A <strong>library</strong> is something that lets you extend the functionality of HTML, CSS, or JavaScript with new functions. Examples of libraries include p5.js for programming graphics, Tone.js for sound, ml5.js for machine learning, three.js for 3D graphics, and matter.js for physics simulations.</span>
 					</a>
 				</div>
-				<div class="code-editor-container">
-					<div class="code-editor" spellcheck="false">
-						<div class="code-editor-html">
+				<div class="code-editor-border">
+					<div class="code-editor-container" spellcheck="false">
+						<div class="code-editor" id="code-editor-html-parent" data-fullscreen="false">
 							<h3 class="code-editor-language">
 								<span>HTML</span>
-								<span class="code-tooltip">HTML (HyperText Markup Language) is a programming language used for structuring web pages. Internet browsers read HTML files to show you a website’s content.</span>
+								<span class="code-tooltip"><strong>HTML (HyperText Markup Language)</strong> is a programming language used for structuring web pages. Internet browsers read HTML files to show you a website’s content.</span>
 							</h3>
-							<pre class="code-editor-plaintext"><code id="html" contenteditable="true" oninput="updatePreview();"></code></pre>
+							<div class="code-editor-plaintext">
+								<div class="code-editor-plaintext-options">
+									<button onclick="toggleWrap('html');">Wrap Text</button>
+									<button onclick="toggleFullscreen('html')">Fullscreen</button>
+								</div>
+								<textarea id="code-editor-html"></textarea>
+							</div>
 						</div>
-						<div class="code-editor-css">
+						<div class="code-editor" id="code-editor-css-parent" data-fullscreen="false">
 							<h3 class="code-editor-language">
 								<span>CSS</span>
-								<span class="code-tooltip">CSS (Cascading Style Sheets) is a programming language used for styling web pages. This includes everything from how typography will look, to how information is laid out and organized. Internet browsers read CSS in conjunction with HTML.</span>
+								<span class="code-tooltip"><strong>CSS (Cascading Style Sheets)</strong> is a programming language used for styling web pages. This includes everything from how typography will look, to how information is laid out and organized. Internet browsers read CSS in conjunction with HTML.</span>
 							</h3>
-							<pre class="code-editor-plaintext"><code id="css" contenteditable="true" oninput="updatePreview();"></code></pre>
+							<div class="code-editor-plaintext">
+								<div class="code-editor-plaintext-options">
+									<button onclick="toggleWrap('css');">Wrap Text</button>
+									<button onclick="toggleFullscreen('css')">Fullscreen</button>
+								</div>
+								<textarea id="code-editor-css"></textarea>
+							</div>
 						</div>
-						<div class="code-editor-js">
+						<div class="code-editor" id="code-editor-js-parent" data-fullscreen="false">
 							<h3 class="code-editor-language">
 								<span>JavaScript</span>
-								<span class="code-tooltip">JavaScript (JS) is a programming language used for dynamically modifying web pages. Some uses cases for JS include adding interactive elements, performing computation, or generating data and content. JS is able to manipulate HTML and CSS after the web page loads.</span>
+								<span class="code-tooltip"><strong>JavaScript (JS)</strong> is a programming language used for dynamically modifying web pages. Some uses cases for JS include adding interactive elements, performing computation, or generating data and content. JS is able to manipulate HTML and CSS after the web page loads.</span>
 							</h3>
-							<pre class="code-editor-plaintext"><code id="js" contenteditable="true" oninput="updatePreview();"></code></pre>
+							<div class="code-editor-plaintext">
+								<div class="code-editor-plaintext-options">
+									<button onclick="toggleWrap('js');">Wrap Text</button>
+									<button onclick="toggleFullscreen('js')">Fullscreen</button>
+								</div>
+								<textarea id="code-editor-js"></textarea>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -120,9 +146,9 @@
 
 			<div class="nav-container">
 				<nav class="nav">
-					<!-- <div class="nav-link" data-active="1">Previous Story</div> -->
-					<div class="nav-link" onclick="catalogIn(); mainUp();">Choose a Story</div>
-					<!-- <div class="nav-link" data-active="1">Next Story</div> -->
+					<div class="nav-link" data-active="1">Previous Story</div>
+					<div class="nav-link nav-link-catalog" onclick="catalogIn(); mainUp();">Choose a Story</div>
+					<div class="nav-link" data-active="1">Next Story</div>
 				</nav>
 			</div>
 

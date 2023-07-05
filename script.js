@@ -1,98 +1,406 @@
 // Intro
 let colors = ["red", "blue", "purple", "yellow", "pink", "green"];
 let activeColor = Math.floor(Math.random()*colors.length);
+let colorLoop = true;
 function setRandomColor() {
-	let loop = true;
-	while (loop) {
+	if (colorLoop) {
 		activeColor++;
 		if (activeColor >= colors.length) {
 			activeColor = 0;
 		}
 		document.documentElement.style.setProperty('--primary', "var(--"+colors[activeColor]+")");
-		loop = false;
+		setTimeout(() => {
+			setRandomColor();
+		}, 2000)
 	}
 }
 setTimeout(setRandomColor, 50);
-let introAnimation = setInterval(setRandomColor, 2000);
 let intro = document.querySelector(".intro");
 function introOut() {
 	intro.style.transform = "translate(0%, -100%)";
-	clearInterval(introAnimation);
-	openStory(Object.keys(jsonBackup)[Math.floor((Math.random()*Object.keys(jsonBackup).length))]);
 	setSorting("random");
+}
+function introOutInstant() {
+	let temp = intro.style.transition;
+	intro.style.transition = "unset";
+	intro.style.transform = "translate(0%, -100%)";
+	setTimeout(() => {
+		intro.style.transition = temp;
+	}, 50)
+}
+function introIn() {
+	intro.style.transform = "translate(0%, 0%)";
+
+	let introTitle = document.querySelector(".intro-title");
+	introTitle.style.transform = "translateY(0px)";
+
+	let introSubtitle = document.querySelector(".intro-subtitle");
+	introSubtitle.style.transform = "translateY(0px)";
+	introSubtitle.style.opacity = 1;
+
+	let introMenuBorder = document.querySelector(".intro-menu-border");
+	introMenuBorder.style.transform = "translateY(0px)";
+	introMenuBorder.style.opacity = 1;
+	introMenuBorder.style.pointerEvents = "all";
+}
+function introRestart() {
+	activeColor = Math.floor(Math.random()*colors.length);
+	colorLoop = true;
+	setTimeout(setRandomColor, 50);
+
+	introIn();
+
+	if (mainState == "in") {
+		mainDown();
+	} else if (mainState == "up") {
+		mainDownInstant();
+	}
+
+	if (catalogState == "in") {
+		catalogDown();
+	} else if (catalogState == "up") {
+		catalogDownInstant();
+	}
+
+	if (aboutState == "in") {
+		aboutDown();
+	} else if (aboutState == "up") {
+		aboutDownInstant();
+	}
+}
+
+// About section toggles
+function toggleAbout(section) {
+	let aboutSections = document.querySelectorAll(`.about-section`);
+	let aboutSection = document.querySelector(`#about-${section}`);
+	// Close all other sections
+	for (let i of aboutSections) {
+		if (aboutSection != i) {
+			i.dataset.active = 0;
+		}
+	}
+	// Toggle selected section
+	if (parseInt(aboutSection.dataset.active) == 0) {
+		aboutSection.dataset.active = 1;
+	} else {
+		aboutSection.dataset.active = 0;
+	}
 }
 
 // Navigation
-let about = document.querySelector(".about");
+let about = document.querySelector(".about-container");
+let aboutState = "down";
 function aboutIn() {
+	if (colorLoop == false) {
+		colorLoop = true;
+		setTimeout(setRandomColor, 50);
+	}
+	aboutState = "in";
 	about.style.transform = "translate(0%, 0%)";
+	
+	// Scroll to top
+	let aboutContent = document.querySelector(".about");
+	aboutContent.scrollTop = 0;
 }
-function aboutOut() {
+function aboutUp() {
+	aboutState = "up";
 	about.style.transform = "translate(0%, -100%)";
 }
+function aboutUpInstant() {
+	aboutState = "up";
+	let temp = about.style.transition;
+	about.style.transition = "unset";
+	about.style.transform = "translate(0%, -100%)";
+	setTimeout(() => {
+		about.style.transition = temp;
+	}, 50)
+}
+function aboutDown() {
+	aboutState = "down";
+	about.style.transform = "translate(0%, 100%)";
+}
+function aboutDownInstant() {
+	aboutState = "down";
+	let temp = about.style.transition;
+	about.style.transition = "unset";
+	about.style.transform = "translate(0%, 100%)";
+	setTimeout(() => {
+		about.style.transition = temp;
+	}, 50)
+}
+
 let main = document.querySelector(".main");
+let mainState = "down";
 function mainIn() {
+	colorLoop = false;
+	mainState = "in";
 	main.style.transform = "translate(0%, 0%)";
+	if (window.innerWidth > 1200) {
+		openPanelStory();
+		openPanelCode();
+	}
+	
+	// Scroll to top
+	let storyContent = document.querySelector(".story-content");
+	storyContent.scrollTop = 0;
+
+	// Make sure a story is active
+	let url = new URL(window.location.href);
+	let params = new URLSearchParams(url.search);
+	if (activeStory != "" && params.get("site") != activeStory) {
+		params.set("site", activeStory);
+		window.history.pushState({site: activeStory},'','?'+params);
+	} else if (activeStory == "") {
+		openStoryRandom();
+	}
+
+	// Set color based on lines of code
+	let lines = jsonBackup[activeStory]["lines"];
+	if (lines <= 20) {
+		activeColor = 0;
+	} else if (lines >= 21 && lines <= 40) {
+		activeColor = 1;
+	} else if (lines >= 41 && lines <= 60) {
+		activeColor = 2;
+	} else if (lines >= 61 && lines <= 80) {
+		activeColor = 3;
+	} else if (lines >= 81 && lines <= 100) {
+		activeColor = 4;
+	} else {
+		activeColor = 5;
+	}
+	document.documentElement.style.setProperty('--primary', "var(--"+colors[activeColor]+")");
 }
 function mainUp() {
+	mainState = "up";
 	main.style.transform = "translate(0%, -100%)";
 }
+function mainUpInstant() {
+	mainState = "up";
+	let temp = main.style.transition;
+	main.style.transition = "unset";
+	main.style.transform = "translate(0%, -100%)";
+	setTimeout(() => {
+		main.style.transition = temp;
+	}, 50)
+}
+function mainDownInstant() {
+	mainState = "down";
+	let temp = main.style.transition;
+	main.style.transition = "unset";
+	main.style.transform = "translate(0%, 100%)";
+	setTimeout(() => {
+		main.style.transition = temp;
+	}, 50)
+}
 function mainDown() {
+	mainState = "down";
 	main.style.transform = "translate(0%, 100%)";
 }
+
 let catalog = document.querySelector(".catalog");
+let catalogState = "down";
 function catalogIn() {
+	colorLoop = false;
+	catalogState = "in";
 	catalog.style.transform = "translate(0%, 0%)";
+	if (window.innerWidth > 1200) {
+		openPanelControls();
+	}
+
+	// Scroll to top
+	let controls = document.querySelector(".controls-content");
+	controls.scrollTop = 0;
+	let index = document.querySelector("#index");
+	index.scrollTop = 0;
 }
 function catalogUp() {
+	catalogState = "up";
 	catalog.style.transform = "translate(0%, -100%)";
 }
 function catalogDown() {
+	catalogState = "down";
 	catalog.style.transform = "translate(0%, 100%)";
 }
+function catalogDownInstant() {
+	catalogState = "down";
+	let temp = catalog.style.transition;
+	catalog.style.transition = "unset";
+	catalog.style.transform = "translate(0%, 100%)";
+	setTimeout(() => {
+		catalog.style.transition = temp;
+	}, 50)
+}
 
-// Toggle views on main screen
+// Toggle panels on main view
 let storyView = true;
 let codeView = true;
-function toggleStory() {
+function togglePanelStory() {
 	let toggle = document.querySelector("#toggle-story");
+	let toggleTxt = toggle.querySelector("p");
 	let story = document.querySelector("#story");
 	let preview = document.querySelector("#preview-container");
 	if (storyView) {
-		toggle.innerText = "Hide Story Details";
-		toggle.dataset.active = 1;
+		toggleTxt.innerText = "Show Story Details";
+		toggle.dataset.active = 0;
 		story.dataset.active = 0;
 		preview.dataset.story = 0;
 		storyView = false;
 	} else {
-		toggle.innerText = "Show Story Details";
-		toggle.dataset.active = 0;
+		toggleTxt.innerText = "Hide Story Details";
+		toggle.dataset.active = 1;
 		story.dataset.active = 1;
 		preview.dataset.story = 1;
 		storyView = true;
 	}
+	if (window.innerWidth < 1200 && codeView == true) {
+		closePanelCode();
+	}
 }
-function toggleCode() {
+function togglePanelCode() {
 	let toggle = document.querySelector("#toggle-code");
+	let toggleTxt = toggle.querySelector("p");
 	let code = document.querySelector("#code");
 	let preview = document.querySelector("#preview-container");
 	if (codeView) {
-		toggle.innerText = "Show Code Editor";
-		toggle.dataset.active = 1;
+		toggleTxt.innerText = "Show Code Editor";
+		toggle.dataset.active = 0;
 		code.dataset.active = 0;
 		preview.dataset.code = 0;
 		codeView = false;
 	} else {
-		toggle.innerText = "Hide Code Editor";
-		toggle.dataset.active = 0;
+		toggleTxt.innerText = "Hide Code Editor";
+		toggle.dataset.active = 1;
 		code.dataset.active = 1;
 		preview.dataset.code = 1;
 		codeView = true;
 	}
+	if (window.innerWidth < 1200 && storyView == true) {
+		closePanelCode();
+	}
+}
+function openPanelStory() {
+	let toggle = document.querySelector("#toggle-story");
+	let toggleTxt = toggle.querySelector("p");
+	let story = document.querySelector("#story");
+	let preview = document.querySelector("#preview-container");
+	toggleTxt.innerText = "Hide Story Details";
+	toggle.dataset.active = 1;
+	story.dataset.active = 1;
+	preview.dataset.story = 1;
+	storyView = true;
+}
+function openPanelCode() {
+	let toggle = document.querySelector("#toggle-code");
+	let toggleTxt = toggle.querySelector("p");
+	let code = document.querySelector("#code");
+	let preview = document.querySelector("#preview-container");
+	toggleTxt.innerText = "Hide Code Editor";
+	toggle.dataset.active = 1;
+	code.dataset.active = 1;
+	preview.dataset.code = 1;
+	codeView = true;
+}
+function closePanelStory() {
+	let toggle = document.querySelector("#toggle-story");
+	let toggleTxt = toggle.querySelector("p");
+	let story = document.querySelector("#story");
+	let preview = document.querySelector("#preview-container");
+	toggleTxt.innerText = "Show Story Details";
+	toggle.dataset.active = 0;
+	story.dataset.active = 0;
+	preview.dataset.story = 0;
+	storyView = false;
+}
+function closePanelCode() {
+	let toggle = document.querySelector("#toggle-code");
+	let toggleTxt = toggle.querySelector("p");
+	let code = document.querySelector("#code");
+	let preview = document.querySelector("#preview-container");
+	toggleTxt.innerText = "Show Code Editor";
+	toggle.dataset.active = 0;
+	code.dataset.active = 0;
+	preview.dataset.code = 0;
+	codeView = false;
 }
 
+// Panel toggles on mobile
+let previewMobileState = false;
+window.addEventListener("resize", mobilePreviewAdjust);
+function mobilePreviewAdjust() {
+	if (window.innerWidth < 1200 && previewMobileState == false) {
+		previewMobileState = true;
+		closePanelStory();
+		closePanelCode();
+	}
+	if (window.innerWidth >= 1200 && previewMobileState == true) {
+		previewMobileState = false;
+		openPanelStory();
+		openPanelCode();
+	}
+}
+mobilePreviewAdjust();
+
+// Toggle controls panel on catalog view
+let controlsView = true;
+function togglePanelControls() {
+	let toggle = document.querySelector("#toggle-controls");
+	let toggleTxt = toggle.querySelector("p");
+	let controls = document.querySelector(".controls");
+	let index = document.querySelector(".index");
+	if (controlsView) {
+		toggleTxt.innerText = "Show Sorting & Filters";
+		toggle.dataset.active = 0;
+		controls.dataset.active = 0;
+		index.dataset.controls = 0;
+		controlsView = false;
+	} else {
+		toggleTxt.innerText = "Hide Sorting & Filters";
+		toggle.dataset.active = 1;
+		controls.dataset.active = 1;
+		index.dataset.controls = 1;
+		controlsView = true;
+	}
+}
+function openPanelControls() {
+	let toggle = document.querySelector("#toggle-controls");
+	let toggleTxt = toggle.querySelector("p");
+	let controls = document.querySelector(".controls");
+	let index = document.querySelector(".index");
+	toggleTxt.innerText = "Show Sorting & Filters";
+	toggle.dataset.active = 1;
+	controls.dataset.active = 1;
+	index.dataset.controls = 1;
+	controlsView = true;
+}
+function closePanelControls() {
+	let toggle = document.querySelector("#toggle-controls");
+	let toggleTxt = toggle.querySelector("p");
+	let controls = document.querySelector(".controls");
+	let index = document.querySelector(".index");
+	toggleTxt.innerText = "Hide Sorting & Filters";
+	toggle.dataset.active = 0;
+	controls.dataset.active = 0;
+	index.dataset.controls = 0;
+	controlsView = false;
+}
+
+// Control panel toggle on mobile
+let controlsMobileState = false;
+window.addEventListener("resize", mobileControlsAdjust);
+function mobileControlsAdjust() {
+	if (window.innerWidth < 1200 && controlsMobileState == false) {
+		controlsMobileState = true;
+		closePanelControls();
+	}
+	if (window.innerWidth >= 1200 && controlsMobileState == true) {
+		controlsMobileState = false;
+		openPanelControls();
+	}
+}
+mobileControlsAdjust();
+
 // Code editor live update
-let codeEditorPreview = document.querySelector(".preview-iframe");
 let codeEditorHTMLParent = document.querySelector("#code-editor-html-parent");
 let codeEditorCSSParent = document.querySelector("#code-editor-css-parent");
 let codeEditorJSParent = document.querySelector("#code-editor-js-parent");
@@ -123,7 +431,12 @@ CodeMirrorHTML.on("change", function(cm, change) { updatePreview() });
 CodeMirrorCSS.on("change", function(cm, change) { updatePreview() });
 CodeMirrorJS.on("change", function(cm, change) { updatePreview() });
 function updatePreview() {
+	let codeEditorPreview = document.querySelector(".preview-iframe");
 	codeEditorPreview.src = "";
+
+	let htmlString = CodeMirrorHTML.getValue();
+	htmlString.search('src=');
+	
 	if (jsonBackup[activeStory]["library"].length > 0) {
 		codeEditorPreview.srcdoc = '<html>' + CodeMirrorHTML.getValue() + '</html>' + '<style>' + CodeMirrorCSS.getValue() + '</style>' + '<script src="' + jsonBackup[activeStory]["library"][2] + '"></script>' + '<script>' + CodeMirrorJS.getValue() + '</script>';
 	} else {
@@ -147,6 +460,12 @@ function toggleWrap(editor) {
 		CodeMirrorJS.setOption('lineWrapping', editorLineWrap[2]);
 	}
 }
+function resetWrap() {
+	editorLineWrap = [false, false, false];
+	CodeMirrorHTML.setOption('lineWrapping', editorLineWrap[0]);
+	CodeMirrorCSS.setOption('lineWrapping', editorLineWrap[1]);
+	CodeMirrorJS.setOption('lineWrapping', editorLineWrap[2]);
+}
 
 // Fullscreen
 let editorFullscreen = [false, false, false];
@@ -164,81 +483,225 @@ function toggleFullscreen(editor) {
 		codeEditorJSParent.dataset.fullscreen = editorFullscreen[2];
 	}
 }
+function resetFullscreen() {
+	editorFullscreen = [false, false, false];
+	codeEditorHTMLParent.dataset.fullscreen = editorFullscreen[0];codeEditorCSSParent.dataset.fullscreen = editorFullscreen[1];
+	codeEditorJSParent.dataset.fullscreen = editorFullscreen[2];
+}
 
 // Fetch JSON and build index
-// JSON format:
-// title: string (short)
-// desc: string (long)
-// authors: array of arrays [tag name, display name]
-// tags: array of arrays [actual tag, display tag]
-// lines: int
-// library: array [display text, url, cdn code]
-// src: url as string
-let jsonBackup;
+let jsonBackup, jsonBackupAnthologies;
 fetch('sites.json')
 	.then((response) => response.json())
 	.then((json) => {
-			jsonBackup = json;
-			let index = document.querySelector("#index");
-			let keys = Object.keys(json);
-			let temp = "";
-			for (let key of keys) {
-				let entry = json[key];
+		jsonBackup = json;
+		fetch('anthologies.json')
+			.then((response) => response.json())
+			.then((json) => {
+				jsonBackupAnthologies = json;
+				populateContent();
+			})
+	})
 
-				// Build authors string
-				let authors = "";
-				for (let i=0; i<entry["authors"].length; i++) {
-					if (i==entry["authors"].length-1) {
-						authors += entry["authors"][i][1];
-					} else {
-						authors += entry["authors"][i][1] + ", ";
-					}
-				}
+// Generate content from JSON files
+function populateContent() {
 
-				// Build tags
-				let tags = "";
-				for (let tag of entry["tags"]) {
-					if (tag.length == 2) {
-						tags += `<li class="index-item-tag">${tag[1]}</li>`;
-					}
-				}
+	// STORIES
+	let index = document.querySelector("#index");
+	let keys = Object.keys(jsonBackup);
+	let temp = "";
+	let uniqueAuthors = []; // keep track of unique authors
+	for (let key of keys) {
+		let entry = jsonBackup[key];
 
-				// Set category for lines of code
-				let category = "";
-				let lines = entry["lines"];
-				if (lines <= 20) {
-					category = "20less";
-				} else if (lines >= 21 && lines <= 40) {
-					category = "21to40";
-				} else if (lines >= 41 && lines <= 60) {
-					category = "41to60";
-				} else if (lines >= 61 && lines <= 80) {
-					category = "61to80";
-				} else if (lines >= 81 && lines <= 100) {
-					category = "81to100";
-				} else {
-					category = "100more";
-				}
-
-				temp += `
-					<div class="index-item" data-key="${key}" data-category="${category}" data-active="1" onclick="openStory('${key}')">
-						<div class="index-item-lines">
-							<p class="index-item-lines-text">Lines</p>
-							<p class="index-item-lines-number">${entry["lines"]}</p>
-							<p class="index-item-lines-text">of Code</p>
-						</div>
-						<div class="index-item-info">
-							<h4 class="index-item-title">${entry["title"]}</h4>
-							<h5 class="index-item-authors">${authors}</h5>
-							<ul class="index-item-tags">
-								${tags}
-							</ul>
-						</div>
-					</div>
-				`
+		// Build authors string
+		let authors = "";
+		for (let i=0; i<entry["authors"].length; i++) {
+			if (i==entry["authors"].length-1) {
+				authors += entry["authors"][i];
+			} else {
+				authors += entry["authors"][i] + ", ";
 			}
-			index.innerHTML += temp;
-})
+		}
+
+		// Build tags
+		let tags = "";
+		for (let tag of entry["tags"]) {
+			tags += `<li class="index-item-tag">${tag}</li>`;
+		}
+
+		// Set category for lines of code
+		let category = "";
+		let lines = entry["lines"];
+		if (lines <= 20) {
+			category = "20less";
+		} else if (lines >= 21 && lines <= 40) {
+			category = "21to40";
+		} else if (lines >= 41 && lines <= 60) {
+			category = "41to60";
+		} else if (lines >= 61 && lines <= 80) {
+			category = "61to80";
+		} else if (lines >= 81 && lines <= 100) {
+			category = "81to100";
+		} else {
+			category = "100more";
+		}
+
+		// Add anthology info if needed
+		let anthology = entry["anthology"];
+		let anthologyTemp = "";
+		if (anthology != "") {
+			anthologyTemp = `<h6 class="index-item-anthology">${jsonBackupAnthologies[anthology]["title"]}</h6>`;
+		}
+
+		temp += `
+			<div class="index-item" data-key="${key}" data-type="story" data-category="${category}" data-active="1" data-search="1" onclick="openStory('${key}')">
+				<div class="index-item-lines">
+					<p class="index-item-lines-text index-item-lines-text-desktop">Lines</p>
+					<p class="index-item-lines-number">${entry["lines"]}</p>
+					<p class="index-item-lines-text index-item-lines-text-desktop">of&nbsp;Code</p>
+					<p class="index-item-lines-text index-item-lines-text-mobile">Lines of Code</p>
+				</div>
+				<div class="index-item-info">
+					${anthologyTemp}
+					<h4 class="index-item-title">${entry["title"]}</h4>
+					<h5 class="index-item-authors">${authors}</h5>
+					<ul class="index-item-tags">
+						${tags}
+					</ul>
+				</div>
+			</div>
+		`
+
+		// Collect new authors
+		for (let author of entry["authors"]) {
+			if (!uniqueAuthors.includes(author)) {
+				uniqueAuthors.push(author);
+			}
+		}
+	}
+
+	index.innerHTML += temp;
+
+	// Build out authors filters list and alphabetically sort (firstname)
+	let authorsTemp = "";
+	for (let author of uniqueAuthors.sort()) {
+		authorsTemp += `
+			<li class="controls-option" data-active="0" data-filter="${author}" onclick="setFilter('${author}')">${author}</li>
+		`
+	}
+	let filtersAuthors = document.querySelector("#filters-authors");
+	filtersAuthors.innerHTML += authorsTemp;
+
+	// ANTHOLOGIES
+	keys = Object.keys(jsonBackupAnthologies);
+	temp = "";
+	for (let key of keys) {
+		let entry = jsonBackupAnthologies[key];
+
+		// Calculate total lines of code and build out elements for individual stories
+		let lines = 0;
+		let stories = "";
+		for (let story of entry["stories"]) {
+			lines += jsonBackup[story]["lines"];
+			let category = "";
+			if (jsonBackup[story]["lines"] <= 20) {
+				category = "20less";
+			} else if (jsonBackup[story]["lines"] <= 40) {
+				category = "21to40";
+			} else if (jsonBackup[story]["lines"] <= 60) {
+				category = "41to60";
+			} else if (jsonBackup[story]["lines"] <= 80) {
+				category = "61to80";
+			} else if (jsonBackup[story]["lines"] <= 100) {
+				category = "81to100";
+			} else {
+				category = "100more";
+			}
+			stories += `
+				<li class="index-item-story" data-category="${category}">
+					<div class="index-item-story-lines">
+						<p>${jsonBackup[story]["lines"]}</p>
+					</div>
+					<p class="index-item-story-title">${jsonBackup[story]["title"]}</p>
+				</li>
+			`;
+		}
+
+		temp += `
+			<div class="index-item" data-key="${key}" data-type="anthology" data-active="1" data-search="1" onclick="openStory('${entry["stories"][0]}')">
+				<div class="index-item-lines">
+					<p class="index-item-lines-text index-item-lines-text-desktop">Lines</p>
+					<p class="index-item-lines-number">${lines}</p>
+					<p class="index-item-lines-text index-item-lines-text-desktop">of&nbsp;Code</p>
+					<p class="index-item-lines-text index-item-lines-text-mobile">Lines of Code</p>
+				</div>
+				<div class="index-item-info">
+					<h4 class="index-item-title">${entry["title"]}</h4>
+					<ul class="index-item-stories">
+						${stories}
+					</ul>
+				</div>
+			</div>
+		`
+	}
+	index.innerHTML += temp;
+
+	initializeStory();
+}
+
+// Load entry on pageload after all other information loaded in
+function initializeStory() {
+	// Construct a new object and pass the page href to URLSearchParams
+	const pageHref = window.location.search;
+	const searchParams = new URLSearchParams(pageHref.substring(pageHref.indexOf('?')));
+
+	if (searchParams.has('site')) {
+		console.log(1)
+		setTimeout(() => {
+			introOut();
+			aboutUpInstant();
+			openStory(searchParams.get('site'));
+		}, 1000)
+	} else {
+		// Format intro screen
+		let introTitle = document.querySelector(".intro-title");
+		let introSubtitle = document.querySelector(".intro-subtitle");
+		let introMenuBorder = document.querySelector(".intro-menu-border");
+
+		setTimeout(() => {
+			introTitle.style.transform = "translateY(0px)";
+		}, 1000)
+		setTimeout(() => {
+			introSubtitle.style.transform = "translateY(0px)";
+			introSubtitle.style.opacity = 1;
+		}, 1200)
+		setTimeout(() => {
+			introMenuBorder.style.transform = "translateY(0px)";
+			introMenuBorder.style.opacity = 1;
+			introMenuBorder.style.pointerEvents = "all";
+		}, 1400)
+	}
+}
+function reloadStory() {
+	// Construct a new object and pass the page href to URLSearchParams
+	const pageHref = window.location.search;
+	const searchParams = new URLSearchParams(pageHref.substring(pageHref.indexOf('?')));
+
+	if (searchParams.has('site')) {
+		introOut();
+		if (aboutState == "down") {
+			aboutUpInstant();
+		} else {
+			aboutUp();
+		}
+		openStory(searchParams.get('site'));
+		flashStory();
+	} else {
+		introRestart();
+	}
+}
+window.addEventListener("popstate", reloadStory);
 
 // Flash index screen when order changes
 function flashIndex() {
@@ -249,6 +712,52 @@ function flashIndex() {
 		flash.style.transition = "opacity .5s";
 		flash.style.opacity = 0;
 	}, 50);
+}
+
+// Mobile resizing for index
+let indexResizeObserver = new ResizeObserver(() => {
+    indexResize();
+});
+indexResizeObserver.observe(document.querySelector("#index"));
+function indexResize() {
+	let indexItems = document.querySelector(".index-items");
+	if (indexItems.offsetWidth < 800) {
+		indexItems.style.gridTemplateColumns = "minmax(0, 1fr)";
+	} else if (indexItems.offsetWidth < 1400) {
+		indexItems.style.gridTemplateColumns = "minmax(0, 1fr) minmax(0, 1fr)";
+	} else if (indexItems.offsetWidth < 1800) {
+		indexItems.style.gridTemplateColumns = "minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)";
+	} else {
+		indexItems.style.gridTemplateColumns = "minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)";
+	}
+}
+indexResize();
+
+// Set story type (story or anthology)
+let storyType = "story";
+function setStoryType(newStoryType) {
+	storyType = newStoryType;
+	let storyonly = document.querySelectorAll("[data-storyonly]");
+	let toggleStory = document.querySelector("[data-storytype='story']");
+	let toggleAnthology = document.querySelector("[data-storytype='anthology']");
+	let index = document.querySelector("#index");
+	if (storyType == "story") {
+		toggleStory.dataset.active = 1;
+		toggleAnthology.dataset.active = 0;
+		for (let i of storyonly) {
+			i.dataset.storyonly = 1;
+		}
+		index.dataset.view = "story";
+	} else {
+		toggleStory.dataset.active = 0;
+		toggleAnthology.dataset.active = 1;
+		for (let i of storyonly) {
+			i.dataset.storyonly = 0;
+		}
+		index.dataset.view = "anthology";
+	}
+	setSorting("random");
+	clearFilters();
 }
 
 // Set sorting order
@@ -273,159 +782,218 @@ function setSorting(sorting) {
 
 	// Calculate and apply sort order
 	sortOrder = [];
-	if (activeSorting == "leastcode") {
-		// Separate entries into sets of unique lines of code (sort lines, then alpha per number of lines) | format: {"lines": {"alpha": key, "alpha": key}}
-		let lineGroups = {};
-		for (let key of Object.keys(jsonBackup)) {
-			let entry = jsonBackup[key];
-			let entryAlpha = entry['alpha'];
-			let entryLines = entry['lines'];
-			if (lineGroups[entryLines] == undefined) {
-				lineGroups[entryLines] = {}; // add new object for each author
+	if (storyType == "story") {
+
+		if (activeSorting == "leastcode") {
+			// Separate entries into sets of unique lines of code (sort lines, then alpha per number of lines) | format: {"lines": {"alpha": key, "alpha": key}}
+			let lineGroups = {};
+			for (let key of Object.keys(jsonBackup)) {
+				let entry = jsonBackup[key];
+				let entryAlpha = entry['alpha'];
+				let entryLines = entry['lines'];
+				if (lineGroups[entryLines] == undefined) {
+					lineGroups[entryLines] = {}; // add new object for each author
+				}
+				lineGroups[entryLines][entryAlpha] = key;
 			}
-			lineGroups[entryLines][entryAlpha] = key;
-		}
-		// Sort lines and entries per number of lines
-		for (let key of Object.keys(lineGroups).sort(function(a, b) {return a - b})) { // change sort to numerical instead of by string
-			for (let subkey of Object.keys(lineGroups[key]).sort()) {
-				sortOrder.push(lineGroups[key][subkey]);
+			// Sort lines and entries per number of lines
+			for (let key of Object.keys(lineGroups).sort(function(a, b) {return a - b})) { // change sort to numerical instead of by string
+				for (let subkey of Object.keys(lineGroups[key]).sort()) {
+					sortOrder.push(lineGroups[key][subkey]);
+				}
 			}
-		}
-		// Apply sorting
-		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
-			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
-			indexItem.style.order = sortCounter;
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "mostcode") {
+			// Separate entries into sets of unique lines of code (sort lines, then alpha per number of lines) | format: {"lines": {"alpha": key, "alpha": key}}
+			let lineGroups = {};
+			for (let key of Object.keys(jsonBackup)) {
+				let entry = jsonBackup[key];
+				let entryAlpha = entry['alpha'];
+				let entryLines = entry['lines'];
+				if (lineGroups[entryLines] == undefined) {
+					lineGroups[entryLines] = {}; // add new object for each author
+				}
+				lineGroups[entryLines][entryAlpha] = key;
+			}
+			// Sort lines and entries per number of lines (reversed)
+			for (let key of Object.keys(lineGroups).sort(function(a, b) {return a - b}).reverse()) { // change sort to numerical instead of by string
+				for (let subkey of Object.keys(lineGroups[key]).sort().reverse()) {
+					sortOrder.push(lineGroups[key][subkey]);
+				}
+			}
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "titleaz") {
+			// Build object containing alpha/key pairs
+			let sortingAlpha = {};
+			for (let key of Object.keys(jsonBackup)) {
+				let entry = jsonBackup[key];
+				let entryAlpha = entry['alpha'];
+				sortingAlpha[entryAlpha] = key;
+			}
+			// Sort alpha keys
+			for (let key of Object.keys(sortingAlpha).sort()) {
+				sortOrder.push(sortingAlpha[key]);
+			}
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "titleza") {
+			// Build object containing alpha/key pairs
+			let sortingAlpha = {};
+			for (let key of Object.keys(jsonBackup)) {
+				let entry = jsonBackup[key];
+				let entryAlpha = entry['alpha'];
+				sortingAlpha[entryAlpha] = key;
+			}
+			// Sort alpha keys (reversed)
+			for (let key of Object.keys(sortingAlpha).sort().reverse()) {
+				sortOrder.push(sortingAlpha[key]);
+			}
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "authoraz") {
+			// Separate entries into sets of unique authors (sort authors, then alpha per author) | format: {"authoralpha": {"alpha": key, "alpha": key}}
+			let authorGroups = {};
+			for (let key of Object.keys(jsonBackup)) {
+				let entry = jsonBackup[key];
+				let entryAlpha = entry['alpha'];
+				let entryAuthorAlpha = entry['authoralpha'];
+				if (authorGroups[entryAuthorAlpha] == undefined) {
+					authorGroups[entryAuthorAlpha] = {}; // add new object for each author
+				}
+				authorGroups[entryAuthorAlpha][entryAlpha] = key;
+			}
+			// Sort author keys and entries per author
+			for (let key of Object.keys(authorGroups).sort()) {
+				for (let subkey of Object.keys(authorGroups[key]).sort()) {
+					sortOrder.push(authorGroups[key][subkey]);
+				}
+			}
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "authorza") {
+			// Separate entries into sets of unique authors (sort authors, then alpha per author) | format: {"authoralpha": {"alpha": key, "alpha": key}}
+			let authorGroups = {};
+			for (let key of Object.keys(jsonBackup)) {
+				let entry = jsonBackup[key];
+				let entryAlpha = entry['alpha'];
+				let entryAuthorAlpha = entry['authoralpha'];
+				if (authorGroups[entryAuthorAlpha] == undefined) {
+					authorGroups[entryAuthorAlpha] = {}; // add new object for each author
+				}
+				authorGroups[entryAuthorAlpha][entryAlpha] = key;
+			}
+			// Sort author keys and entries per author (reversed)
+			for (let key of Object.keys(authorGroups).sort().reverse()) {
+				for (let subkey of Object.keys(authorGroups[key]).sort().reverse()) {
+					sortOrder.push(authorGroups[key][subkey]);
+				}
+			}
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "random") {
+			let indexItems = document.querySelectorAll(".index-item");
+			let randomOrder = {};
+			for (let indexItem of indexItems) {
+				let randomIndex = parseInt(Math.random()*1000000000);
+				randomOrder[randomIndex] = indexItem.dataset.key;
+				indexItem.style.order = randomIndex;
+			}
+			sortOrder = [];
+			for (let key of Object.keys(randomOrder).sort()) {
+				sortOrder.push(randomOrder[key]);
+			}
 		}
 
-	} else if (activeSorting == "mostcode") {
-		// Separate entries into sets of unique lines of code (sort lines, then alpha per number of lines) | format: {"lines": {"alpha": key, "alpha": key}}
-		let lineGroups = {};
-		for (let key of Object.keys(jsonBackup)) {
-			let entry = jsonBackup[key];
-			let entryAlpha = entry['alpha'];
-			let entryLines = entry['lines'];
-			if (lineGroups[entryLines] == undefined) {
-				lineGroups[entryLines] = {}; // add new object for each author
+	} else if (storyType == "anthology") {
+
+		if (activeSorting == "titleaz") {
+			// Build object containing alpha/key pairs
+			let sortingAlpha = {};
+			for (let key of Object.keys(jsonBackupAnthologies)) {
+				let entry = jsonBackupAnthologies[key];
+				let entryAlpha = entry['alpha'];
+				sortingAlpha[entryAlpha] = key;
 			}
-			lineGroups[entryLines][entryAlpha] = key;
-		}
-		// Sort lines and entries per number of lines (reversed)
-		for (let key of Object.keys(lineGroups).sort(function(a, b) {return a - b}).reverse()) { // change sort to numerical instead of by string
-			for (let subkey of Object.keys(lineGroups[key]).sort().reverse()) {
-				sortOrder.push(lineGroups[key][subkey]);
+			// Sort alpha keys
+			for (let key of Object.keys(sortingAlpha).sort()) {
+				sortOrder.push(sortingAlpha[key]);
 			}
-		}
-		// Apply sorting
-		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
-			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
-			indexItem.style.order = sortCounter;
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "titleza") {
+			// Build object containing alpha/key pairs
+			let sortingAlpha = {};
+			for (let key of Object.keys(jsonBackupAnthologies)) {
+				let entry = jsonBackupAnthologies[key];
+				let entryAlpha = entry['alpha'];
+				sortingAlpha[entryAlpha] = key;
+			}
+			// Sort alpha keys (reversed)
+			for (let key of Object.keys(sortingAlpha).sort().reverse()) {
+				sortOrder.push(sortingAlpha[key]);
+			}
+			// Apply sorting
+			for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
+				let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
+				indexItem.style.order = sortCounter;
+			}
+	
+		} else if (activeSorting == "random") {
+			let indexItems = document.querySelectorAll(".index-item");
+			let randomOrder = {};
+			for (let indexItem of indexItems) {
+				let randomIndex = parseInt(Math.random()*1000000000);
+				randomOrder[randomIndex] = indexItem.dataset.key;
+				indexItem.style.order = randomIndex;
+			}
+			sortOrder = [];
+			for (let key of Object.keys(randomOrder).sort()) {
+				sortOrder.push(randomOrder[key]);
+			}
 		}
 
-	} else if (activeSorting == "titleaz") {
-		// Build object containing alpha/key pairs
-		let sortingAlpha = {};
-		for (let key of Object.keys(jsonBackup)) {
-			let entry = jsonBackup[key];
-			let entryAlpha = entry['alpha'];
-			sortingAlpha[entryAlpha] = key;
-		}
-		// Sort alpha keys
-		for (let key of Object.keys(sortingAlpha).sort()) {
-			sortOrder.push(sortingAlpha[key]);
-		}
-		// Apply sorting
-		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
-			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
-			indexItem.style.order = sortCounter;
-		}
-
-	} else if (activeSorting == "titleza") {
-		// Build object containing alpha/key pairs
-		let sortingAlpha = {};
-		for (let key of Object.keys(jsonBackup)) {
-			let entry = jsonBackup[key];
-			let entryAlpha = entry['alpha'];
-			sortingAlpha[entryAlpha] = key;
-		}
-		// Sort alpha keys (reversed)
-		for (let key of Object.keys(sortingAlpha).sort().reverse()) {
-			sortOrder.push(sortingAlpha[key]);
-		}
-		// Apply sorting
-		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
-			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
-			indexItem.style.order = sortCounter;
-		}
-
-	} else if (activeSorting == "authoraz") {
-		// Separate entries into sets of unique authors (sort authors, then alpha per author) | format: {"authoralpha": {"alpha": key, "alpha": key}}
-		let authorGroups = {};
-		for (let key of Object.keys(jsonBackup)) {
-			let entry = jsonBackup[key];
-			let entryAlpha = entry['alpha'];
-			let entryAuthorAlpha = entry['authoralpha'];
-			if (authorGroups[entryAuthorAlpha] == undefined) {
-				authorGroups[entryAuthorAlpha] = {}; // add new object for each author
-			}
-			authorGroups[entryAuthorAlpha][entryAlpha] = key;
-		}
-		// Sort author keys and entries per author
-		for (let key of Object.keys(authorGroups).sort()) {
-			for (let subkey of Object.keys(authorGroups[key]).sort()) {
-				sortOrder.push(authorGroups[key][subkey]);
-			}
-		}
-		// Apply sorting
-		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
-			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
-			indexItem.style.order = sortCounter;
-		}
-
-	} else if (activeSorting == "authorza") {
-		// Separate entries into sets of unique authors (sort authors, then alpha per author) | format: {"authoralpha": {"alpha": key, "alpha": key}}
-		let authorGroups = {};
-		for (let key of Object.keys(jsonBackup)) {
-			let entry = jsonBackup[key];
-			let entryAlpha = entry['alpha'];
-			let entryAuthorAlpha = entry['authoralpha'];
-			if (authorGroups[entryAuthorAlpha] == undefined) {
-				authorGroups[entryAuthorAlpha] = {}; // add new object for each author
-			}
-			authorGroups[entryAuthorAlpha][entryAlpha] = key;
-		}
-		// Sort author keys and entries per author (reversed)
-		for (let key of Object.keys(authorGroups).sort().reverse()) {
-			for (let subkey of Object.keys(authorGroups[key]).sort().reverse()) {
-				sortOrder.push(authorGroups[key][subkey]);
-			}
-		}
-		// Apply sorting
-		for (let sortCounter=0; sortCounter<sortOrder.length; sortCounter++) {
-			let indexItem = document.querySelector(`[data-key="${sortOrder[sortCounter]}"]`);
-			indexItem.style.order = sortCounter;
-		}
-
-	} else if (activeSorting == "random") {
-		let indexItems = document.querySelectorAll(".index-item");
-		let randomOrder = {};
-		for (let indexItem of indexItems) {
-			let randomIndex = parseInt(Math.random()*1000000000);
-			randomOrder[randomIndex] = indexItem.dataset.key;
-			indexItem.style.order = randomIndex;
-		}
-		sortOrder = [];
-		for (let key of Object.keys(randomOrder).sort()) {
-			sortOrder.push(randomOrder[key]);
-		}
 	}
 
-	console.log(sortOrder);
+	// Scroll index to top
+	let index = document.querySelector("#index");
+	index.scrollTop = 0;
+
 	flashIndex();
 }
 
 // Set filters
 let activeFilters = [];
-let lineFilters = ["20less", "21to40", "41to60", "61to80", "81to100", "100more"];
+let lineFilters = ["20 or less", "21–40", "41–60", "61–80", "81–100", "More than 100"];
 function setFilter(filter) {
 	// Make sure only one "lines of code" filter is active
 	if (lineFilters.includes(filter)) {
@@ -450,39 +1018,58 @@ function setFilter(filter) {
 	}
 
 	// Filter index items
-	let indexItems = document.querySelectorAll(".index-item");
+	let storyItems = document.querySelectorAll(".index-item[data-type='story']");
 	let controlsClear = document.querySelector(".controls-clear");
 	if (activeFilters.length == 0) {
-		controlsClear.dataset.active = 0;
-		for (let indexItem of indexItems) {
-			indexItem.dataset.active = 1;
+		if (searchString == "") {
+			controlsClear.dataset.active = 0;
+		}
+		for (let storyItem of storyItems) {
+			storyItem.dataset.active = 1;
 		}
 	} else {
 		controlsClear.dataset.active = 1;
-		for (let indexItem of indexItems) {
-			let key = indexItem.dataset.key;
-			indexItem.dataset.active = 1;
-			let tags = [];
-			for (let tag of jsonBackup[key]["tags"]) {
-				tags.push(tag[0]);
+		for (let storyItem of storyItems) {
+			let key = storyItem.dataset.key;
+			storyItem.dataset.active = 1;
+
+			// Calculate line group
+			let lineGroup;
+			if (jsonBackup[key]["lines"] <= 20) {
+				lineGroup = "20 or less";
+			} else if (jsonBackup[key]["lines"] <= 40) {
+				lineGroup = "21–40";
+			} else if (jsonBackup[key]["lines"] <= 60) {
+				lineGroup = "41–60";
+			} else if (jsonBackup[key]["lines"] <= 80) {
+				lineGroup = "61–80";
+			} else if (jsonBackup[key]["lines"] <= 100) {
+				lineGroup = "81–100";
+			} else {
+				lineGroup = "More than 100";
 			}
+
+			// Add extra filters for line group and authors
+			let tags = jsonBackup[key]["tags"].slice();
+			tags.push(lineGroup);
+			for (let author of jsonBackup[key]["authors"]) {
+				tags.push(author);
+			}
+
+			// Detect if filters match
 			for (let f of activeFilters) {
 				if (!tags.includes(f)) {
-					indexItem.dataset.active = 0;
+					storyItem.dataset.active = 0;
 				}
 			}
 		}
 	}
 
-	// Check if no items match filter combination
-	let activeItems = document.querySelectorAll(".index-item[data-active='1'");
-	let emptyNotice = document.querySelector(".index-empty");
-	if (activeItems.length == 0) {
-		emptyNotice.dataset.active = 1;
-	} else {
-		emptyNotice.dataset.active = 0;
-	}
+	// Scroll index to top
+	let index = document.querySelector("#index");
+	index.scrollTop = 0;
 
+	detectEmpty();
 	flashIndex();
 }
 function clearFilters() {
@@ -499,6 +1086,11 @@ function clearFilters() {
 	let controlsClear = document.querySelector(".controls-clear");
 	controlsClear.dataset.active = 0;
 
+	// Clear search
+	let searchDOM = document.querySelector(".search");
+	searchDOM.value = "";
+	setSearch("");
+
 	// Hide empty notice
 	let emptyNotice = document.querySelector(".index-empty");
 	emptyNotice.dataset.active = 0;
@@ -506,33 +1098,90 @@ function clearFilters() {
 	flashIndex();
 }
 
+// Search filter
+let searchString = "";
+function setSearch(query) {
+	searchString = query;
+	// Show clear button if needed
+	let controlsClear = document.querySelector(".controls-clear");
+	if (searchString.length > 0) {
+		controlsClear.dataset.active = 1;
+	} else if (activeFilters.length == 0) {
+		controlsClear.dataset.active = 0;
+	}
+
+	if (storyType == "story") {
+		let storyItems = document.querySelectorAll(".index-item[data-type='story'");
+		for (let storyItem of storyItems) {
+			let key = storyItem.dataset.key;
+			let formattedTitle = jsonBackup[key]["title"].toLowerCase().replace(/[.,\/#!$%\^&*;:{}=\-_`~()‘’“”\?]/g,"");
+			formattedInput = searchString.toLowerCase().replace(/[.,\/#!$%\^&*;:{}=\-_`~()‘’“”\?]/g,"");
+			if (formattedTitle.includes(formattedInput)) {
+				storyItem.dataset.search = 1;
+			} else {
+				storyItem.dataset.search = 0;
+			}
+		}
+	} else if (storyType == "anthology") {
+		let anthologyItems = document.querySelectorAll(".index-item[data-type='anthology'");
+		for (let anthologyItem of anthologyItems) {
+			let key = anthologyItem.dataset.key;
+			let formattedTitle = jsonBackupAnthologies[key]["title"].toLowerCase().replace(/[.,\/#!$%\^&*;:{}=\-_`~()‘’“”\?]/g,"");
+			formattedInput = searchString.toLowerCase().replace(/[.,\/#!$%\^&*;:{}=\-_`~()‘’“”\?]/g,"");
+			if (formattedTitle.includes(formattedInput)) {
+				anthologyItem.dataset.search = 1;
+			} else {
+				anthologyItem.dataset.search = 0;
+			}
+		}
+	}
+
+	detectEmpty();
+	flashIndex();
+}
+
+// Empty notice
+function detectEmpty() {
+	// Check if no items match filter combination
+	let activeItems = document.querySelectorAll(`.index-item[data-type='${storyType}'][data-active='1'][data-search='1']`);
+	let emptyNotice = document.querySelector(".index-empty");
+	if (activeItems.length == 0) {
+		emptyNotice.dataset.active = 1;
+	} else {
+		emptyNotice.dataset.active = 0;
+	}
+}
+
 // Load in story
 let activeStory = "";
+function openStoryRandom() {
+	openStory(Object.keys(jsonBackup)[Math.floor((Math.random()*Object.keys(jsonBackup).length))]);
+}
 function openStory(story) {
 	activeStory = story;
 
-	let preview = document.querySelector("#preview");
-	preview.src = jsonBackup[story]["src"];
-	preview.removeAttribute("srcdoc");
-
-	// Set color based on lines of code
-	let lines = jsonBackup[story]["lines"];
-	if (lines <= 20) {
-		activeColor = 0;
-	} else if (lines >= 21 && lines <= 40) {
-		activeColor = 1;
-	} else if (lines >= 41 && lines <= 60) {
-		activeColor = 2;
-	} else if (lines >= 61 && lines <= 80) {
-		activeColor = 3;
-	} else if (lines >= 81 && lines <= 100) {
-		activeColor = 4;
-	} else {
-		activeColor = 5;
+	// Update URL
+	let url = new URL(window.location.href);
+	let params = new URLSearchParams(url.search);
+	if (params.get("site") != activeStory) {
+		params.set("site", activeStory);
+		window.history.pushState({site: activeStory},'','?'+params);
 	}
-	document.documentElement.style.setProperty('--primary', "var(--"+colors[activeColor]+")");
+
+	// Build new iframe to prevent incorrent page history
+	let previewContainer = document.querySelector("#preview-container");
+	let oldPreview = document.querySelector("#preview");
+	previewContainer.removeChild(oldPreview);
+	let newPreview = document.createElement("iframe");
+	newPreview.classList.add("preview-iframe");
+	newPreview.id = "preview";
+	newPreview.src = jsonBackup[story]["src"];
+	previewContainer.appendChild(newPreview);
 
 	// Populate story info
+	let storyContent = document.querySelector(".story-content");
+	storyContent.scrollTop = 0;
+
 	let linesDisplay = document.querySelector("#lines");
 	linesDisplay.innerText = jsonBackup[story]["lines"];
 
@@ -545,36 +1194,52 @@ function openStory(story) {
 	let authors = document.querySelector("#authors");
 	let temp = "";
 	for (let i=0; i<jsonBackup[story]["authors"].length; i++) {
-		temp += `<li class="story-link" onclick="clearFilters(); setFilter('${jsonBackup[story]["authors"][i][0]}'); mainUp(); catalogIn();">${jsonBackup[story]["authors"][i][1]}</li>`
+		temp += `<li class="story-link" onclick="clearFilters(); setStoryType('story'); setFilter('${jsonBackup[story]["authors"][i]}'); mainUp(); catalogIn();">${jsonBackup[story]["authors"][i]}</li>`;
 	}
 	authors.innerHTML = temp;
 
 	let tags = document.querySelector("#tags");
 	temp = "";
 	for (let i=0; i<jsonBackup[story]["tags"].length; i++) {
-		if (jsonBackup[story]["tags"][i].length == 2) {
-			temp += `<li class="story-link" onclick="clearFilters(); setFilter('${jsonBackup[story]["tags"][i][0]}'); mainUp(); catalogIn();">${jsonBackup[story]["tags"][i][1]}</li>`
-		}
+		temp += `<li class="story-link" onclick="clearFilters(); setStoryType('story'); setFilter('${jsonBackup[story]["tags"][i]}'); mainUp(); catalogIn();">${jsonBackup[story]["tags"][i]}</li>`
 	}
 	tags.innerHTML = temp;
 
 	// Set up code
 	let libraryContainer = document.querySelector("#library-container");
+	let codeEditorBorder = document.querySelector(".code-editor-border");
 	let libraryLink = document.querySelector("#library-link");
 	let libraryText = document.querySelector("#library-text");
 	if (jsonBackup[story]["library"].length == 0) {
 		libraryContainer.dataset.active = 0;
+		codeEditorBorder.dataset.library = 0;
 	} else {
 		libraryContainer.dataset.active = 1;
+		codeEditorBorder.dataset.library = 1;
 		libraryLink.href = jsonBackup[story]["library"][1];
 		libraryText.innerText = jsonBackup[story]["library"][0];
+	}
+
+	// Update fields if story is part of an anthology
+	let anthologyContent = document.querySelector(".anthology-content");
+	let anthologyTitle = document.querySelector(".anthology-heading");
+	let anthologyNumber = document.querySelector("#anthology-number");
+	let anthologyTotal = document.querySelector("#anthology-total");
+	let anthologyName = jsonBackup[story]["anthology"];
+	if (anthologyName != "") {
+		anthologyContent.dataset.active = 1;
+		anthologyTitle.innerText = jsonBackupAnthologies[anthologyName]["title"];
+		anthologyNumber.innerText = jsonBackupAnthologies[anthologyName]["stories"].indexOf(story)+1;
+		anthologyTotal.innerText = jsonBackupAnthologies[anthologyName]["stories"].length;
+	} else {
+		anthologyContent.dataset.active = 0;
 	}
 
 	loadPreview();
 
 	let optionDownload = document.querySelector("#download");
 	let optionNewtab = document.querySelector("#newtab");
-	optionDownload.href = jsonBackup[story]["src"];
+	optionDownload.href = jsonBackup[story]["download"];
 	optionNewtab.href = jsonBackup[story]["src"];
 
 	mainIn();
@@ -583,10 +1248,8 @@ function openStory(story) {
 
 // Reset preview and code editor to currently active story
 function resetPreview() {
-	let preview = document.querySelector("#preview");
-	preview.src = jsonBackup[activeStory]["src"];
-	preview.removeAttribute("srcdoc");
 	loadPreview();
+	flashStory();
 }
 
 // Load in code from external file for code editor
@@ -613,31 +1276,56 @@ function loadPreview() {
 			CodeMirrorHTML.getDoc().setValue(htmlDoc.substring(htmlStartIndex, htmlEndIndex));
 			CodeMirrorCSS.getDoc().setValue(htmlDoc.substring(cssStartIndex, cssEndIndex));
 			CodeMirrorJS.getDoc().setValue(htmlDoc.substring(jsStartIndex, jsEndIndex));
+
+			// Build new iframe to prevent incorrent page history
+			// Do this after resetting code, or else code overrides src immediately
+			let previewContainer = document.querySelector("#preview-container");
+			let oldPreview = document.querySelector("#preview");
+			previewContainer.removeChild(oldPreview);
+			let newPreview = document.createElement("iframe");
+			newPreview.classList.add("preview-iframe");
+			newPreview.id = "preview";
+			newPreview.src = jsonBackup[activeStory]["src"];
+			previewContainer.appendChild(newPreview);
 		}
 	};
 	xhttp.open("GET", jsonBackup[activeStory]["src"], true);
 	xhttp.send();
 }
 
-// TO DO: updated home screen/instructions
-// make some filter categories toggle instead of multiple select
-// make tags and author not need display names
-// what counts as a line?
-// allow some normal css (margin 0, padding 0, box-sizing)
-// split up html, css, js, library tags
-// scroll story and code to the top when loading new story (also catalog!)
-// figure out how to manage assets
+// Story traversal for anthologies
+function previousStory() {
+	let anthologyName = jsonBackup[activeStory]["anthology"];
+	let anthologyIndex = jsonBackupAnthologies[anthologyName]["stories"].indexOf(activeStory);
+	let anthologyTotal = jsonBackupAnthologies[anthologyName]["stories"].length;
+	if (anthologyIndex-1 < 0) {
+		anthologyIndex = anthologyTotal-1;
+	} else {
+		anthologyIndex -= 1;
+	}
+	flashStory();
+	openStory(jsonBackupAnthologies[anthologyName]["stories"][anthologyIndex]);
+}
+function nextStory() {
+	let anthologyName = jsonBackup[activeStory]["anthology"];
+	let anthologyIndex = jsonBackupAnthologies[anthologyName]["stories"].indexOf(activeStory);
+	let anthologyTotal = jsonBackupAnthologies[anthologyName]["stories"].length;
+	if (anthologyIndex+1 >= anthologyTotal) {
+		anthologyIndex = 0;
+	} else {
+		anthologyIndex += 1;
+	}
+	flashStory();
+	openStory(jsonBackupAnthologies[anthologyName]["stories"][anthologyIndex]);
+}
 
-// add collection functionality
-// - catalog screens allows toggling between stories and collections
-// - need to add json values for collection + collection order
-// - prev/next buttons change story in collection
-
-// for iframe srcdoc image path issues:
-// detect all src fields for audio or image (or font!)
-// set file paths to have prefix automatically
-
-// FREE CODE
-// margins 0, padding 0, box-sizing border box
-// images get max-width of 100%
-// flexbox centered
+// Flash screen when anthology story changes
+function flashStory() {
+	let flash = document.querySelector(".story-flash");
+	flash.style.transition = "0s";
+	flash.style.opacity = 1;
+	setTimeout(() => {
+		flash.style.transition = "opacity .5s";
+		flash.style.opacity = 0;
+	}, 50);
+}

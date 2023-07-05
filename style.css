@@ -66,6 +66,7 @@ body {
 .intro-title {
 	font-size: 36px;
 	line-height: 1.2em;
+	letter-spacing: -.02em;
 	background-color: var(--white);
 	border: calc(var(--border) * 3) double var(--black);
 	font-variation-settings: "wght" 300, "SRFF" 100;
@@ -149,6 +150,7 @@ body {
 .about-title {
 	font-size: 36px;
 	line-height: 1.2em;
+	letter-spacing: -.02em;
 	background-color: var(--white);
 	text-align: center;
 	border: calc(var(--border) * 3) double var(--black);
@@ -188,6 +190,7 @@ body {
 }
 .about-heading-content {
 	border: var(--border) solid var(--primary);
+	border-color: var(--primary);
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -198,7 +201,7 @@ body {
 	gap: 20px;
 	background-color: var(--black);
 	cursor: pointer;
-	transition: border 1s, background-color .2s, color .2s, fill .2s, opacity .2s;
+	transition: border-color 1s, background-color .2s, color .2s, fill .2s, opacity .2s;
 }
 .about-heading-content span {
 	padding-top: .2em;
@@ -295,7 +298,7 @@ body {
 	color: var(--white);
 }
 .about-nav-container {
-	z-index: 1;
+	z-index: 9;
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -1889,6 +1892,9 @@ body {
 
 /* Mobile styles */
 @media screen and (max-width: 800px) {
+	.about-list-item {
+		flex-direction: column;
+	}
 	.preview {
 		transition: unset;
 	}
@@ -1934,20 +1940,17 @@ body {
 	.story-flash {
 		width: calc(100% - calc(30px + calc(var(--border) * 7)));
 	}
-	.about-list-item {
-		flex-direction: column;
-	}
 }
 @media screen and (max-width: 600px) {
 	.intro {
 		padding: 10px;
 	}
 	.intro-title {
-		font-size: 24px;
+		font-size: 20px;
 		padding: .6em .6em .4em .6em;
 	}
 	.intro-subtitle {
-		font-size: 18px;
+		font-size: 16px;
 		font-variation-settings: "wght" 400, "SRFF" 50;
 	}
 	.about {
@@ -1958,16 +1961,16 @@ body {
 		width: calc(100% + calc(var(--border) * 2));
 	}
 	.about-title {
-		font-size: 24px;
+		font-size: 20px;
 		padding: .6em .6em .4em .6em;
 	}
 	.about-subtitle {
-		font-size: 18px;
+		font-size: 16px;
 		font-variation-settings: "wght" 400, "SRFF" 50;
 	}
 	.about-heading {
-		top: -40px;
-		font-size: 18px;
+		top: calc(-40px - var(--border));
+		font-size: 14px;
 	}
 	.about-heading-content {
 		padding: 10px;

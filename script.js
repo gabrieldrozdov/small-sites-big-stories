@@ -86,6 +86,15 @@ function toggleAbout(section) {
 		aboutSection.dataset.active = 0;
 	}
 }
+// Close all about sections
+function closeAbout() {
+	let aboutSections = document.querySelectorAll(`.about-section`);
+	// Close all other sections
+	for (let i of aboutSections) {
+		i.dataset.active = 0;
+	}
+
+}
 
 // Navigation
 let about = document.querySelector(".about-container");
@@ -98,9 +107,10 @@ function aboutIn() {
 	aboutState = "in";
 	about.style.transform = "translate(0%, 0%)";
 	
-	// Scroll to top
+	// Scroll to top and close all toggles
 	let aboutContent = document.querySelector(".about");
 	aboutContent.scrollTop = 0;
+	closeAbout();
 }
 function aboutUp() {
 	aboutState = "up";
@@ -657,12 +667,32 @@ function initializeStory() {
 	const searchParams = new URLSearchParams(pageHref.substring(pageHref.indexOf('?')));
 
 	if (searchParams.has('site')) {
-		console.log(1)
-		setTimeout(() => {
-			introOut();
-			aboutUpInstant();
-			openStory(searchParams.get('site'));
-		}, 1000)
+		let story = searchParams.get('site');
+		if (Object.keys(jsonBackup).includes(story)) {
+			setTimeout(() => {
+				introOut();
+				aboutUpInstant();
+				openStory(searchParams.get('site'));
+			}, 1000)
+		} else {
+			// Format intro screen
+			let introTitle = document.querySelector(".intro-title");
+			let introSubtitle = document.querySelector(".intro-subtitle");
+			let introMenuBorder = document.querySelector(".intro-menu-border");
+	
+			setTimeout(() => {
+				introTitle.style.transform = "translateY(0px)";
+			}, 1000)
+			setTimeout(() => {
+				introSubtitle.style.transform = "translateY(0px)";
+				introSubtitle.style.opacity = 1;
+			}, 1200)
+			setTimeout(() => {
+				introMenuBorder.style.transform = "translateY(0px)";
+				introMenuBorder.style.opacity = 1;
+				introMenuBorder.style.pointerEvents = "all";
+			}, 1400)
+		}
 	} else {
 		// Format intro screen
 		let introTitle = document.querySelector(".intro-title");

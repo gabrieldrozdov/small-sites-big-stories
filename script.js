@@ -1,5 +1,5 @@
 // Intro
-let colors = ["red", "blue", "purple", "yellow", "pink", "green"];
+let colors = ["red", "blue", "purple", "yellow", "green", "pink"];
 let activeColor = Math.floor(Math.random()*colors.length);
 let colorLoop = true;
 function setRandomColor() {

@@ -1,12 +1,12 @@
 :root {
-	--red: #f45c28;
-	--yellow: #ffb800;
-	--green: #98e079;
-	--blue: #00d6f5;
-	--purple: #ac6aff;
-	--pink: #fb8bd3;
-	--black: #4d4d4d;
-	--white: #f2f2f2;
+	--red: #FF734D;
+	--blue: #5ADDE8;
+	--purple: #A690FC;
+	--yellow: #fcc03a;
+	--pink: #F3A8DD;
+	--green: #98DB6B;
+	--black: #353535;
+	--white: #e5e5e5;
 	--primary: var(--white);
 	--border: 2px;
 }
@@ -1384,26 +1384,26 @@ body {
 	background-color: var(--yellow);
 }
 #option-81to100 {
-	border: 3px double var(--pink);
+	border: 3px double var(--green);
 }
 #option-81to100:hover {
 	color: var(--black);
-	background-color: var(--pink);
+	background-color: var(--green);
 }
 #option-81to100[data-active="1"] {
 	color: var(--black);
-	background-color: var(--pink);
+	background-color: var(--green);
 }
 #option-100more {
-	border: 3px double var(--green);
+	border: 3px double var(--pink);
 }
 #option-100more:hover {
 	color: var(--black);
-	background-color: var(--green);
+	background-color: var(--pink);
 }
 #option-100more[data-active="1"] {
 	color: var(--black);
-	background-color: var(--green);
+	background-color: var(--pink);
 }
 .controls-clear {
 	position: sticky;
@@ -1571,10 +1571,10 @@ body {
 	border: calc(var(--border) * 3) double var(--yellow);
 }
 .index-item[data-category="81to100"] {
-	border: calc(var(--border) * 3) double var(--pink);
+	border: calc(var(--border) * 3) double var(--green);
 }
 .index-item[data-category="100more"] {
-	border: calc(var(--border) * 3) double var(--green);
+	border: calc(var(--border) * 3) double var(--pink);
 }
 .index-item:hover {
 	background-color: var(--white);
@@ -1592,10 +1592,10 @@ body {
 	background-color: var(--yellow);
 }
 .index-item[data-category="81to100"]:hover {
-	background-color: var(--pink);
+	background-color: var(--green);
 }
 .index-item[data-category="100more"]:hover {
-	background-color: var(--green);
+	background-color: var(--pink);
 }
 .index-item:active {
 	opacity: .5;
@@ -1625,10 +1625,10 @@ body {
 	background-color: var(--yellow);
 }
 .index-item[data-category="81to100"] .index-item-lines {
-	background-color: var(--pink);
+	background-color: var(--green);
 }
 .index-item[data-category="100more"] .index-item-lines {
-	background-color: var(--green);
+	background-color: var(--pink);
 }
 .index-item-lines-text {
 	font-size: 12px;
@@ -1669,10 +1669,10 @@ body {
 	color: var(--yellow);
 }
 .index-item[data-category="81to100"] .index-item-lines-number {
-	color: var(--pink);
+	color: var(--green);
 }
 .index-item[data-category="100more"] .index-item-lines-number {
-	color: var(--green);
+	color: var(--pink);
 }
 .index-item-info {
 	flex: 1 0 0px;
@@ -1717,10 +1717,10 @@ body {
 	color: var(--yellow);
 }
 .index-item[data-category="81to100"] .index-item-authors {
-	color: var(--pink);
+	color: var(--green);
 }
 .index-item[data-category="100more"] .index-item-authors {
-	color: var(--green);
+	color: var(--pink);
 }
 .index-item-tags {
 	display: flex;
@@ -1772,12 +1772,12 @@ body {
 	border-bottom: calc(var(--border) * 3) double var(--yellow);
 }
 .index-item[data-category="81to100"] .index-item-anthology {
-	color: var(--pink);
-	border-bottom: calc(var(--border) * 3) double var(--pink);
-}
-.index-item[data-category="100more"] .index-item-anthology {
 	color: var(--green);
 	border-bottom: calc(var(--border) * 3) double var(--green);
+}
+.index-item[data-category="100more"] .index-item-anthology {
+	color: var(--pink);
+	border-bottom: calc(var(--border) * 3) double var(--pink);
 }
 .index-item:hover .index-item-anthology {
 	border-bottom: calc(var(--border) * 3) double var(--black);
@@ -1830,10 +1830,10 @@ body {
 	background-color: var(--yellow);
 }
 .index-item-story[data-category="81to100"] .index-item-story-lines {
-	background-color: var(--pink);
+	background-color: var(--green);
 }
 .index-item-story[data-category="100more"] .index-item-story-lines {
-	background-color: var(--green);
+	background-color: var(--pink);
 }
 .index-item:hover .index-item-story-lines {
 	background-color: var(--black);
@@ -1862,10 +1862,10 @@ body {
 	color: var(--yellow);
 }
 .index-item-story[data-category="81to100"] .index-item-story-title {
-	color: var(--pink);
+	color: var(--green);
 }
 .index-item-story[data-category="100more"] .index-item-story-title {
-	color: var(--green);
+	color: var(--pink);
 }
 .index-item:hover .index-item-story-title {
 	color: var(--black);

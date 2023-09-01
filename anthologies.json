@@ -1,12 +1,12 @@
 {
 	"fruit-market": {
 		"title": "Scenes from the fruit market",
-		"stories": ["banana-dealer", "perfect-hue", "accidental-explosions", "dance-audition"],
+		"stories": "banana-dealer, perfect-hue, accidental-explosions, dance-audition",
 		"alpha": "fruit-market"
 	},
 	"test2": {
 		"title": "Some other sort of test",
-		"stories": ["precious-gem"],
+		"stories": "precious-gem",
 		"alpha": "test2"
 	}
 }

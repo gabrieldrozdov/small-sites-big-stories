@@ -11,8 +11,12 @@
 	--border: 2px;
 }
 @font-face {
-	font-family: Limkin;
+	font-family: "Limkin";
 	src: url("assets/Limkin.ttf");
+}
+@font-face {
+	font-family: "IBM Plex";
+	src: url("assets/IBMPlexMono-Regular.ttf");
 }
 * {
 	box-sizing: border-box;
@@ -20,7 +24,7 @@
 	padding: 0;
 }
 body {
-	font-family: Limkin, serif;
+	font-family: "Limkin", serif;
 	font-variation-settings: "wght" 400, "SRFF" 100;
 	color: var(--black);
 	background-color: var(--white);
@@ -101,7 +105,7 @@ body {
 }
 .intro-menu button {
 	font-size: 12px;
-	font-family: Limkin, serif;
+	font-family: "Limkin", serif;
 	font-variation-settings: "wght" 650, "SRFF" 50;
 	text-transform: uppercase;
 	color: var(--white);
@@ -246,6 +250,15 @@ body {
 .about-content strong {
 	font-variation-settings: "wght" 600, "SRFF" 100;
 }
+.about-content a {
+	color: var(--black);
+}
+.about-content a:hover {
+	text-decoration: none;
+}
+.about-content a:active {
+	opacity: .5;
+}
 .about-subsection {
 	display: flex;
 	align-items: start;
@@ -296,6 +309,10 @@ body {
 .about-list p {
 	padding-top: .2em;
 	color: var(--white);
+}
+.about-code {
+	font-family: "IBM Plex", monospace;
+	font-size: 12px;
 }
 .about-nav-container {
 	z-index: 9;
@@ -774,7 +791,7 @@ body {
 	height: 100%;
 	overflow: scroll;
 	border: var(--border) solid var(--black);
-	background-color: var(--white);
+	background-color: white;
 }
 
 /* Code view */
@@ -1056,6 +1073,10 @@ body {
 	flex-grow: 1;
 	height: 100% !important;
 	overflow: scroll;
+}
+.CodeMirror * {
+	font-family: "IBM Plex", monospace;
+	font-size: 12px;
 }
 .cm-s-ssbs.CodeMirror { background: var(--black); color: var(--white); }
 .cm-s-ssbs div.CodeMirror-selected { background: #333; }

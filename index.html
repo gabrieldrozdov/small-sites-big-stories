@@ -119,19 +119,19 @@
 									It might also be easier and simpler to copy-paste code instead of writing code that duplicates itself.
 								</p>
 								<p>
-									Because of both of these reasons, lines of code are counted based on the following rules:
+									Because of both of these reasons, lines of code are (generally) counted based on the following rules:
 								</p>
 								<div class="about-list">
 									<div class="about-list-item">
 										<div class="about-number">1</div>
 										<p>
-											Lines of code only count toward the total if they are <strong>meaningful</strong>. This means that a “&lt;div&gt;” tag on its own line might not count as a line of code. This is up to the author’s discretion.
+											Lines of code only count toward the total if they are <strong>meaningful</strong>. This means that something like a “&lt;p&gt;” tag on its own line might not count as a line of code. This is up to the author’s discretion.
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">2</div>
 										<p>
-											Lines of code only count toward the total if they are <strong>unique</strong>. This means that copy-pasted lines may only count the first time they appear.
+											Lines of code only need to count toward the total if they are <strong>unique</strong>. This means that copy-pasted lines may only count the first time they appear (within reason).
 										</p>
 									</div>
 									<div class="about-list-item">
@@ -159,48 +159,48 @@
 										<div class="about-number">1</div>
 										<p>
 											Several HTML elements have some margin and padding set by default. This is especially obvious on the &lt;body&gt; tag, which has a margin of 8px. The following code removes margin and padding from all elements:<br><br>
-											<strong>*&nbsp;{<br>
+											<span class="about-code">*&nbsp;{<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;margin: 0;<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;padding: 0;<br>
-											}</strong>
+											}</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">2</div>
 										<p>
 											Images can break the boundaries of the elements they’re inside of. To fix this, we can set a maximum width to all image elements:<br><br>
-											<strong>img&nbsp;{<br>
+											<span class="about-code">img&nbsp;{<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;max-width: 100%;<br>
-											}</strong>
+											}</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">3</div>
 										<p>
 											The width and height of elements usually excludes the border, which makes sizing difficult. We can set the width and height to include the border for all elements with the following property:<br><br>
-											<strong>*&nbsp;{<br>
+											<span class="about-code">*&nbsp;{<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;box-sizing: border-box;<br>
-											}</strong>
+											}</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">4</div>
 										<p>
 											Flexbox is the easiest way to vertically and horizontally center things on the screen. We can create a container class to hold our content if we want it centered:<br><br>
-											<strong>.container&nbsp;{<br>
+											<span class="about-code">.container&nbsp;{<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;display: flex;<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;align-items: center;<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;justify-content: center;<br>
-											}</strong>
+											}</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">5</div>
 										<p>
 											p5.js is a fantastic JavaScript library that makes drawing images really easy. It creates a &lt;canvas&gt; element, but this element does not resize to fill the available space. We can use the following JavaScript code to make that canvas automatically resize when the window changes size:<br><br>
-											<strong>function windowResized() {<br>
+											<span class="about-code">function windowResized() {<br>
 											&nbsp;&nbsp;&nbsp;&nbsp;resizeCanvas( windowWidth, windowHeight );<br>
-											}</strong>
+											}</span>
 										</p>
 									</div>
 								</div>
@@ -208,7 +208,7 @@
 									Freebies are usually marked by comments in the code editor.
 								</p>
 								<p>
-									This list may include new freebies in the future, which could affect the code count for older stories.
+									This list may change to include new freebies in the future, which could affect the actual code count for older stories.
 								</p>
 							</div>
 						</div>
@@ -227,10 +227,10 @@
 									No matter your skill level, the first thing to do is explore! Experience as many stories as you want, and maybe try changing around parts of the code to see what happens.
 								</p>
 								<p>
-									Over time, you should strive to understand why certain things change when you edit the code. This is an important step in learning to code — learning to analyze code, so that you can modify it, adapt it for use somewhere else, or even fix it if it’s broken.
+									Over time, you should strive to understand why certain things change when you edit the code. This is an important step in learning to program — learning to analyze pre-existing code, so that you can modify it, adapt it for use somewhere else, or even fix it if it’s broken.
 								</p>
 								<p>
-									This project functions best as a supplement to a traditional coding curriculum, since it does not feature formal tutorials or demos.
+									This project functions best as a supplement to a traditional coding curriculum, since it does not feature formal tutorials or demos. If you’re looking for a place to learn code (with lots of bells and whistles!) then check out this project’s sister site, the <a href="https://webprogramming.gdwithgd.com/" target="_blank">Web Programming Workshop</a>.
 								</p>
 							</div>
 						</div>
@@ -249,13 +249,13 @@
 									Teaching code to someone who has never programmed before can be difficult. This is particularly true because there are many fundamental concepts to cover before getting to anything creative. However, interesting projects don’t need to be complicated, and you don’t need a full understanding of code to start creating interesting things.
 								</p>
 								<p>
-									Teachers can use “Small Sites; Big Stories” to show students the potential of code even at small scales. This can take the form of a class exercise or assignment (e.g. create an interactive narrative using less than 40 lines of code), or even the form of research (e.g. What kinds of digital experiences can evoke drama or mystery?).
+									Teachers can use “Small Sites; Big Stories” to show students the potential of code even at small scales. This can take the form of a class exercise or assignment (e.g. create an interactive narrative using less than 40 lines of code), or even the form of research (e.g. what kinds of digital experiences evoke drama or mystery?).
 								</p>
 								<p>
 									“Small Sites; Big Stories” can also help fill a gap in instruction if a teacher isn’t confident in their coding skills. Students can go to the site directly to see how certain things are accomplished in practice, or teachers can select stories to show to a class for analysis and critique.
 								</p>
 								<p>
-									This project functions best as a supplement to a traditional coding curriculum, since it does not feature formal tutorials or demos.
+									This project functions best as a supplement to a traditional coding curriculum, since it does not feature formal tutorials or demos. If you’re looking for a coding curriculum (with lots of bells and whistles!) then check out this project’s sister site, the <a href="https://webprogramming.gdwithgd.com/" target="_blank">Web Programming Workshop</a>.
 								</p>
 							</div>
 						</div>
@@ -274,7 +274,7 @@
 									For the most part, yes! This is an open source initiative that encourages you to learn from and use the techniques on display.
 								</p>
 								<p>
-									If you want to borrow a substantial amount of code from a story, consider crediting the original author in your project.
+									If you want to borrow a substantial amount of code from a story, consider crediting the original author in your project. And please don’t copy a story in its entirety or reuse it somewhere else without credit — that’s plagiarism, and also really lame.
 								</p>
 							</div>
 						</div>
@@ -290,7 +290,7 @@
 						<div class="about-content">
 							<div class="about-subsection">
 								<p>
-									Absolutely! Please email gabrieldrozdov@gmail.com if you’re interested in coding a story or have one you’d like to submit already. Anthologies are welcome too!
+									Absolutely! Please email gabriel@noreplica.com if you have an idea or a finished story you’d like to submit. Anthologies are welcome too!
 								</p>
 								<p>
 									All stories are reviewed before being added to the site, and there isn’t a guarantee that your story will be included. If your story is accepted, revisions may be requested to make your story fit the project’s missions of accessibility and education.
@@ -419,7 +419,7 @@
 			</section>
 
 			<section class="preview" id="preview-container" data-story="1" data-code="1">
-				<iframe class="preview-iframe" id="preview" src="https://gabrieldrozdov.github.io/nocode/reallysmall"></iframe>
+				<iframe class="preview-iframe" id="preview"></iframe>
 			</section>
 
 			<div class="toggle-container">
@@ -435,7 +435,7 @@
 			<section class="code" id="code">
 				<div class="code-library-container" id="library-container" data-active="0">
 					<a class="code-library" href="#" target="_blank" id="library-link">
-						<span id="library-text">JavaScript Library: p5.js</span>
+						<span id="library-text">JavaScript Library</span>
 						<span class="code-tooltip">A <strong>library</strong> is something that lets you extend the functionality of HTML, CSS, or JavaScript with new functions. Examples of libraries include p5.js for programming graphics, Tone.js for sound, ml5.js for machine learning, three.js for 3D graphics, and matter.js for physics simulations.</span>
 					</a>
 				</div>
@@ -620,14 +620,14 @@
 								<span>Genre</span>
 							</h5>
 							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="Action" onclick="setFilter('Action')">Action</li>
-								<li class="controls-option" data-active="0" data-filter="Adventure" onclick="setFilter('Adventure')">Adventure</li>
-								<li class="controls-option" data-active="0" data-filter="Comedy" onclick="setFilter('Comedy')">Comedy</li>
-								<li class="controls-option" data-active="0" data-filter="Drama" onclick="setFilter('Drama')">Drama</li>
-								<li class="controls-option" data-active="0" data-filter="Documentary" onclick="setFilter('Documentary')">Documentary</li>
-								<li class="controls-option" data-active="0" data-filter="Horror" onclick="setFilter('Horror')">Horror</li>
-								<li class="controls-option" data-active="0" data-filter="Mystery" onclick="setFilter('Mystery')">Mystery</li>
-								<li class="controls-option" data-active="0" data-filter="Romance" onclick="setFilter('Romance')">Romance</li>
+								<li class="controls-option" data-active="0" data-filter="action" onclick="setFilter('action')">Action</li>
+								<li class="controls-option" data-active="0" data-filter="adventure" onclick="setFilter('adventure')">Adventure</li>
+								<li class="controls-option" data-active="0" data-filter="comedy" onclick="setFilter('comedy')">Comedy</li>
+								<li class="controls-option" data-active="0" data-filter="drama" onclick="setFilter('drama')">Drama</li>
+								<li class="controls-option" data-active="0" data-filter="documentary" onclick="setFilter('documentary')">Documentary</li>
+								<li class="controls-option" data-active="0" data-filter="horror" onclick="setFilter('horror')">Horror</li>
+								<li class="controls-option" data-active="0" data-filter="mystery" onclick="setFilter('mystery')">Mystery</li>
+								<li class="controls-option" data-active="0" data-filter="romance" onclick="setFilter('romance')">Romance</li>
 							</ul>
 						</div>
 
@@ -637,9 +637,9 @@
 								<span>Programming Languages</span>
 							</h5>
 							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="HTML" onclick="setFilter('HTML')">HTML</li>
-								<li class="controls-option" data-active="0" data-filter="CSS" onclick="setFilter('CSS')">CSS</li>
-								<li class="controls-option" data-active="0" data-filter="JavaScript" onclick="setFilter('JavaScript')">JavaScript</li>
+								<li class="controls-option" data-active="0" data-filter="html" onclick="setFilter('html')">HTML</li>
+								<li class="controls-option" data-active="0" data-filter="css" onclick="setFilter('css')">CSS</li>
+								<li class="controls-option" data-active="0" data-filter="javascript" onclick="setFilter('javascript')">JavaScript</li>
 							</ul>
 						</div>
 
@@ -651,7 +651,7 @@
 							<ul class="controls-options">
 								<li class="controls-option" data-active="0" data-filter="p5.js" onclick="setFilter('p5.js')">p5.js</li>
 								<li class="controls-option" data-active="0" data-filter="ml5.js" onclick="setFilter('ml5.js')">ml5.js</li>
-								<li class="controls-option" data-active="0" data-filter="Tone.js" onclick="setFilter('Tone.js')">Tone.js</li>
+								<li class="controls-option" data-active="0" data-filter="tone.js" onclick="setFilter('tone.js')">Tone.js</li>
 								<li class="controls-option" data-active="0" data-filter="matter.js" onclick="setFilter('matter.js')">matter.js</li>
 							</ul>
 						</div>
@@ -662,13 +662,13 @@
 								<span>Types of Interaction</span>
 							</h5>
 							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="Mouse" onclick="setFilter('Mouse')">Mouse</li>
-								<li class="controls-option" data-active="0" data-filter="Click" onclick="setFilter('Click')">Click</li>
-								<li class="controls-option" data-active="0" data-filter="Scroll Wheel" onclick="setFilter('Scroll Wheel')">Scroll Wheel</li>
-								<li class="controls-option" data-active="0" data-filter="Keyboard" onclick="setFilter('Keyboard')">Keyboard</li>
-								<li class="controls-option" data-active="0" data-filter="Camera" onclick="setFilter('Camera')">Camera</li>
-								<li class="controls-option" data-active="0" data-filter="Microphone" onclick="setFilter('Microphone')">Microphone</li>
-								<li class="controls-option" data-active="0" data-filter="No Interaction" onclick="setFilter('No Interaction')">No Interaction</li>
+								<li class="controls-option" data-active="0" data-filter="mouse" onclick="setFilter('mouse')">Mouse</li>
+								<li class="controls-option" data-active="0" data-filter="click" onclick="setFilter('Click')">Click</li>
+								<li class="controls-option" data-active="0" data-filter="scroll wheel" onclick="setFilter('scroll wheel')">Scroll Wheel</li>
+								<li class="controls-option" data-active="0" data-filter="keyboard" onclick="setFilter('keyboard')">Keyboard</li>
+								<li class="controls-option" data-active="0" data-filter="camera" onclick="setFilter('camera')">Camera</li>
+								<li class="controls-option" data-active="0" data-filter="microphone" onclick="setFilter('microphone')">Microphone</li>
+								<li class="controls-option" data-active="0" data-filter="no interaction" onclick="setFilter('no interaction')">No Interaction</li>
 							</ul>
 						</div>
 
@@ -678,12 +678,12 @@
 								<span>Design Techniques</span>
 							</h5>
 							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="Typography" onclick="setFilter('Typography')">Typography</li>
-								<li class="controls-option" data-active="0" data-filter="Variable Fonts" onclick="setFilter('Variable Fonts')">Variable Fonts</li>
-								<li class="controls-option" data-active="0" data-filter="Flexbox" onclick="setFilter('Flexbox')">Flexbox</li>
-								<li class="controls-option" data-active="0" data-filter="Grid" onclick="setFilter('Grid')">Grid</li>
-								<li class="controls-option" data-active="0" data-filter="Keyframes" onclick="setFilter('Keyframes')">Keyframes</li>
-								<li class="controls-option" data-active="0" data-filter="Hover States" onclick="setFilter('Hover States')">Hover States</li>
+								<li class="controls-option" data-active="0" data-filter="typography" onclick="setFilter('typography')">Typography</li>
+								<li class="controls-option" data-active="0" data-filter="variable fonts" onclick="setFilter('variable fonts')">Variable Fonts</li>
+								<li class="controls-option" data-active="0" data-filter="flexbox" onclick="setFilter('flexbox')">Flexbox</li>
+								<li class="controls-option" data-active="0" data-filter="grid" onclick="setFilter('grid')">Grid</li>
+								<li class="controls-option" data-active="0" data-filter="keyframes" onclick="setFilter('keyframes')">Keyframes</li>
+								<li class="controls-option" data-active="0" data-filter="hover states" onclick="setFilter('hover states')">Hover States</li>
 							</ul>
 						</div>
 
@@ -693,13 +693,13 @@
 								<span>Programming Techniques</span>
 							</h5>
 							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="Math" onclick="setFilter('Math')">Math</li>
-								<li class="controls-option" data-active="0" data-filter="variables" onclick="setFilter('Variables')">Variables</li>
-								<li class="controls-option" data-active="0" data-filter="Arrays" onclick="setFilter('Arrays')">Arrays</li>
-								<li class="controls-option" data-active="0" data-filter="Objects" onclick="setFilter('Objects')">Objects</li>
-								<li class="controls-option" data-active="0" data-filter="If/Then/Else" onclick="setFilter('If/Then/Else')">If/Then/Else</li>
-								<li class="controls-option" data-active="0" data-filter="Loops" onclick="setFilter('Loops')">Loops</li>
-								<li class="controls-option" data-active="0" data-filter="Randomization" onclick="setFilter('Randomization')">Randomization</li>
+								<li class="controls-option" data-active="0" data-filter="math" onclick="setFilter('math')">Math</li>
+								<li class="controls-option" data-active="0" data-filter="variables" onclick="setFilter('variables')">Variables</li>
+								<li class="controls-option" data-active="0" data-filter="arrays" onclick="setFilter('arrays')">Arrays</li>
+								<li class="controls-option" data-active="0" data-filter="objects" onclick="setFilter('objects')">Objects</li>
+								<li class="controls-option" data-active="0" data-filter="if then else" onclick="setFilter('if then else')">If/Then/Else</li>
+								<li class="controls-option" data-active="0" data-filter="loops" onclick="setFilter('loops')">Loops</li>
+								<li class="controls-option" data-active="0" data-filter="randomization" onclick="setFilter('randomization')">Randomization</li>
 							</ul>
 						</div>
 
@@ -709,8 +709,8 @@
 								<span>Compatible Devices</span>
 							</h5>
 							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="Desktop" onclick="setFilter('Desktop')">Desktop</li>
-								<li class="controls-option" data-active="0" data-filter="Mobile" onclick="setFilter('Mobile')">Mobile</li>
+								<li class="controls-option" data-active="0" data-filter="desktop" onclick="setFilter('desktop')">Desktop</li>
+								<li class="controls-option" data-active="0" data-filter="mobile" onclick="setFilter('mobile')">Mobile</li>
 							</ul>
 						</div>
 

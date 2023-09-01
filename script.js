@@ -165,7 +165,7 @@ function mainIn() {
 	}
 
 	// Set color based on lines of code
-	let lines = jsonBackup[activeStory]["lines"];
+	let lines = parseInt(jsonBackup[activeStory]["lines"]);
 	if (lines <= 20) {
 		activeColor = 0;
 	} else if (lines >= 21 && lines <= 40) {
@@ -447,8 +447,8 @@ function updatePreview() {
 	let htmlString = CodeMirrorHTML.getValue();
 	htmlString.search('src=');
 	
-	if (jsonBackup[activeStory]["library"].length > 0) {
-		codeEditorPreview.srcdoc = '<html>' + CodeMirrorHTML.getValue() + '</html>' + '<style>' + CodeMirrorCSS.getValue() + '</style>' + '<script src="' + jsonBackup[activeStory]["library"][2] + '"></script>' + '<script>' + CodeMirrorJS.getValue() + '</script>';
+	if (jsonBackup[activeStory]["library-name"] != "") {
+		codeEditorPreview.srcdoc = '<html>' + CodeMirrorHTML.getValue() + '</html>' + '<style>' + CodeMirrorCSS.getValue() + '</style>' + '<script src="' + jsonBackup[activeStory]["library-cdn"] + '"></script>' + '<script>' + CodeMirrorJS.getValue() + '</script>';
 	} else {
 		codeEditorPreview.srcdoc = '<html>' + CodeMirrorHTML.getValue() + '</html>' + '<style>' + CodeMirrorCSS.getValue() + '</style>' + '<script>' + CodeMirrorJS.getValue() + '</script>';
 	}
@@ -501,7 +501,7 @@ function resetFullscreen() {
 
 // Fetch JSON and build index
 let jsonBackup, jsonBackupAnthologies;
-fetch('sites.json')
+fetch('stories.json')
 	.then((response) => response.json())
 	.then((json) => {
 		jsonBackup = json;
@@ -526,23 +526,25 @@ function populateContent() {
 
 		// Build authors string
 		let authors = "";
-		for (let i=0; i<entry["authors"].length; i++) {
-			if (i==entry["authors"].length-1) {
-				authors += entry["authors"][i];
+		let authorsArray = entry["authors"].split(',');
+		for (let i=0; i<authorsArray.length; i++) {
+			if (i == authorsArray.length-1) {
+				authors += authorsArray[i].trim();
 			} else {
-				authors += entry["authors"][i] + ", ";
+				authors += authorsArray[i].trim() + ", ";
 			}
 		}
 
 		// Build tags
 		let tags = "";
-		for (let tag of entry["tags"]) {
-			tags += `<li class="index-item-tag">${tag}</li>`;
+		let tagsArray = entry['tags'].split(',');
+		for (let tag of tagsArray) {
+			tags += `<li class="index-item-tag">${tag.trim()}</li>`;
 		}
 
 		// Set category for lines of code
 		let category = "";
-		let lines = entry["lines"];
+		let lines = parseInt(entry["lines"]);
 		if (lines <= 20) {
 			category = "20less";
 		} else if (lines >= 21 && lines <= 40) {
@@ -568,7 +570,7 @@ function populateContent() {
 			<div class="index-item" data-key="${key}" data-type="story" data-category="${category}" data-active="1" data-search="1" onclick="openStory('${key}')">
 				<div class="index-item-lines">
 					<p class="index-item-lines-text index-item-lines-text-desktop">Lines</p>
-					<p class="index-item-lines-number">${entry["lines"]}</p>
+					<p class="index-item-lines-number">${parseInt(entry["lines"])}</p>
 					<p class="index-item-lines-text index-item-lines-text-desktop">of&nbsp;Code</p>
 					<p class="index-item-lines-text index-item-lines-text-mobile">Lines of Code</p>
 				</div>
@@ -584,9 +586,9 @@ function populateContent() {
 		`
 
 		// Collect new authors
-		for (let author of entry["authors"]) {
-			if (!uniqueAuthors.includes(author)) {
-				uniqueAuthors.push(author);
+		for (let author of authorsArray) {
+			if (!uniqueAuthors.includes(author.trim())) {
+				uniqueAuthors.push(author.trim());
 			}
 		}
 	}
@@ -612,18 +614,22 @@ function populateContent() {
 		// Calculate total lines of code and build out elements for individual stories
 		let lines = 0;
 		let stories = "";
-		for (let story of entry["stories"]) {
-			lines += jsonBackup[story]["lines"];
+		let storiesList = [];
+		let anthologyArray = entry["stories"].split(',');
+		for (let story of anthologyArray) {
+			storiesList.push(story.trim());
+			let trimmedStory = story.trim();
+			lines += parseInt(jsonBackup[trimmedStory]["lines"]);
 			let category = "";
-			if (jsonBackup[story]["lines"] <= 20) {
+			if (parseInt(jsonBackup[trimmedStory]["lines"]) <= 20) {
 				category = "20less";
-			} else if (jsonBackup[story]["lines"] <= 40) {
+			} else if (parseInt(jsonBackup[trimmedStory]["lines"]) <= 40) {
 				category = "21to40";
-			} else if (jsonBackup[story]["lines"] <= 60) {
+			} else if (parseInt(jsonBackup[trimmedStory]["lines"]) <= 60) {
 				category = "41to60";
-			} else if (jsonBackup[story]["lines"] <= 80) {
+			} else if (parseInt(jsonBackup[trimmedStory]["lines"]) <= 80) {
 				category = "61to80";
-			} else if (jsonBackup[story]["lines"] <= 100) {
+			} else if (parseInt(jsonBackup[trimmedStory]["lines"]) <= 100) {
 				category = "81to100";
 			} else {
 				category = "100more";
@@ -631,15 +637,15 @@ function populateContent() {
 			stories += `
 				<li class="index-item-story" data-category="${category}">
 					<div class="index-item-story-lines">
-						<p>${jsonBackup[story]["lines"]}</p>
+						<p>${parseInt(jsonBackup[trimmedStory]["lines"])}</p>
 					</div>
-					<p class="index-item-story-title">${jsonBackup[story]["title"]}</p>
+					<p class="index-item-story-title">${jsonBackup[trimmedStory]["title"]}</p>
 				</li>
 			`;
 		}
 
 		temp += `
-			<div class="index-item" data-key="${key}" data-type="anthology" data-active="1" data-search="1" onclick="openStory('${entry["stories"][0]}')">
+			<div class="index-item" data-key="${key}" data-type="anthology" data-active="1" data-search="1" onclick="openStory('${storiesList[0]}')">
 				<div class="index-item-lines">
 					<p class="index-item-lines-text index-item-lines-text-desktop">Lines</p>
 					<p class="index-item-lines-number">${lines}</p>
@@ -820,7 +826,7 @@ function setSorting(sorting) {
 			for (let key of Object.keys(jsonBackup)) {
 				let entry = jsonBackup[key];
 				let entryAlpha = entry['alpha'];
-				let entryLines = entry['lines'];
+				let entryLines = parseInt(entry['lines']);
 				if (lineGroups[entryLines] == undefined) {
 					lineGroups[entryLines] = {}; // add new object for each author
 				}
@@ -844,7 +850,7 @@ function setSorting(sorting) {
 			for (let key of Object.keys(jsonBackup)) {
 				let entry = jsonBackup[key];
 				let entryAlpha = entry['alpha'];
-				let entryLines = entry['lines'];
+				let entryLines = parseInt(entry['lines']);
 				if (lineGroups[entryLines] == undefined) {
 					lineGroups[entryLines] = {}; // add new object for each author
 				}
@@ -1065,25 +1071,31 @@ function setFilter(filter) {
 
 			// Calculate line group
 			let lineGroup;
-			if (jsonBackup[key]["lines"] <= 20) {
+			if (parseInt(jsonBackup[key]["lines"]) <= 20) {
 				lineGroup = "20 or less";
-			} else if (jsonBackup[key]["lines"] <= 40) {
+			} else if (parseInt(jsonBackup[key]["lines"]) <= 40) {
 				lineGroup = "21–40";
-			} else if (jsonBackup[key]["lines"] <= 60) {
+			} else if (parseInt(jsonBackup[key]["lines"]) <= 60) {
 				lineGroup = "41–60";
-			} else if (jsonBackup[key]["lines"] <= 80) {
+			} else if (parseInt(jsonBackup[key]["lines"]) <= 80) {
 				lineGroup = "61–80";
-			} else if (jsonBackup[key]["lines"] <= 100) {
+			} else if (parseInt(jsonBackup[key]["lines"]) <= 100) {
 				lineGroup = "81–100";
 			} else {
 				lineGroup = "More than 100";
 			}
 
 			// Add extra filters for line group and authors
-			let tags = jsonBackup[key]["tags"].slice();
+			let tags = [];
+			let tagsArray = jsonBackup[key]['tags'].split(',');
+			for (let tag of tagsArray) {
+				tags.push(tag.trim());
+			}
 			tags.push(lineGroup);
-			for (let author of jsonBackup[key]["authors"]) {
-				tags.push(author);
+
+			let authorsArray = jsonBackup[key]["authors"].split(',');
+			for (let author of authorsArray) {
+				tags.push(author.trim());
 			}
 
 			// Detect if filters match
@@ -1205,7 +1217,7 @@ function openStory(story) {
 	let newPreview = document.createElement("iframe");
 	newPreview.classList.add("preview-iframe");
 	newPreview.id = "preview";
-	newPreview.src = jsonBackup[story]["src"];
+	newPreview.src = `stories/${story}/${story}.html`;
 	previewContainer.appendChild(newPreview);
 
 	// Populate story info
@@ -1213,7 +1225,7 @@ function openStory(story) {
 	storyContent.scrollTop = 0;
 
 	let linesDisplay = document.querySelector("#lines");
-	linesDisplay.innerText = jsonBackup[story]["lines"];
+	linesDisplay.innerText = parseInt(jsonBackup[story]["lines"]);
 
 	let title = document.querySelector("#title");
 	title.innerText = jsonBackup[story]["title"];
@@ -1223,15 +1235,17 @@ function openStory(story) {
 
 	let authors = document.querySelector("#authors");
 	let temp = "";
-	for (let i=0; i<jsonBackup[story]["authors"].length; i++) {
-		temp += `<li class="story-link" onclick="clearFilters(); setStoryType('story'); setFilter('${jsonBackup[story]["authors"][i]}'); mainUp(); catalogIn();">${jsonBackup[story]["authors"][i]}</li>`;
+	let authorsArray = jsonBackup[story]["authors"].split(',');
+	for (let i=0; i<authorsArray.length; i++) {
+		temp += `<li class="story-link" onclick="clearFilters(); setStoryType('story'); setFilter('${authorsArray[i].trim()}'); mainUp(); catalogIn();">${authorsArray[i].trim()}</li>`;
 	}
 	authors.innerHTML = temp;
 
 	let tags = document.querySelector("#tags");
 	temp = "";
-	for (let i=0; i<jsonBackup[story]["tags"].length; i++) {
-		temp += `<li class="story-link" onclick="clearFilters(); setStoryType('story'); setFilter('${jsonBackup[story]["tags"][i]}'); mainUp(); catalogIn();">${jsonBackup[story]["tags"][i]}</li>`
+	let tagsArray = jsonBackup[story]["tags"].split(',');
+	for (let i=0; i<tagsArray.length; i++) {
+		temp += `<li class="story-link" onclick="clearFilters(); setStoryType('story'); setFilter('${tagsArray[i].trim()}'); mainUp(); catalogIn();">${tagsArray[i].trim()}</li>`
 	}
 	tags.innerHTML = temp;
 
@@ -1240,14 +1254,14 @@ function openStory(story) {
 	let codeEditorBorder = document.querySelector(".code-editor-border");
 	let libraryLink = document.querySelector("#library-link");
 	let libraryText = document.querySelector("#library-text");
-	if (jsonBackup[story]["library"].length == 0) {
+	if (jsonBackup[story]["library-name"] == "") {
 		libraryContainer.dataset.active = 0;
 		codeEditorBorder.dataset.library = 0;
 	} else {
 		libraryContainer.dataset.active = 1;
 		codeEditorBorder.dataset.library = 1;
-		libraryLink.href = jsonBackup[story]["library"][1];
-		libraryText.innerText = jsonBackup[story]["library"][0];
+		libraryLink.href = jsonBackup[story]["library-link"];
+		libraryText.innerText = jsonBackup[story]["library-name"];
 	}
 
 	// Update fields if story is part of an anthology
@@ -1257,10 +1271,15 @@ function openStory(story) {
 	let anthologyTotal = document.querySelector("#anthology-total");
 	let anthologyName = jsonBackup[story]["anthology"];
 	if (anthologyName != "") {
+		let anthologyArray = jsonBackupAnthologies[anthologyName]["stories"].split(',');
+		let stories = [];
+		for (let story of anthologyArray) {
+			stories.push(story.trim());
+		}
 		anthologyContent.dataset.active = 1;
 		anthologyTitle.innerText = jsonBackupAnthologies[anthologyName]["title"];
-		anthologyNumber.innerText = jsonBackupAnthologies[anthologyName]["stories"].indexOf(story)+1;
-		anthologyTotal.innerText = jsonBackupAnthologies[anthologyName]["stories"].length;
+		anthologyNumber.innerText = stories.indexOf(story)+1;
+		anthologyTotal.innerText = stories.length;
 	} else {
 		anthologyContent.dataset.active = 0;
 	}
@@ -1269,8 +1288,8 @@ function openStory(story) {
 
 	let optionDownload = document.querySelector("#download");
 	let optionNewtab = document.querySelector("#newtab");
-	optionDownload.href = jsonBackup[story]["download"];
-	optionNewtab.href = jsonBackup[story]["src"];
+	optionDownload.href = `stories/${story}/${story}.zip`;
+	optionNewtab.href = `stories/${story}/${story}.html`;
 
 	mainIn();
 	catalogDown();
@@ -1315,38 +1334,48 @@ function loadPreview() {
 			let newPreview = document.createElement("iframe");
 			newPreview.classList.add("preview-iframe");
 			newPreview.id = "preview";
-			newPreview.src = jsonBackup[activeStory]["src"];
+			newPreview.src = `stories/${activeStory}/${activeStory}.html`;
 			previewContainer.appendChild(newPreview);
 		}
 	};
-	xhttp.open("GET", jsonBackup[activeStory]["src"], true);
+	xhttp.open("GET", `stories/${activeStory}/${activeStory}.html`, true);
 	xhttp.send();
 }
 
 // Story traversal for anthologies
 function previousStory() {
 	let anthologyName = jsonBackup[activeStory]["anthology"];
-	let anthologyIndex = jsonBackupAnthologies[anthologyName]["stories"].indexOf(activeStory);
-	let anthologyTotal = jsonBackupAnthologies[anthologyName]["stories"].length;
+	let anthologyArray = jsonBackupAnthologies[anthologyName]["stories"].split(',');
+	let stories = [];
+	for (let story of anthologyArray) {
+		stories.push(story.trim());
+	}
+	let anthologyIndex = stories.indexOf(activeStory);
+	let anthologyTotal = stories.length;
 	if (anthologyIndex-1 < 0) {
 		anthologyIndex = anthologyTotal-1;
 	} else {
 		anthologyIndex -= 1;
 	}
 	flashStory();
-	openStory(jsonBackupAnthologies[anthologyName]["stories"][anthologyIndex]);
+	openStory(stories[anthologyIndex]);
 }
 function nextStory() {
 	let anthologyName = jsonBackup[activeStory]["anthology"];
-	let anthologyIndex = jsonBackupAnthologies[anthologyName]["stories"].indexOf(activeStory);
-	let anthologyTotal = jsonBackupAnthologies[anthologyName]["stories"].length;
+	let anthologyArray = jsonBackupAnthologies[anthologyName]["stories"].split(',');
+	let stories = [];
+	for (let story of anthologyArray) {
+		stories.push(story.trim());
+	}
+	let anthologyIndex = stories.indexOf(activeStory);
+	let anthologyTotal = stories.length;
 	if (anthologyIndex+1 >= anthologyTotal) {
 		anthologyIndex = 0;
 	} else {
 		anthologyIndex += 1;
 	}
 	flashStory();
-	openStory(jsonBackupAnthologies[anthologyName]["stories"][anthologyIndex]);
+	openStory(stories[anthologyIndex]);
 }
 
 // Flash screen when anthology story changes

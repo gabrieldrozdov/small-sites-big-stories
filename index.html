@@ -159,48 +159,76 @@
 										<div class="about-number">1</div>
 										<p>
 											Several HTML elements have some margin and padding set by default. This is especially obvious on the &lt;body&gt; tag, which has a margin of 8px. The following code removes margin and padding from all elements:<br><br>
-											<span class="about-code">*&nbsp;{<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;margin: 0;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;padding: 0;<br>
-											}</span>
+											<span class="about-code">
+												*&nbsp;{<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;margin: 0;<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;padding: 0;<br>
+												}
+											</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">2</div>
 										<p>
 											Images can break the boundaries of the elements they’re inside of. To fix this, we can set a maximum width to all image elements:<br><br>
-											<span class="about-code">img&nbsp;{<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;max-width: 100%;<br>
-											}</span>
+											<span class="about-code">
+												img&nbsp;{<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;max-width: 100%;<br>
+												}
+											</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">3</div>
 										<p>
 											The width and height of elements usually excludes the border, which makes sizing difficult. We can set the width and height to include the border for all elements with the following property:<br><br>
-											<span class="about-code">*&nbsp;{<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;box-sizing: border-box;<br>
-											}</span>
+											<span class="about-code">
+												*&nbsp;{<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;box-sizing: border-box;<br>
+												}
+											</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">4</div>
 										<p>
-											Flexbox is the easiest way to vertically and horizontally center things on the screen. We can create a container class to hold our content if we want it centered:<br><br>
-											<span class="about-code">.container&nbsp;{<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;display: flex;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;align-items: center;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;justify-content: center;<br>
-											}</span>
+											If we want our content to take up the whole screen, we can create a container class with a set width and height (we use dvh here instead of vh to account for mobile devices):<br><br>
+											<span class="about-code">
+												.container&nbsp;{<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;width: 100vw;<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;height: 100dvh;<br>
+												}
+											</span>
 										</p>
 									</div>
 									<div class="about-list-item">
 										<div class="about-number">5</div>
 										<p>
+											Flexbox is the easiest way to vertically and horizontally center things on the screen. We can add to our container class to hold our content if we want it centered:<br><br>
+											<span class="about-code">
+												.container&nbsp;{<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;display: flex;<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;align-items: center;<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;justify-content: center;<br>
+												}
+											</span>
+										</p>
+									</div>
+									<div class="about-list-item">
+										<div class="about-number">6</div>
+										<p>
 											p5.js is a fantastic JavaScript library that makes drawing images really easy. It creates a &lt;canvas&gt; element, but this element does not resize to fill the available space. We can use the following JavaScript code to make that canvas automatically resize when the window changes size:<br><br>
-											<span class="about-code">function windowResized() {<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;resizeCanvas( windowWidth, windowHeight );<br>
-											}</span>
+											<span class="about-code">
+												function windowResized() {<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;resizeCanvas(windowWidth, windowHeight);<br>
+												}
+											</span><br><br>
+											The following CSS removes a slight bottom margin as well:<br><br>
+											<span class="about-code">
+												canvas {<br>
+												&nbsp;&nbsp;&nbsp;&nbsp;display: block;<br>
+												}
+											</span>
 										</p>
 									</div>
 								</div>
@@ -626,6 +654,7 @@
 								<li class="controls-option" data-active="0" data-filter="drama" onclick="setFilter('drama')">Drama</li>
 								<li class="controls-option" data-active="0" data-filter="documentary" onclick="setFilter('documentary')">Documentary</li>
 								<li class="controls-option" data-active="0" data-filter="horror" onclick="setFilter('horror')">Horror</li>
+								<li class="controls-option" data-active="0" data-filter="fantasy" onclick="setFilter('fantasy')">Fantasy</li>
 								<li class="controls-option" data-active="0" data-filter="mystery" onclick="setFilter('mystery')">Mystery</li>
 								<li class="controls-option" data-active="0" data-filter="romance" onclick="setFilter('romance')">Romance</li>
 							</ul>
@@ -666,8 +695,6 @@
 								<li class="controls-option" data-active="0" data-filter="click" onclick="setFilter('Click')">Click</li>
 								<li class="controls-option" data-active="0" data-filter="scroll wheel" onclick="setFilter('scroll wheel')">Scroll Wheel</li>
 								<li class="controls-option" data-active="0" data-filter="keyboard" onclick="setFilter('keyboard')">Keyboard</li>
-								<li class="controls-option" data-active="0" data-filter="camera" onclick="setFilter('camera')">Camera</li>
-								<li class="controls-option" data-active="0" data-filter="microphone" onclick="setFilter('microphone')">Microphone</li>
 								<li class="controls-option" data-active="0" data-filter="no interaction" onclick="setFilter('no interaction')">No Interaction</li>
 							</ul>
 						</div>
@@ -697,9 +724,10 @@
 								<li class="controls-option" data-active="0" data-filter="variables" onclick="setFilter('variables')">Variables</li>
 								<li class="controls-option" data-active="0" data-filter="arrays" onclick="setFilter('arrays')">Arrays</li>
 								<li class="controls-option" data-active="0" data-filter="objects" onclick="setFilter('objects')">Objects</li>
-								<li class="controls-option" data-active="0" data-filter="if then else" onclick="setFilter('if then else')">If/Then/Else</li>
+								<li class="controls-option" data-active="0" data-filter="if then else" onclick="setFilter('if/then/else')">If/Then/Else</li>
 								<li class="controls-option" data-active="0" data-filter="loops" onclick="setFilter('loops')">Loops</li>
 								<li class="controls-option" data-active="0" data-filter="randomization" onclick="setFilter('randomization')">Randomization</li>
+								<li class="controls-option" data-active="0" data-filter="classes" onclick="setFilter('classes')">Classes</li>
 							</ul>
 						</div>
 

@@ -5,20 +5,56 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Desperate for bananas, low on cash, stuck in a volatile economy</title>
+<meta name="author" content="Gabriel Drozdov">
 
 <style>
 /* CSS START */
+/* —————————————— FREEBIES —————————————— */
+/* This code won’t count toward the total */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 .container {
-	background-color: yellow;
-	font-size: 32px;
-	padding: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100vw;
+	height: 100dvh;
+}
+/* —————————————————————————————————————— */
+
+.container {
+	background-color: yellow;
+	font-size: 32px;
+	text-align: center;
+	font-family: monospace;
+	padding: 20px;
 	flex-direction: column;
 	gap: 20px;
-	width: 100vw;
-	height: 100vh;
+}
+
+span {
+	background-color: white;
+}
+
+button {
+	transform: rotate(-10deg);
+	border-radius: 50%;
+	padding: 10px 40px;
+	border: 2px solid black;
+	background-color: yellow;
+	cursor: pointer;
+	font-family: monospace;
+	transition: .2s
+}
+button:hover {
+	background-color: white;
+	transform: rotate(-15deg);
+}
+button:active {
+	transform: rotate(-180deg);
 }
 /* CSS END */
 </style>
@@ -28,28 +64,23 @@
 
 <!-- HTML START -->
 <div class="container">
-	<div>
-		A banana costs $<span id="cost">2</span> right now.
-	</div>
-	<div>
-		You have $<span id="money">20</span> left.
-	</div>
-	<div>
-		You own <span id="bananas">0</span> bananas.
-	</div>
-	<button onclick="buyBanana();">Buy a banana</button>
+	<p>A banana costs $<span id="cost">2.00</span> right now.</p>
+	<p>You have $<span id="money">20.00</span> left.</p>
+	<p>You own <span id="bananas">0</span> bananas.</p>
+	<button onclick="buyBanana();">BUY A BANANA</button>
 </div>
 <!-- HTML END -->
 
 <script>
 // JS START
-let cost = 2;
-let money = 20;
-let bananas = 0;
+let money = 20.00;
+let cost = bananas = 0;
+
 setInterval(() => {
 	cost = Math.random()*3;
 	document.querySelector("#cost").innerText = cost.toFixed(2);
 }, 250);
+// Try changing the numbers above!
 
 function buyBanana() {
 	if (money > cost) {
@@ -57,6 +88,8 @@ function buyBanana() {
 		bananas++;
 		document.querySelector("#money").innerText = money.toFixed(2);
 		document.querySelector("#bananas").innerText = bananas;
+	} else {
+		document.querySelector(".container").innerHTML = `<div>You went into debt.<br>You could’ve had <span>${bananas}</span> bananas, but you got greedy.<br>Shame on you! Shame!!</div>`;
 	}
 }
 // JS END

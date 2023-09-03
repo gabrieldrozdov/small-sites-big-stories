@@ -997,6 +997,11 @@ body {
 	padding: var(--border);
 	background-color: var(--black);
 	border: var(--border) solid var(--primary);
+	opacity: .5;
+	transition: opacity .2s;
+}
+.code-editor-plaintext-options:hover {
+	opacity: 1;
 }
 .code-editor-plaintext-options button {
 	fill: var(--black);
@@ -1079,7 +1084,7 @@ body {
 	font-size: 12px;
 }
 .cm-s-ssbs.CodeMirror { background: var(--black); color: var(--white); }
-.cm-s-ssbs div.CodeMirror-selected { background: #333; }
+.cm-s-ssbs div.CodeMirror-selected { background: #111; }
 .cm-s-ssbs .CodeMirror-line::selection, .cm-s-ssbs .CodeMirror-line > span::selection, .cm-s-ssbs .CodeMirror-line > span > span::selection { background: #333; }
 .cm-s-ssbs .CodeMirror-line::-moz-selection, .cm-s-ssbs .CodeMirror-line > span::-moz-selection, .cm-s-ssbs .CodeMirror-line > span > span::-moz-selection { background: #333; }
 .cm-s-ssbs .CodeMirror-gutters { background: var(--black); border-right: 1px solid var(--white); }

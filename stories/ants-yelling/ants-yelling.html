@@ -5,20 +5,34 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ants yelling as loud as they possibly can</title>
+<meta name="author" content="Gabriel Drozdov">
 
 <style>
 /* CSS START */
+/* —————————————— FREEBIES —————————————— */
+/* This code won’t count toward the total */
+* {
+	margin: 0;
+}
 .container {
 	width: 100vw;
-	height: 100vh;
+	height: 100dvh;
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: center;
 }
+/* —————————————————————————————————————— */
+
 .ant {
-	font-size: 5px;
-	transition: 1s;
+	animation: yell alternate infinite ease-in-out;
 }
+
+/* Try changing the font sizes! */
+@keyframes yell {
+	from { font-size: 1px; }
+	to { font-size: 10px; }
+}
+
 /* CSS END */
 </style>
 
@@ -26,23 +40,18 @@
 <body>
 
 <!-- HTML START -->
+<!-- Try adding more ants! -->
+<!-- What happens if you change the animation duration? -->
 <div class="container">
-	<div class="ant">AH</div>
-	<div class="ant">AH</div>
-	<div class="ant">AH</div>
-	<div class="ant">AH</div>
-	<div class="ant">AH</div>
+	<p class="ant" style="animation-duration: 0.4s;">AH</p>
+	<p class="ant" style="animation-duration: 0.6s;">AH</p>
+	<p class="ant" style="animation-duration: 0.3s;">AH</p>
+	<p class="ant" style="animation-duration: 0.5s;">AH</p>
 </div>
 <!-- HTML END -->
 
 <script>
 // JS START
-let ants = document.querySelectorAll(".ant");
-setInterval(() => {
-	let ant = ants[Math.floor(Math.random()*ants.length)];
-	ant.style.fontSize = "20px";
-	setTimeout(() => {ant.style.fontSize = "5px";}, 500);
-}, 500)
 // JS END
 </script>
 

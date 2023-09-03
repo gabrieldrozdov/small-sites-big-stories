@@ -4,19 +4,42 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A panic button for someone in dire need of useless entertainment</title>
+<title>A panic button designed to relieve panic</title>
+<meta name="author" content="Gabriel Drozdov">
 
 <style>
 /* CSS START */
+/* —————————————— FREEBIES —————————————— */
+/* This code won’t count toward the total */
+* {
+	margin: 0;
+}
+.container {
+	width: 100vw;
+	height: 100dvh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* —————————————————————————————————————— */
+
+/* Try setting the background size to a different value! */
+.container {
+	background-size: 100% 100%;
+	padding: 20px;
+}
 #button {
-	border: 10px solid black;
+	border: 5px solid black;
 	background-color: red;
-	font-size: 50px;
+	padding: 20px;
+	font-size: 24px;
 	cursor: pointer;
 }
 #button:hover {
-	color: red;
-	background-color: black;
+	transform: scale(1.1);
+}
+#button:active {
+	transform: scale(.8);
 }
 /* CSS END */
 </style>
@@ -25,21 +48,17 @@
 <body>
 
 <!-- HTML START -->
-<button id="button">CLICK IN THE CASE OF EXTREME BOREDOM</button>
+<div class="container">
+	<button id="button" onclick="panic();">CLICK IN THE CASE OF EXTREME DESPERATION<br>(AT YOUR OWN RISK)</button>
+</div>
 <!-- HTML END -->
 
 <script>
 // JS START
-document.querySelector("#button").addEventListener("click", () => {
-	for (let i=0; i<10; i++) {
-		let src = "";
-		let letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-		for (let j=0; j<3; j++) {
-			src += letters[Math.floor(Math.random()*letters.length)];
-		}
-		window.open("http://"+src+".com");
-	}
-})
+function panic() {
+	let container = document.querySelector('.container');
+	container.style.backgroundImage = `url("/stories/panic-button/dogs/dog${Math.floor(Math.random()*50)}.jpg")`;
+}
 // JS END
 </script>
 

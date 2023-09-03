@@ -1,12 +1,7 @@
 {
-	"fruit-market": {
-		"title": "Scenes from the fruit market",
-		"stories": "banana-dealer, perfect-hue, accidental-explosions, dance-audition",
-		"alpha": "fruit-market"
-	},
-	"test2": {
-		"title": "Some other sort of test",
-		"stories": "precious-gem",
-		"alpha": "test2"
-	}
+   "todays-artisans": {
+      "title": "Today’s Artisans: Professionals Working Their Craft",
+      "stories": "perfect-color, perfect-polish",
+      "alpha": "todays-artisans-professionals"
+   }
 }

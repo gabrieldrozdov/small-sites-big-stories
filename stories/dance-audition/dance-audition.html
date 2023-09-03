@@ -5,18 +5,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>You’re up on the world’s #1 hit amateur dance show</title>
+<meta name="author" content="Gabriel Drozdov">
 
 <style>
 /* CSS START */
+/* —————————————— FREEBIES —————————————— */
+/* This code won’t count toward the total */
+* {
+	margin: 0;
+}
 .container {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 5vw;
-  width: 100vw;
-  height: 100vh;
+	width: 100vw;
+	height: 100dvh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* —————————————————————————————————————— */
+
+.container {
+	text-align: center;
+	font-size: 5vw;
 }
 /* CSS END */
 </style>
@@ -26,24 +35,29 @@
 
 <!-- HTML START -->
 <div class="container">
-  <h1 id="text">Press <span id="key"></span></h1>
+	<p id="text">
+		So you think you can dance? Show me.<br>
+		<span id="key">Press a to dance</span>
+	</p>
 </div>
 <!-- HTML END -->
 
 <script>
 // JS START
 let keys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-let target = keys[Math.floor(Math.random()*keys.length)];
+let moves = ['tango', 'waltz', 'cha cha', 'salsa', 'twist', 'box step', 'ball change', 'plié', 'tap dance', 'do the worm', 'breakdance'];
+let targetKey = keys[Math.floor(Math.random()*keys.length)];
 let score = 0;
-document.querySelector("#key").innerText = target;
+
+document.querySelector("#key").innerText = `Press ${targetKey} to ${moves[Math.floor(Math.random()*moves.length)]}.`;
 document.body.addEventListener('keydown', function(e) {
-  if (e.key == target) {
-    score++;
-    target = keys[Math.floor(Math.random()*keys.length)];
-    document.querySelector("#key").innerText = target;
-  } else {
-    document.querySelector("#text").innerHTML = `You FUMBLED! Score: ${score}`;
-  }
+	if (e.key == targetKey) {
+		score++;
+		targetKey = keys[Math.floor(Math.random()*keys.length)];
+		document.querySelector("#key").innerText = `Press ${targetKey} to ${moves[Math.floor(Math.random()*moves.length)]}.`;
+	} else {
+		document.querySelector("#text").innerHTML = `What! You fell down?<br>${score} moves? That’s it?<br>Try better next time, kid.`;
+	}
 });
 // JS END
 </script>

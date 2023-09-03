@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch as a weaver selects the perfect color for their next textile</title>
+<meta name="author" content="Gabriel Drozdov">
+
+<style>
+/* CSS START */
+/* —————————————— FREEBIES —————————————— */
+/* This code won’t count toward the total */
+* {
+	margin: 0;
+}
+canvas {
+	display: block;
+}
+/* —————————————————————————————————————— */
+/* CSS END */
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+
+</head>
+<body>
+
+<!-- HTML START -->
+<!-- HTML END -->
+
+<script>
+// JS START
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	rgbRed = rgbGreen = rgbBlue = Math.floor(Math.random()*256);
+	posX = posY = 0;
+}
+
+function draw() {
+	fill(rgbRed, rgbGreen, rgbBlue);
+	rect(posX*(width/10), posY*(height/10), width/10, height/10);
+	// Try changing what the width and height get divided by!
+
+	posX += 1;
+	if (posX == 10){
+		posX = 0;
+		posY += 1;
+	}
+	if (posY == 10) {
+		posY = 0;
+	}
+
+	rgbRed += 1;
+	if (rgbRed == 256) {
+		rgbRed = 0;
+		rgbGreen += 1;
+	}
+	if (rgbGreen == 256) {
+		rgbGreen = 0;
+		rgbBlue += 1;
+	}
+	if (rgbBlue == 256) {
+		rgbBlue = 0;
+	}
+}
+
+/* —————————————— FREEBIES —————————————— */
+/* This code won’t count toward the total */
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+/* —————————————————————————————————————— */
+// JS END
+</script>
+
+</body>
+</html>

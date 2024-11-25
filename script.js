@@ -799,12 +799,6 @@ function setStoryType(newStoryType) {
 // Set sorting order
 let activeSorting = "";
 let sortOrder = [];
-function sortNumber() {
-	var numArray = [140000, 104, 99];
-	numArray.sort(function(a, b) {
-	return a - b;
-});
-}
 function setSorting(sorting) {
 	activeSorting = sorting;
 

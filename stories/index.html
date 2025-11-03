@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Small Sites; Big Stories | Editor</title>
+
+	<meta name="author" content="Gabriel Drozdov / GD with GD">
+	<meta name="keywords" content="Web Design, Web Development, Creative Coding, Design Education, Code Education, Storytelling, Pedagogy">
+	<meta name="description" content="Websites written using as little code as possible!">
+	<meta property="og:url" content="https://smallsites.gdwithgd.com/">
+	<meta name="og:title" property="og:title" content="Small Sites; Big Stories, by GD with GD">
+	<meta property="og:description" content="Websites written using as little code as possible!">
+	<meta property="og:image" content="/assets/meta/opengraph.jpg">
+	<link rel="icon" type="png" href="/assets/meta/favicon.png">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+
+	<link rel="stylesheet" href="/editor.css">
+
+	<!-- CodeMirror -->
+	<link rel="stylesheet" href="/assets/cm/lib/codemirror.css">
+	<script src="/assets/cm/lib/codemirror.js"></script>
+	<script src="/assets/cm/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="/assets/cm/mode/xml/xml.js"></script>
+	<script src="/assets/cm/mode/css/css.js"></script>
+	<script src="/assets/cm/mode/javascript/javascript.js"></script>
+
+	<!-- CodeMirror addons -->
+	<script src="/assets/cm/addon/lint/lint.js"></script>
+	<script src="/assets/cm/addon/lint/html-lint.js"></script>
+	<script src="/assets/cm/addon/edit/closetag.js"></script>
+	<script src="/assets/cm/addon/edit/closebrackets.js"></script>
+	<script src="/assets/cm/addon/edit/matchbrackets.js"></script>
+	<script src="/assets/cm/addon/comment/comment.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header class="header">
+			<a class="header-logo" href="/">
+				<span class="header-logo-line1">Small Sites;</span>
+				<span class="header-logo-line2">Big Stories</span>
+			</a>
+			<div class="header-info">
+				<h1 class="header-info-title">
+				</h1>
+				<ul class="header-info-details">
+				</ul>
+			</div>
+			<div class="header-desc">
+			</div>
+			<nav class="header-nav">
+				<h2 class="header-nav-title">Change Story</h2>
+				<div class="header-nav-links">
+					<a href="" id="nav-prev">
+						<svg viewBox="0 0 100 100"><polygon points="78.85 55 40.3 55 56.55 71.25 49.48 78.32 21.15 50 49.48 21.68 56.55 28.75 40.3 45 78.85 45 78.85 55"/></svg>
+						<span>Previous</span>
+					</a>
+					<a href="../">
+						<svg viewBox="0 0 100 100"><path d="m25,5c-5.52,0-10,4.48-10,10v70c0,5.52,4.48,10,10,10h60V5H25Zm50,80H28c-2.76,0-5-2.24-5-5s2.24-5,5-5h47v10Zm0-20H28V15h47v50Z"></path><rect x="38" y="25" width="27" height="10"></rect></svg>
+						<span>Bookshelf</span>
+					</a>
+					<a href="" id="nav-next">
+						<svg viewBox="0 0 100 100"><polygon points="21.15 45 59.7 45 43.45 28.75 50.52 21.68 78.85 50 50.52 78.32 43.45 71.25 59.7 55 21.15 55 21.15 45"/></svg>
+						<span>Next</span>
+					</a>
+				</div>
+			</nav>
+		</header>
+
+		<main class="book">
+			<div class="code">
+				<div class="code-cm"></div>
+				<div class="code-controls">
+					<button onclick="editorToggleTheme();">
+						<svg viewBox="0 0 100 100"><path d="M50,10c-22.09,0-40,17.91-40,40s17.91,40,40,40,40-17.91,40-40S72.09,10,50,10ZM50,80V20c16.57,0,30,13.43,30,30s-13.43,30-30,30Z"/></svg>
+						<span>Theme</span>
+					</button>
+					<button onclick="editorToggleWrapping();">
+						<svg viewBox="0 0 100 100"><path d="M58.75,15H24.14v10h34.61c11.73,0,21.24,9.51,21.24,21.24s-9.51,21.26-21.24,21.26l-29.61-.03,10.43-10.4-7.07-7.07-22.5,22.5,22.5,22.5,7.07-7.07-10.43-10.43h29.61c17.26,0,31.25-13.99,31.25-31.25s-13.99-31.25-31.25-31.25Z"></path></svg>
+						<span>Wrap</span>
+					</button>
+					<button onclick="editorToggleFullscreen();">
+						<svg viewBox="0 0 100 100"><polygon points="43.54 63.54 27.07 80 41.82 80 41.82 90 10 90 10 58.18 20 58.18 20 72.93 36.47 56.47 43.54 63.54"/><polygon points="90 58.18 90 90 58.18 90 58.18 80 72.93 80 56.47 63.54 63.54 56.47 80 72.93 80 58.18 90 58.18"/><polygon points="43.54 36.47 36.47 43.54 20 27.07 20 41.82 10 41.82 10 10 41.82 10 41.82 20 27.07 20 43.54 36.47"/><polygon points="90 10 90 41.82 80 41.82 80 27.07 63.54 43.54 56.47 36.47 72.93 20 58.18 20 58.18 10 90 10"/></svg>
+						<span>Expand</span>
+					</button>
+					<button onclick="editorReset();">
+						<svg viewBox="0 0 100 100"><path d="m50,13.871c-9.554,0-18.232,3.755-24.655,9.86v-11.668h-9.998v28.284s28.284,0,28.284,0v-9.999h-12.258c4.831-4.656,11.394-7.525,18.628-7.525,14.835,0,26.859,12.024,26.859,26.859s-12.024,26.859-26.859,26.859-26.859-12.024-26.859-26.859h-8.953c0,19.777,16.035,35.812,35.812,35.812s35.812-16.035,35.812-35.812S69.777,13.871,50,13.871Z"></path></svg>
+						<span>Reset</span>
+					</button>
+					<button onclick="editorRerun();">
+						<svg viewBox="0 0 100 100"><polygon points="29.5 82.5 29.5 17.5 74.5 50 29.5 82.5"/></svg>
+						<span>Rerun</span>
+					</button>
+					<button onclick="editorDownload();">
+						<svg viewBox="0 0 100 100"><polygon points="72.5 47.5 50 70 27.5 47.5 34.57 40.43 45 50.86 45 10 55 10 55 50.86 65.43 40.43 72.5 47.5"/><polygon points="80 65 80 80 20 80 20 65 10 65 10 90 90 90 90 65 80 65"/></svg>
+						<span>Save</span>
+					</button>
+				</div>
+			</div>
+			<div class="preview">
+				<iframe class="preview-iframe"></iframe>
+			</div>
+		</main>
+	</div>
+
+	<canvas id="mesh"></canvas>
+
+	<script src="/editor.js"></script>
+	<script src="/mesh.js"></script>
+</body>
+</html>

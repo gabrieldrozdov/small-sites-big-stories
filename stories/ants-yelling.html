@@ -1,0 +1,24 @@
+<style>
+	/* Center the ants on the screen */
+	body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		height: 100vh;
+	}
+
+	/* Animate each ant */
+	p {
+		animation: yelling 1s infinite ease-in-out alternate;
+	}
+	@keyframes yelling {
+		from { font-size: 1px; }
+		to { font-size: 10px; }
+	}
+</style>
+
+<p style="animation-duration: 0.4s;">AH</p>
+<p style="animation-duration: 0.6s;">AH</p>
+<p style="animation-duration: 0.3s;">AH</p>
+<p style="animation-duration: 0.5s;">AH</p>

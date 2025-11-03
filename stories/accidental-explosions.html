@@ -1,0 +1,40 @@
+<style>
+	/* Missile class */
+	.missile {
+		position: absolute;
+		width: 10vw;
+		height: 10vw;
+		border-radius: 50%;
+		background-color: red;
+		animation: explosion 1s alternate ease-in-out infinite;
+	}
+
+	/* Animation */
+	@keyframes explosion {
+		from { transform: scale(0); }
+		to { transform: scale(5); }
+	}
+</style>
+
+<script>
+	// Function to create new missiles
+	function launchMissile(e) {
+		// Stop if too many missiles already
+		let totalMissiles = document.querySelectorAll('.missile').length;
+		if (totalMissiles > 200) {
+			return
+		}
+
+		// 50/50 chance to create a new missile
+		if (Math.random() < .5) {
+			let missile = document.createElement("div");
+			missile.classList.add("missile");
+			missile.style.left = e.clientX + "px";
+			missile.style.top = e.clientY + "px";
+			document.querySelector('body').appendChild(missile);
+		}
+	}
+
+	// Run function when mouse moved
+	window.addEventListener("mousemove", launchMissile);
+</script>

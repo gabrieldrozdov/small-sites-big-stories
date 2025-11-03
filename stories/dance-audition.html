@@ -1,0 +1,47 @@
+<style>
+	body {
+		/* Center on the screen */
+		margin: 0;
+		padding: 20px;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		/* Style text */
+		font-size: 32px;
+		font-family: sans-serif;
+	}
+</style>
+
+<p>
+	So you think you can dance? <strong>Show me.</strong><br>
+	<span>Press <em>a</em> to dance</span>
+</p>
+
+<script>
+	// Keyboard keys
+	const keys = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+	// Dance moves
+	const moves = ['tango', 'waltz', 'cha cha', 'salsa', 'twist', 'box step', 'ball change', 'plié', 'tap dance', 'do the worm', 'breakdance'];
+
+	// Your current score
+	let score = 0;
+
+	// Set the first key you need to press
+	let targetKey = keys[Math.floor(Math.random()*keys.length)];
+	document.querySelector("span").innerHTML = `Press <em>${targetKey}</em> to ${moves[Math.floor(Math.random()*moves.length)]}.`;
+
+	// Detect if the correct key was pressed
+	document.body.addEventListener('keydown', (e) => {
+		if (e.key == targetKey) {
+			score++;
+			targetKey = keys[Math.floor(Math.random()*keys.length)];
+			document.querySelector("span").innerHTML = `Press <em>${targetKey}</em> to ${moves[Math.floor(Math.random()*moves.length)]}.`;
+		} else {
+			targetKey = "none";
+			document.querySelector("p").innerHTML = `What! You fell down?<br><em>${score}</em> moves? That’s it?<br>Try to do better next time, kid.`;
+		}
+	});
+</script>

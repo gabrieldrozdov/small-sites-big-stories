@@ -1,0 +1,72 @@
+<style>
+	body {
+		/* Center everything on the screen */
+		margin: 0;
+		padding: 20px;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+
+		/* Style the page and text */
+		background-color: yellow;
+		font-size: 32px;
+		font-family: monospace;
+	}
+
+	/* Highlighted text */
+	mark {
+		background-color: white;
+	}
+
+	/* Buy a banana button */
+	button {
+		background-color: yellow;
+		border: 2px solid black;
+		padding: 10px 40px;
+		border-radius: 50%;
+		transform: rotate(-10deg);
+		font-family: monospace;
+		cursor: pointer;
+		transition: .2s;
+	}
+	button:hover {
+		background-color: white;
+		transform: rotate(-15deg);
+	}
+	button:active {
+		transform: rotate(-180deg);
+	}
+</style>
+
+<p>A banana costs $<mark id="cost">2.00</mark> right now.</p>
+<p>You have $<mark id="money">20.00</mark> left.</p>
+<p>You own <mark id="bananas">0</mark> bananas.</p>
+<button onclick="buyBanana();">BUY A BANANA</button>
+
+<script>
+	let money = 20.00; // Starting money
+	let cost = bananas = 0;
+
+	// Change the price of bananas every 250ms
+	setInterval(() => {
+		cost = Math.random()*3;
+		document.querySelector("#cost").textContent = cost.toFixed(2);
+	}, 250);
+
+	// Buy a banana
+	function buyBanana() {
+		if (money > cost) {
+			// If you have enough money, buy a banana!
+			money = money - cost;
+			bananas++;
+			document.querySelector("#money").textContent = money.toFixed(2);
+			document.querySelector("#bananas").textContent = bananas;
+		} else {
+			// If the banana is too expensive, you lose!
+			document.querySelector("body").innerHTML = `<p>You went into debt.<br>You could’ve had <mark>${bananas}</mark> bananas, but you got greedy.<br>Shame on you! Shame!!</p>`;
+		}
+	}
+</script>

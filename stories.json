@@ -1,106 +1,44 @@
 {
-   "ants-yelling": {
-      "title": "A colony of ants yelling as loud as they possibly can",
-      "lines": 10,
-      "desc": "An @keyframes CSS animation changes the font size for several ants represented by <p> tags. I use inline CSS to change the animation duration of each of the ants, which makes the story more exciting!",
-      "authors": "Gabriel Drozdov",
-      "tags": "drama, html+css, no interaction",
-      "library-name": "",
-      "library-link": "",
-      "library-cdn": "",
-      "alpha": "colony-of-ants-yelling",
-      "authoralpha": "drozdov",
-      "anthology": ""
-   },
-   "perfect-color": {
-      "title": "Watch as a weaver selects the perfect color for their next textile",
-      "lines": 22,
-      "desc": "The width and height are divided by 10 to create a grid of 100 squares. Each frame, we generate a new square in the next available position, starting back at the beginning once we reach the end. The color of each square gradually moves through the RGB spectrum, first exhausting all the possible values for red (0–255), then blue, and finally green.",
-      "authors": "Gabriel Drozdov",
-      "tags": "documentary, no interaction, html+css+js, p5.js",
-      "library-name": "p5.js",
-      "library-link": "https://p5js.org/",
-      "library-cdn": "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js",
-      "alpha": "watch-as-a-weaver",
-      "authoralpha": "drozdov",
-      "anthology": "todays-artisans"
-   },
-   "perfect-polish": {
-      "title": "Watch as a jeweler perfects the polish on their latest gem",
-      "lines": 52,
-      "desc": "A class keeps track of three pairs of points (x and y coordinates) to draw a triangle using p5.js. One of those pairs stays centered on the mouse position, while the other two wander along the edges of the canvas. Lastly, the blend mode is set to difference so that overlapping triangles invert their colors.",
-      "authors": "Gabriel Drozdov",
-      "tags": "documentary, mouse, html+css+js, p5.js",
-      "library-name": "p5.js",
-      "library-link": "https://p5js.org/",
-      "library-cdn": "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js",
-      "alpha": "watch-as-a-jeweler",
-      "authoralpha": "drozdov",
-      "anthology": "todays-artisans"
-   },
-   "gentle-giant": {
-      "title": "A gentle giant asking for directions to the local bowling alley",
-      "lines": 7,
-      "desc": "The giant’s presence is represented by a huge font size (200% the screen height), but their gentleness is conveyed by making the font color transparent and adding a thin text stroke. Lastly, I use the white-space property to make the message take up one line instead of wrapping to multiple lines.",
-      "authors": "Gabriel Drozdov",
-      "tags": "fantasy, scroll wheel, html+css",
-      "library-name": "",
-      "library-link": "",
-      "library-cdn": "",
-      "alpha": "gentle-giant-asking-for-directions",
-      "authoralpha": "drozdov",
-      "anthology": ""
-   },
-   "panic-button": {
-      "title": "A panic button designed to relieve panic",
-      "lines": 18,
-      "desc": "A folder contains 50 images of dogs with a consistent file name followed by a number 0–49. When the button is pressed, a JavaScript function gets called that changes the container’s background image to one of those images of dogs. The image is randomly selected by multiplying Math.random() by 50 to get a random number, and then rounding the result down to select the relevant file name.",
-      "authors": "Gabriel Drozdov",
-      "tags": "comedy, click, html+css+js",
-      "library-name": "",
-      "library-link": "",
-      "library-cdn": "",
-      "alpha": "panic-button-designed-to-relieve",
-      "authoralpha": "drozdov",
-      "anthology": ""
-   },
-   "banana-dealer": {
-      "title": "Desperate for bananas, low on cash, stuck in a volatile economy",
-      "lines": 44,
-      "desc": "Using setInterval(), the cost of bananas gets randomized every 250 milliseconds. The player has to time their clicks to maximize the number of bananas they can purchase, because they’ll lose once they try to buy a banana but can’t afford one. This lose state is triggered by checking if the current cost of a banana is greater than the remaining money left.",
-      "authors": "Gabriel Drozdov",
-      "tags": "action, click, html+css+js",
-      "library-name": "",
-      "library-link": "",
-      "library-cdn": "",
-      "alpha": "desperate-for-bananas-low-on-cash",
-      "authoralpha": "drozdov",
-      "anthology": ""
-   },
-   "accidental-explosions": {
-      "title": "Someone keeps launching missiles by accident, and that person might be you",
-      "lines": 24,
-      "desc": "An event listener calls a function whenever the mouse moves. This function adds a new div exactly at the mouse position via clientX and clientY. To get the divs centered on the mouse position, they are translated -50% both horizontally and vertically. The explosion effect is then achieved through an @keyframes animation that scales the divs continuously. Lastly, the total amount of divs is capped at 500 to prevent excessive lag.",
-      "authors": "Gabriel Drozdov",
-      "tags": "comedy, mouse, html+css+js",
-      "library-name": "",
-      "library-link": "",
-      "library-cdn": "",
-      "alpha": "someone-keeps-launching-missiles",
-      "authoralpha": "drozdov",
-      "anthology": ""
-   },
-   "dance-audition": {
-      "title": "You’re up on the world’s #1 hit amateur dance show",
-      "lines": 19,
-      "desc": "An array holds every letter of the alphabet. A random key and dance move are selected, and then an event listener waits for the player to press any key. Once a key is pressed, a function checks if the pressed key matches the target key. If it does, a new key and dance move are selected. If it doesn’t, then the game ends.",
-      "authors": "Gabriel Drozdov",
-      "tags": "drama, keyboard, html+css+js",
-      "library-name": "",
-      "library-link": "",
-      "library-cdn": "",
-      "alpha": "youre-up-on-the-worlds",
-      "authoralpha": "drozdov",
-      "anthology": ""
-   }
+	"ants-yelling": {
+		"lines": 24,
+		"title": "A colony of ants yelling as loud as they possibly can",
+		"details": [],
+		"date": [11, 3, 2025],
+		"desc": "<p>Ants are tiny. If they yell, they’re still going to be tiny. It’ll be a sort of pathetic kind of yell.</p><p>Here, we’ve got a group of ants cented on the screen, with each represented by the word “AH.” Their screams are a simple animation that changes their font size, but even with their loudest voices they can still only reach 10px. Hey, at least they’re trying!</p>"
+	},
+	"dance-audition": {
+		"lines": 47,
+		"title": "You’re up on the world’s #1 hit amateur dance show",
+		"details": [],
+		"date": [11, 3, 2025],
+		"desc": "<p>Dancing is all about knowing the right moves. (Or at least, that’s what I think because I don’t know how to dance.) What’s the computer equivalent of a “move?” What about clicking a key on your keyboard!</p><p>To nail your audition, you’ll need to press the key on the screen. Every time you get the right key, a new one is picked at random, and a new random dance move is picked, too! There’s no time limit, but hitting the wrong key ends your audition.</p>"
+	},
+	"banana-dealer": {
+		"lines": 72,
+		"title": "Desperate for bananas, low on cash, stuck in a volatile economy",
+		"details": [],
+		"date": [11, 3, 2025],
+		"desc": "<p>Bananas are getting expensive these days. Who knows how much a banana will cost tomorrow? Even worse, who knows how much a banana will cost in the next minute or second?</p><p>Play this game and try to buy as many bananas as you can without going broke! Start with $20 and try to buy bananas as the lowest price possible. The game ends when you try to buy a banana but don’t have enough money to afford it!</p>"
+	},
+	"accidental-explosions": {
+		"lines": 40,
+		"title": "Someone keeps launching missiles by accident, and that person might be you",
+		"details": [],
+		"date": [11, 3, 2025],
+		"desc": "<p>What does a missile look like? I don’t really know, but I figure that it creates an explosion, which when seen from above looks like a pulsing red circle.</p><p>In this story, I use JavaScript to track when the user moves their mouse. I then create an element at that exact location. Using CSS, I position that element at that exact location and have it run an animation to get bigger and smaller repeatedly. The result: missiles!</p>"
+	},
+	"panic-button": {
+		"lines": 48,
+		"title": "A panic button designed to relieve panic",
+		"details": [],
+		"date": [11, 3, 2025],
+		"desc": "<p>Feeling anxious? Like you’re ready to burst? Then this panic button is for you! Clicking this button is a surefire way to release a tiny bit of dopamine even in the scariest of times. (Unless you’re allergic to cats...)</p>"
+	},
+	"gentle-giant": {
+		"lines": 11,
+		"title": "A gentle giant asking for directions to the local bowling alley",
+		"details": [],
+		"date": [11, 3, 2025],
+		"desc": "<p>A giant’s got to have a loud voice. That’s kind of scary. But how can they make themselves seem a little friendlier? What if all they’re asking is for directions to their favorite place?</p><p>In this story, the giant is represented by appropriately gigantic text. But to counteract this giganticness, the text is light and soft.</p>"
+	}
 }

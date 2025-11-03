@@ -1,777 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Small Sites; Big Stories</title>
 
-	<meta name="author" content="Gabriel Drozdov">
-	<meta name="keywords" content="Web Design, Web Development, Creative Coding, Design Education, Code Education, Storytelling">
-	<meta name="description" content="Interactive narratives collected in a catalog of microsites written using as little code as possible.">
-	<meta property="og:url" content="https://smallsites.gdwithgd.com/">
-	<meta name="og:title" property="og:title" content="Small Sites; Big Stories">
-	<meta property="og:description" content="Interactive narratives collected in a catalog of microsites written using as little code as possible.">
-	<meta property="og:image" content="./assets/opengraph.jpg">
-
-	<link rel="icon" type="png" href="assets/favicon.png">
-	<link rel="stylesheet" href="style.css">
-
-	<!-- CodeMirror -->
-	<script src="cm/codemirror.js"></script>
-	<link rel="stylesheet" href="cm/codemirror.css">
-	<script src="cm/mode/htmlmixed/htmlmixed.js"></script>
-	<script src="cm/mode/xml/xml.js"></script>
-	<script src="cm/mode/css/css.js"></script>
-	<script src="cm/mode/javascript/javascript.js"></script>
-</head>
-<body>
-	<div class="container">
-
-		<header class="intro">
-			<div class="intro-content">
-				<div class="intro-main">
-					<h1 class="intro-title">Small&nbsp;Sites;<br><strong>Big&nbsp;Stories</strong></h1>
-					<h2 class="intro-subtitle">Interactive narratives<br>collected in a catalog of&nbsp;microsites<br>written using as little code as&nbsp;possible</h2>
-					<div class="intro-menu-border">
-						<div class="intro-menu">
-							<button onclick="introOut(); mainIn(); aboutUpInstant();">Jump into a Story</button>
-							<button onclick="introOut(); catalogIn(); mainUpInstant(); aboutUpInstant();">Browse the Catalog</button>
-							<button onclick="introOut(); aboutIn();">Learn More About this Project</button>
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Small Sites; Big Stories, by GD with GD</title>
+		
+			<meta name="author" content="Gabriel Drozdov / GD with GD">
+			<meta name="keywords" content="Web Design, Web Development, Creative Coding, Design Education, Code Education, Storytelling, Pedagogy">
+			<meta name="description" content="Websites written using as little code as possible!">
+			<meta property="og:url" content="https://smallsites.gdwithgd.com/">
+			<meta name="og:title" property="og:title" content="Small Sites; Big Stories, by GD with GD">
+			<meta property="og:description" content="Websites written using as little code as possible!">
+			<meta property="og:image" content="/assets/meta/opengraph.jpg">
+			<link rel="icon" type="png" href="/assets/meta/favicon.png">
+			<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+		
+			<link rel="stylesheet" href="/home.css">
+		</head>
+		<body>
+			<main class="home-container" data-transition="1">
+				<header class="home-header">
+					<h1 class="home-title">
+						<span class="home-title-line1">Small Sites;</span>
+						<span class="home-title-line2">Big Stories</span>
+					</h1>
+					<p class="home-desc">
+						Websites written using as little code as possible, by <a href="https://gdwithgd.com/" target="_blank">GD with GD</a>
+					</p>
+				</header>
+		
+				<div class="home-filter">
+					<div class="home-filter-value">
+						<span class="home-filter-value-label">Min</span>
+						<span id="home-filter-min-value" class="home-filter-value-number">0</span>
+					</div>
+					<div class="home-filter-slider-container">
+						<h2 class="home-filter-slider-title">Lines of Code</h2>
+						<div class="home-filter-slider">
+							<input type="range" id="home-filter-min-range" min="0" max="72" value="0">
+							<input type="range" id="home-filter-max-range" min="0" max="72" value="72">
+							<div class="home-filter-slider-track"></div>
 						</div>
 					</div>
+					<div class="home-filter-value">
+						<span class="home-filter-value-label">Max</span>
+						<span id="home-filter-max-value" class="home-filter-value-number">72</span>
+					</div>
 				</div>
-			</div>
-		</header>
-
-		<div class="about-container">
-			<div class="about" id="about">
-				<h1 class="about-title">Small&nbsp;Sites; <strong>Big&nbsp;Stories</strong></h1>
-				<h2 class="about-subtitle">Interactive narratives<br>collected in a catalog of&nbsp;microsites<br>written using as little code as&nbsp;possible</h2>
+		
+				<nav class="home-index">
+					
+			<a href="/stories/?story=ants-yelling" class="home-index-link" data-lines="24">
+				<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-lines">
+					<div class="home-index-link-lines-number">24</div>
+					<div class="home-index-link-lines-text">Lines of Code</div>
+				</div>
+					<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-heading">
+					<h2 class="home-index-link-title">
+						A colony of ants yelling as loud as they possibly can
+					</h2>
+					<ul class="home-index-link-details">
+						<li>Published November 3, 2025</li>
+					</ul>
+				</div>
+				<div class="home-index-link-decoration"></div>
+			</a>
+		
+			<a href="/stories/?story=dance-audition" class="home-index-link" data-lines="47">
+				<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-lines">
+					<div class="home-index-link-lines-number">47</div>
+					<div class="home-index-link-lines-text">Lines of Code</div>
+				</div>
+					<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-heading">
+					<h2 class="home-index-link-title">
+						You’re up on the world’s #1 hit amateur dance show
+					</h2>
+					<ul class="home-index-link-details">
+						<li>Published November 3, 2025</li>
+					</ul>
+				</div>
+				<div class="home-index-link-decoration"></div>
+			</a>
+		
+			<a href="/stories/?story=banana-dealer" class="home-index-link" data-lines="72">
+				<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-lines">
+					<div class="home-index-link-lines-number">72</div>
+					<div class="home-index-link-lines-text">Lines of Code</div>
+				</div>
+					<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-heading">
+					<h2 class="home-index-link-title">
+						Desperate for bananas, low on cash, stuck in a volatile economy
+					</h2>
+					<ul class="home-index-link-details">
+						<li>Published November 3, 2025</li>
+					</ul>
+				</div>
+				<div class="home-index-link-decoration"></div>
+			</a>
+		
+			<a href="/stories/?story=accidental-explosions" class="home-index-link" data-lines="40">
+				<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-lines">
+					<div class="home-index-link-lines-number">40</div>
+					<div class="home-index-link-lines-text">Lines of Code</div>
+				</div>
+					<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-heading">
+					<h2 class="home-index-link-title">
+						Someone keeps launching missiles by accident, and that person might be you
+					</h2>
+					<ul class="home-index-link-details">
+						<li>Published November 3, 2025</li>
+					</ul>
+				</div>
+				<div class="home-index-link-decoration"></div>
+			</a>
+		
+			<a href="/stories/?story=panic-button" class="home-index-link" data-lines="48">
+				<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-lines">
+					<div class="home-index-link-lines-number">48</div>
+					<div class="home-index-link-lines-text">Lines of Code</div>
+				</div>
+					<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-heading">
+					<h2 class="home-index-link-title">
+						A panic button designed to relieve panic
+					</h2>
+					<ul class="home-index-link-details">
+						<li>Published November 3, 2025</li>
+					</ul>
+				</div>
+				<div class="home-index-link-decoration"></div>
+			</a>
+		
+			<a href="/stories/?story=gentle-giant" class="home-index-link" data-lines="11">
+				<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-lines">
+					<div class="home-index-link-lines-number">11</div>
+					<div class="home-index-link-lines-text">Lines of Code</div>
+				</div>
+					<div class="home-index-link-decoration"></div>
+				<div class="home-index-link-heading">
+					<h2 class="home-index-link-title">
+						A gentle giant asking for directions to the local bowling alley
+					</h2>
+					<ul class="home-index-link-details">
+						<li>Published November 3, 2025</li>
+					</ul>
+				</div>
+				<div class="home-index-link-decoration"></div>
+			</a>
+		
+				</nav>
+				<div class="home-floor"></div>
+		
+				<div class="home-vignette"></div>
+				<div class="home-color"></div>
+			</main>
+		
+			<script src="/home.js"></script>
+		</body>
+		</html>
 	
-				<div class="about-sections">
-					<div class="about-section" id="about-info" data-active="0">
-						<h3 class="about-heading">
-							<div class="about-heading-content" onclick="toggleAbout('info')">
-								<span>What is this project?</span>
-								<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-							</div>
-						</h3>
-						<div class="about-content">
-							<div class="about-subsection">
-								<p>
-									“Small Sites; Big Stories” is a few things.
-								</p>
-								<div class="about-list">
-									<div class="about-list-item">
-										<div class="about-number">1</div>
-										<p>
-											It’s a collection of microsites, written using as little code as possible, that tell interactive narratives.
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">2</div>
-										<p>
-											It’s a resource for learning about code and discovering how to use it in creative ways.
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">3</div>
-										<p>
-											It’s a tool for teaching code in a non-linear trajectory.
-										</p>
-									</div>
-								</div>
-								<p>
-									By focusing on exploration and community-engagement, and by eliminating technical barriers to coding, “Small Sites; Big Stories” attempts to make code accessible to a wide audience both within and outside of formal educational environments.
-								</p>
-							</div>
-						</div>
-					</div>
-		
-					<div class="about-section" id="about-rules" data-active="0">
-						<h3 class="about-heading">
-							<div class="about-heading-content" onclick="toggleAbout('rules')">
-								<span>What are the rules?</span>
-								<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-							</div>
-						</h3>
-						<div class="about-content">
-							<div class="about-subsection">
-								<h4 class="about-subheading"><span>As little code as possible</span></h4>
-								<p>
-									The goal of “Small Sites; Big Stories” is to showcase meaningful, exciting digital experiences whose design and development can be understood by outsiders, particularly beginners.
-								</p>
-								<p>
-									One way to make design and code more accessible is to make it simpler. But, simpler doesn’t always mean easier to understand. So, microsites can use more code to achieve their goal as long as adding more code decreases the story’s complexity.
-								</p>
-								<p>
-									To counteract this increase in code, there are several exceptions to what counts as a line of code. This includes “freebie” code snippets that won’t count toward the total line count.
-								</p>
-							</div>
-		
-							<div class="about-subsection">
-								<h4 class="about-subheading"><span>What counts as a line of code?</span></h4>
-								<p>
-									A line of code is, generally speaking, just as it seems — a line of code. However, it is often easier to understand code if it’s formatted properly, which can lead to some very short lines of code (e.g. “&lt;div&gt;” on its own line).
-								</p>
-								<p>
-									It might also be easier and simpler to copy-paste code instead of writing code that duplicates itself.
-								</p>
-								<p>
-									Because of both of these reasons, lines of code are (generally) counted based on the following rules:
-								</p>
-								<div class="about-list">
-									<div class="about-list-item">
-										<div class="about-number">1</div>
-										<p>
-											Lines of code only count toward the total if they are <strong>meaningful</strong>. This means that something like a “&lt;p&gt;” tag on its own line might not count as a line of code. This is up to the author’s discretion.
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">2</div>
-										<p>
-											Lines of code only need to count toward the total if they are <strong>unique</strong>. This means that copy-pasted lines may only count the first time they appear (within reason).
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">3</div>
-										<p>
-											Comments and formatting do not count toward the total.
-										</p>
-									</div>
-								</div>
-								<p>
-									In all cases, the exact total count is up to the author’s discretion.
-								</p>
-							</div>
-		
-							<div class="about-subsection">
-								<h4 class="about-subheading"><span>Freebies</span></h4>
-								<p>
-									There are some code snippets that frequently make life easier. Authors get to use these code snippets for free, since they’re less about storytelling and more about best practices and polished presentation.
-								</p>
-								<p>
-									This is the list of current freebies:
-								</p>
-								<div class="about-list">
-									<div class="about-list-item">
-										<div class="about-number">1</div>
-										<p>
-											Several HTML elements have some margin and padding set by default. This is especially obvious on the &lt;body&gt; tag, which has a margin of 8px. The following code removes margin and padding from all elements:<br><br>
-											<span class="about-code">
-												*&nbsp;{<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;margin: 0;<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;padding: 0;<br>
-												}
-											</span>
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">2</div>
-										<p>
-											Images can break the boundaries of the elements they’re inside of. To fix this, we can set a maximum width to all image elements:<br><br>
-											<span class="about-code">
-												img&nbsp;{<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;max-width: 100%;<br>
-												}
-											</span>
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">3</div>
-										<p>
-											The width and height of elements usually excludes the border, which makes sizing difficult. We can set the width and height to include the border for all elements with the following property:<br><br>
-											<span class="about-code">
-												*&nbsp;{<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;box-sizing: border-box;<br>
-												}
-											</span>
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">4</div>
-										<p>
-											If we want our content to take up the whole screen, we can create a container class with a set width and height (we use dvh here instead of vh to account for mobile devices):<br><br>
-											<span class="about-code">
-												.container&nbsp;{<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;width: 100vw;<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;height: 100dvh;<br>
-												}
-											</span>
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">5</div>
-										<p>
-											Flexbox is the easiest way to vertically and horizontally center things on the screen. We can add to our container class to hold our content if we want it centered:<br><br>
-											<span class="about-code">
-												.container&nbsp;{<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;display: flex;<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;align-items: center;<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;justify-content: center;<br>
-												}
-											</span>
-										</p>
-									</div>
-									<div class="about-list-item">
-										<div class="about-number">6</div>
-										<p>
-											p5.js is a fantastic JavaScript library that makes drawing images really easy. It creates a &lt;canvas&gt; element, but this element does not resize to fill the available space. We can use the following JavaScript code to make that canvas automatically resize when the window changes size:<br><br>
-											<span class="about-code">
-												function windowResized() {<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;resizeCanvas(windowWidth, windowHeight);<br>
-												}
-											</span><br><br>
-											The following CSS removes a slight bottom margin as well:<br><br>
-											<span class="about-code">
-												canvas {<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;display: block;<br>
-												}
-											</span>
-										</p>
-									</div>
-								</div>
-								<p>
-									Freebies are usually marked by comments in the code editor.
-								</p>
-								<p>
-									This list may change to include new freebies in the future, which could affect the actual code count for older stories.
-								</p>
-							</div>
-						</div>
-					</div>
-		
-					<div class="about-section" id="about-learning" data-active="0">
-						<h3 class="about-heading">
-							<div class="about-heading-content" onclick="toggleAbout('learning')">
-								<span>How can I use this project to learn code?</span>
-								<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-							</div>
-						</h3>
-						<div class="about-content">
-							<div class="about-subsection">
-								<p>
-									No matter your skill level, the first thing to do is explore! Experience as many stories as you want, and maybe try changing around parts of the code to see what happens.
-								</p>
-								<p>
-									Over time, you should strive to understand why certain things change when you edit the code. This is an important step in learning to program — learning to analyze pre-existing code, so that you can modify it, adapt it for use somewhere else, or even fix it if it’s broken.
-								</p>
-								<p>
-									This project functions best as a supplement to a traditional coding curriculum, since it does not feature formal tutorials or demos. If you’re looking for a place to learn code (with lots of bells and whistles!) then check out this project’s sister site, <a href="https://webprogramming.gdwithgd.com/" target="_blank">The Designer’s Guide to Web Programming</a>.
-								</p>
-							</div>
-						</div>
-					</div>
-		
-					<div class="about-section" id="about-teaching" data-active="0">
-						<h3 class="about-heading">
-							<div class="about-heading-content" onclick="toggleAbout('teaching')">
-								<span>How can I use this project to teach code?</span>
-								<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-							</div>
-						</h3>
-						<div class="about-content">
-							<div class="about-subsection">
-								<p>
-									Teaching code to someone who has never programmed before can be difficult. This is particularly true because there are many fundamental concepts to cover before getting to anything creative. However, interesting projects don’t need to be complicated, and you don’t need a full understanding of code to start creating interesting things.
-								</p>
-								<p>
-									Teachers can use “Small Sites; Big Stories” to show students the potential of code even at small scales. This can take the form of a class exercise or assignment (e.g. create an interactive narrative using less than 40 lines of code), or even the form of research (e.g. what kinds of digital experiences evoke drama or mystery?).
-								</p>
-								<p>
-									“Small Sites; Big Stories” can also help fill a gap in instruction if a teacher isn’t confident in their coding skills. Students can go to the site directly to see how certain things are accomplished in practice, or teachers can select stories to show to a class for analysis and critique.
-								</p>
-								<p>
-									This project functions best as a supplement to a traditional coding curriculum, since it does not feature formal tutorials or demos. If you’re looking for a coding curriculum (with lots of bells and whistles!) then check out this project’s sister site, the <a href="https://webprogramming.gdwithgd.com/" target="_blank">The Designer’s Guide to Web Programming</a>.
-								</p>
-							</div>
-						</div>
-					</div>
-		
-					<div class="about-section" id="about-copying" data-active="0">
-						<h3 class="about-heading">
-							<div class="about-heading-content" onclick="toggleAbout('copying')">
-								<span>Can I use this code in my own projects?</span>
-								<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-							</div>
-						</h3>
-						<div class="about-content">
-							<div class="about-subsection">
-								<p>
-									For the most part, yes! This is an open source initiative that encourages you to learn from and use the techniques on display.
-								</p>
-								<p>
-									If you want to borrow a substantial amount of code from a story, consider crediting the original author in your project. And please don’t copy a story in its entirety or reuse it somewhere else without credit — that’s plagiarism, and also really lame.
-								</p>
-							</div>
-						</div>
-					</div>
-		
-					<div class="about-section" id="about-contribute" data-active="0">
-						<h3 class="about-heading">
-							<div class="about-heading-content" onclick="toggleAbout('contribute')">
-								<span>Can I contribute a story?</span>
-								<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-							</div>
-						</h3>
-						<div class="about-content">
-							<div class="about-subsection">
-								<p>
-									Absolutely! Please email <a href="mailto:gabriel@noreplica.com">gabriel@noreplica.com</a> if you have an idea or a finished story you’d like to submit. Anthologies are welcome too!
-								</p>
-								<p>
-									All stories are reviewed before being added to the site, and there isn’t a guarantee that your story will be included. If your story is accepted, revisions may be requested to make your story fit the project’s missions of accessibility and education.
-								</p>
-							</div>
-						</div>
-					</div>
-		
-					<div class="about-section" id="about-credits" data-active="0">
-						<h3 class="about-heading">
-							<div class="about-heading-content" onclick="toggleAbout('credits')">
-								<span>Who made this project?</span>
-								<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-							</div>
-						</h3>
-						<div class="about-content">
-							<div class="about-subsection">
-								<p>
-									<strong>Design & Development:</strong> <a href="https://gabrieldrozdov.com/" target="_blank">Gabriel Drozdov</a>
-								</p>
-								<p>
-									<strong>Colophon:</strong> <a href='https://velvetyne.fr/fonts/basteleur/' target="_blank">Basteleur</a> by Keussel, <a href='https://fonts.google.com/specimen/IBM+Plex+Mono' target="_blank">IBM Plex Mono</a> by Mike Abbink, <a href="https://toomuchtype.com/" target="_blank">Limkin</a> by Gabriel Drozdov
-								</p>
-								<p>
-									<strong>Contributors:</strong> TBA
-								</p>
-								<p>
-									“Small Sites; Big Stories” began as part of RISD’s Graduate Studio II course during the Spring 2023 semester, with the guidance of Lucinda Hitchcock and Paul Soulellis.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-	
-			<div class="about-nav-container">
-				<div class="about-nav">
-					<div class="about-nav-link" onclick="aboutUp(); mainIn();">
-						<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-						<p>Jump into a Story</p>
-						<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-					</div>
-				</div>
-			</div>
-		</div>
-	
-		<main class="main">
-			<div class="story-flash"></div>
-
-			<div class="nav-container">
-				<div class="nav">
-					<div class="nav-link" onclick="aboutIn(); mainDown();">
-						<svg viewBox="0 0 24 24"><path d="M0,18L12,6l12,12H0z"/></svg>
-						<p>About this Project</p>
-						<svg viewBox="0 0 24 24"><path d="M0,18L12,6l12,12H0z"/></svg>
-					</div>
-				</div>
-			</div>
-
-			<div class="toggle-container toggle-flip">
-				<div class="toggle">
-					<div class="toggle-text" id="toggle-story" onclick="togglePanelStory();" data-active="1">
-						<svg viewBox="0 0 24 24"><path d="M6 0l12 12-12 12z"/></svg>
-						<p>Hide Story Details</p>
-						<svg viewBox="0 0 24 24"><path d="M6 0l12 12-12 12z"/></svg>
-					</div>
-				</div>
-			</div>
-
-			<section class="story" id="story">
-				<div class="anthology-content" data-active="1">
-					<div class="anthology-border">
-						<div class="anthology-info">
-							<h5 class="anthology-subheading">Anthology</h5>
-							<h4 class="anthology-heading">Anthology Title</h4>
-							<p class="anthology-entry">Story <span id="anthology-number">1</span> of <span id="anthology-total">2</span></p>
-						</div>
-					</div>
-					<div class="anthology-links">
-						<div class="anthology-link" onclick="previousStory();">
-							<svg viewBox="0 0 24 24"><path d="M3,12l18,12V0L3,12z"/></svg>
-							<p>Previous Story</p>
-						</div>
-						<div class="anthology-link"  onclick="nextStory();">
-							<p>Next Story</p>
-							<svg viewBox="0 0 24 24"><path d="M21,12L3,24V0L21,12z"/></svg>
-						</div>
-					</div>
-				</div>
-				<div class="story-content">
-					<div class="story-block">
-						<div class="story-lines">
-							<div class="story-lines-number" id="lines">20</div>
-							<div class="story-lines-text">Lines of Code</div>
-						</div>
-					</div>
-					<div class="story-block">
-						<h3 class="story-caption">Story</h3>
-						<h2 class="story-title" id="title">
-							Some sort of story title goes here
-						</h2>
-					</div>
-					<div class="story-block">
-						<h3 class="story-caption">Created by</h3>
-						<ul class="story-links" id="authors">
-							<li href="#" target="_blank" class="story-link">Firstname Lastname</li>
-							<li href="#" target="_blank" class="story-link">Firstname Lastname</li>
-						</ul>
-					</div>
-					<div class="story-block">
-						<h3 class="story-caption">Explanation</h3>
-						<p class="story-desc" id="desc">
-							Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here. Some sort of description about the story goes here.
-						</p>
-					</div>
-					<div class="story-block">
-						<h3 class="story-caption">Tags</h3>
-						<ul class="story-links" id="tags">
-							<li class="story-link">Tag 1</li>
-							<li class="story-link">Tag 2</li>
-							<li class="story-link">Tag 3</li>
-							<li class="story-link">Tag 4</li>
-						</ul>
-					</div>
-				</div>
-			</section>
-
-			<section class="preview" id="preview-container" data-story="1" data-code="1">
-				<iframe class="preview-iframe" id="preview"></iframe>
-			</section>
-
-			<div class="toggle-container">
-				<div class="toggle">
-					<div class="toggle-text" id="toggle-code" onclick="togglePanelCode();" data-active="1">
-						<svg viewBox="0 0 24 24"><path d="M6 0l12 12-12 12z"/></svg>
-						<p>Hide Code Editor</p>
-						<svg viewBox="0 0 24 24"><path d="M6 0l12 12-12 12z"/></svg>
-					</div>
-				</div>
-			</div>
-
-			<section class="code" id="code">
-				<div class="code-library-container" id="library-container" data-active="0">
-					<a class="code-library" href="#" target="_blank" id="library-link">
-						<span id="library-text">JavaScript Library</span>
-						<span class="code-tooltip">A <strong>library</strong> is something that lets you extend the functionality of HTML, CSS, or JavaScript with new functions. Examples of libraries include p5.js for programming graphics, Tone.js for sound, ml5.js for machine learning, three.js for 3D graphics, and matter.js for physics simulations.</span>
-					</a>
-				</div>
-				<div class="code-editor-border" data-library="0">
-					<div class="code-editor-container" spellcheck="false">
-						<div class="code-editor" id="code-editor-html-parent" data-fullscreen="false">
-							<h3 class="code-editor-language">
-								<span>HTML</span>
-								<span class="code-tooltip"><strong>HTML (HyperText Markup Language)</strong> is a programming language used for structuring web pages. Internet browsers read HTML files to show you a website’s content.</span>
-							</h3>
-							<div class="code-editor-plaintext">
-								<div class="code-editor-plaintext-options">
-									<button onclick="toggleWrap('html');">
-										<svg viewBox="0 0 24 24">
-											<path d="M13.4,21H6v3l-6-5.4L6,13v3h7.4c3.1,0,5.6-2.4,5.6-5.4S16.5,5,13.4,5H6V0h7.4C19.3,0,24,4.7,24,10.6S19.3,21,13.4,21z"/>
-										</svg>
-									</button>
-									<button onclick="toggleFullscreen('html')">
-										<svg viewBox="0 0 24 24">
-											<polygon points="14.4,7 17.8,7 12,0 6.2,7 9.6,7 9.6,17 6.2,17 12,24 17.8,17 14.4,17 "/>
-										</svg>
-									</button>
-								</div>
-								<textarea id="code-editor-html"></textarea>
-							</div>
-						</div>
-						<div class="code-editor" id="code-editor-css-parent" data-fullscreen="false">
-							<h3 class="code-editor-language">
-								<span>CSS</span>
-								<span class="code-tooltip"><strong>CSS (Cascading Style Sheets)</strong> is a programming language used for styling web pages. This includes everything from how typography will look, to how information is laid out and organized. Internet browsers read CSS in conjunction with HTML.</span>
-							</h3>
-							<div class="code-editor-plaintext">
-								<div class="code-editor-plaintext-options">
-									<button onclick="toggleWrap('css');">
-										<svg viewBox="0 0 24 24">
-											<path d="M13.4,21H6v3l-6-5.4L6,13v3h7.4c3.1,0,5.6-2.4,5.6-5.4S16.5,5,13.4,5H6V0h7.4C19.3,0,24,4.7,24,10.6S19.3,21,13.4,21z"/>
-										</svg>
-									</button>
-									<button onclick="toggleFullscreen('css')">
-										<svg viewBox="0 0 24 24">
-											<polygon points="14.4,7 17.8,7 12,0 6.2,7 9.6,7 9.6,17 6.2,17 12,24 17.8,17 14.4,17 "/>
-										</svg>
-									</button>
-								</div>
-								<textarea id="code-editor-css"></textarea>
-							</div>
-						</div>
-						<div class="code-editor" id="code-editor-js-parent" data-fullscreen="false">
-							<h3 class="code-editor-language">
-								<span>JavaScript</span>
-								<span class="code-tooltip"><strong>JavaScript (JS)</strong> is a programming language used for dynamically modifying web pages. Some uses cases for JS include adding interactive elements, performing computation, or generating data and content. JS is able to manipulate HTML and CSS after the web page loads.</span>
-							</h3>
-							<div class="code-editor-plaintext">
-								<div class="code-editor-plaintext-options">
-									<button onclick="toggleWrap('js');">
-										<svg viewBox="0 0 24 24">
-											<path d="M13.4,21H6v3l-6-5.4L6,13v3h7.4c3.1,0,5.6-2.4,5.6-5.4S16.5,5,13.4,5H6V0h7.4C19.3,0,24,4.7,24,10.6S19.3,21,13.4,21z"/>
-										</svg>
-									</button>
-									<button onclick="toggleFullscreen('js')">
-										<svg viewBox="0 0 24 24">
-											<polygon points="14.4,7 17.8,7 12,0 6.2,7 9.6,7 9.6,17 6.2,17 12,24 17.8,17 14.4,17 "/>
-										</svg>
-									</button>
-								</div>
-								<textarea id="code-editor-js"></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="code-links">
-					<div class="code-link" onclick="resetPreview();">
-						<svg viewBox="0 0 100 100"><path d="m81.917,69.95l-19.95-19.95,19.95-19.95-11.967-11.967-19.95,19.95-19.95-19.95-11.967,11.967,19.95,19.95-19.95,19.95,11.967,11.967,19.95-19.95,19.95,19.95,11.967-11.967Z"/></svg>
-						<p>Reset</p>
-					</div>
-					<a class="code-link" id="download" href="#" download>
-						<svg viewBox="0 0 100 100"><path d="m58.989,56.62V16.152h-17.977v40.468h-18.239l27.228,27.228,27.228-27.228h-18.239Z"/></svg>
-						<p>Download</p>
-					</a>
-					<a class="code-link" id="newtab" href="#" target="_blank">
-						<svg viewBox="0 0 100 100"><path d="m83.848,41.538h-25.386v-25.386h-16.924v25.386h-25.386v16.924h25.386v25.386h16.924v-25.386h25.386v-16.924Z"/></svg>
-						<p>New&nbsp;Tab</p>
-					</a>
-				</div>
-			</section>
-
-			<div class="nav-container nav-bottom">
-				<div class="nav">
-					<div class="nav-link nav-link-large" onclick="catalogIn(); mainUp();">
-						<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-						<p>Stories & Anthologies</p>
-						<svg viewBox="0 0 24 24"><path d="M0,6l12,12L24,6H0z"/></svg>
-					</div>
-				</div>
-			</div>
-
-		</main>
-	
-		<div class="catalog">
-
-			<div class="return-container" onclick="catalogDown(); mainIn();">
-				<div class="return">
-					<div class="return-link">
-						<svg viewBox="0 0 24 24"><path d="M0,18L12,6l12,12H0z"/></svg>
-						<p>Jump into a Story</p>
-						<svg viewBox="0 0 24 24"><path d="M0,18L12,6l12,12H0z"/></svg>
-					</div>
-				</div>
-			</div>
-
-			<div class="catalog-toggle-container">
-				<div class="catalog-toggle">
-					<div class="catalog-toggle-text" id="toggle-controls" onclick="togglePanelControls();" data-active="1">
-						<svg viewBox="0 0 24 24"><path d="M6 0l12 12-12 12z"/></svg>
-						<p>Hide Sorting & Filters</p>
-						<svg viewBox="0 0 24 24"><path d="M6 0l12 12-12 12z"/></svg>
-					</div>
-				</div>
-			</div>
-
-			<div class="controls" data-active="1">
-				<div class="controls-content">
-
-					<div class="controls-section">
-						<div class="storytype">
-							<ul class="storytype-options">
-								<li class="storytype-option" data-storytype="story" data-active="1" onclick="setStoryType('story')">
-									<svg viewBox="0 0 24 24"><path d="M4,4v16h16V4H4z M18,18H6V6h12V18z"/><rect x="8" y="8" width="8" height="8"/></svg>
-									<p>Stories</p>
-								</li>
-								<li class="storytype-option" data-storytype="anthology" data-active="0" onclick="setStoryType('anthology')">
-									<svg viewBox="0 0 24 24"><path d="M22,10v12H10V10H22z M24,8H8v16h16V8z M4,4v16h2V6h14V4H4z M0,0v16h2V2h14V0H0z"/><rect x="12" y="12" width="8" height="8"/></svg>
-									<p>Anthologies</p>
-								</li>
-							</ul>
-						</div>
-					</div>
-	
-					<div class="controls-section" id="filters-code" data-storyonly="1">
-						<h4 class="controls-heading">Lines of Code</h4>
-						<div class="controls-subsection">
-							<ul class="controls-options">
-								<li class="controls-option filter-line" data-active="0" data-filter="20 or less" id="option-20less" onclick="setFilter('20 or less')">20 or less</li>
-								<li class="controls-option filter-line" data-active="0" data-filter="21–40" id="option-21to40" onclick="setFilter('21–40')">21–40</li>
-								<li class="controls-option filter-line" data-active="0" data-filter="41–60" id="option-41to60" onclick="setFilter('41–60')">41–60</li>
-								<li class="controls-option filter-line" data-active="0" data-filter="61–80" id="option-61to80" onclick="setFilter('61–80')">61–80</li>
-								<li class="controls-option filter-line" data-active="0" data-filter="81–100" id="option-81to100" onclick="setFilter('81–100')">81–100</li>
-								<li class="controls-option filter-line" data-active="0" data-filter="More than 100" id="option-100more" onclick="setFilter('More than 100')">More than 100</li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="controls-section" id="sorting">
-						<h4 class="controls-heading">Sorting</h4>
-						<div class="controls-subsection">
-							<ul class="controls-options">
-								<li class="controls-option toggle-sorting" data-sorting="leastcode" data-active="1" data-storyonly="1" onclick="setSorting('leastcode')">Least code</li>
-								<li class="controls-option toggle-sorting" data-sorting="mostcode" data-active="0" data-storyonly="1" onclick="setSorting('mostcode')">Most code</li>
-								<li class="controls-option toggle-sorting" data-sorting="titleaz" data-active="0" onclick="setSorting('titleaz')">Title A–Z</li>
-								<li class="controls-option toggle-sorting" data-sorting="titleza" data-active="0" onclick="setSorting('titleza')">Title Z–A</li>
-								<li class="controls-option toggle-sorting" data-sorting="authoraz" data-active="0" data-storyonly="1" onclick="setSorting('authoraz')">Author A–Z</li>
-								<li class="controls-option toggle-sorting" data-sorting="authorza" data-active="0" data-storyonly="1" onclick="setSorting('authorza')">Author Z–A</li>
-								<li class="controls-option toggle-sorting" data-sorting="random" data-active="0" onclick="setSorting('random')">Random</li>
-							</ul>
-						</div>
-					</div>
-	
-					<div class="controls-section" id="filters">
-						<h4 class="controls-heading">Filters</h4>
-
-						<div class="controls-subsection">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><circle cx="44.563" cy="44.322" r="17.203"/><path d="m0,0v100h100V0H0Zm73.89,80.018l-15.604-15.604c-3.912,2.679-8.638,4.248-13.726,4.248-13.42,0-24.339-10.916-24.339-24.339s10.919-24.339,24.339-24.339,24.342,10.919,24.342,24.339c0,5.333-1.726,10.271-4.645,14.286l15.522,15.522-5.889,5.888Z"/></svg>
-								<span>Search</span>
-							</h5>
-							<input type="text" class="search" placeholder="Search for a story by its title" oninput="setSearch(this.value)">
-						</div>
-
-						<div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><path d="m0,0v100h100V0H0Zm15.386,73.076V26.924h46.152v46.152H15.386Zm69.229,0l-15.865-16.455v-13.243l15.865-16.455v46.152Z"/></svg>
-								<span>Genre</span>
-							</h5>
-							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="action" onclick="setFilter('action')">Action</li>
-								<li class="controls-option" data-active="0" data-filter="adventure" onclick="setFilter('adventure')">Adventure</li>
-								<li class="controls-option" data-active="0" data-filter="comedy" onclick="setFilter('comedy')">Comedy</li>
-								<li class="controls-option" data-active="0" data-filter="drama" onclick="setFilter('drama')">Drama</li>
-								<li class="controls-option" data-active="0" data-filter="documentary" onclick="setFilter('documentary')">Documentary</li>
-								<li class="controls-option" data-active="0" data-filter="horror" onclick="setFilter('horror')">Horror</li>
-								<li class="controls-option" data-active="0" data-filter="fantasy" onclick="setFilter('fantasy')">Fantasy</li>
-								<li class="controls-option" data-active="0" data-filter="mystery" onclick="setFilter('mystery')">Mystery</li>
-								<li class="controls-option" data-active="0" data-filter="romance" onclick="setFilter('romance')">Romance</li>
-							</ul>
-						</div>
-
-						<div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><path d="m0,0v100h100V0H0Zm67.432,78.266l-9.657,4.657-11.682-23.844-14.577,12.627V18.471l42.967,32.975-18.667,3.142,11.615,23.678Z"/></svg>
-								<span>Types of Interaction</span>
-							</h5>
-							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="mouse" onclick="setFilter('mouse')">Mouse</li>
-								<li class="controls-option" data-active="0" data-filter="click" onclick="setFilter('click')">Click</li>
-								<li class="controls-option" data-active="0" data-filter="scroll wheel" onclick="setFilter('scroll wheel')">Scroll Wheel</li>
-								<li class="controls-option" data-active="0" data-filter="keyboard" onclick="setFilter('keyboard')">Keyboard</li>
-								<li class="controls-option" data-active="0" data-filter="no interaction" onclick="setFilter('no interaction')">No Interaction</li>
-							</ul>
-						</div>
-
-						<div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><path d="m0,0v100h100V0H0Zm36.038,40.269l-16.866,9.731,16.866,9.706v7.777l-23.924-13.766v-7.432l23.924-13.769v7.753Zm11.064,37.632h-6.199l11.995-55.802h6.214l-12.01,55.802Zm40.783-24.183l-23.924,13.766v-7.777l16.866-9.706-16.866-9.731v-7.753l23.924,13.769v7.432Z"/></svg>
-								<span>Programming Languages</span>
-							</h5>
-							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="only html" onclick="setFilter('only html')">Only HTML</li>
-								<li class="controls-option" data-active="0" data-filter="html+css" onclick="setFilter('html+css')">HTML+CSS</li>
-								<li class="controls-option" data-active="0" data-filter="html+css+js" onclick="setFilter('html+css+js')">HTML+CSS+JS</li>
-							</ul>
-						</div>
-
-						<div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><path d="m0,0v100h100V0H0Zm43.459,23.844c-16.044-.023-12.97,7.564-12.97,15.325,0,6.132-3.96,9.095-7.45,10.831,3.489,1.737,7.45,6.338,7.45,13.183,0,7.741-3.11,12.973,12.97,12.973v6.547c-23.811,0-19.622-12.385-19.622-19.52,0-5.053-4.703-9.343-9.811-9.343v-7.682c5.108.003,9.811-1.939,9.811-6.989,0-7.136-4.202-21.872,19.622-21.872v6.547Zm42.514,29.998c-5.108,0-9.811,4.291-9.811,9.343,0,7.133,4.189,19.517-19.622,19.517v-6.547c16.08,0,12.97-5.232,12.97-12.973,0-6.848,3.96-11.446,7.45-13.183-3.489-1.737-7.45-4.703-7.45-10.831,0-7.757,3.074-15.344-12.97-15.325v-6.547c23.824,0,19.622,14.736,19.622,21.872,0,5.049,4.703,6.992,9.811,6.992v7.682Z"/></svg>
-								<span>JavaScript Library</span>
-							</h5>
-							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="p5.js" onclick="setFilter('p5.js')">p5.js</li>
-								<!-- <li class="controls-option" data-active="0" data-filter="ml5.js" onclick="setFilter('ml5.js')">ml5.js</li>
-								<li class="controls-option" data-active="0" data-filter="tone.js" onclick="setFilter('tone.js')">Tone.js</li>
-								<li class="controls-option" data-active="0" data-filter="matter.js" onclick="setFilter('matter.js')">matter.js</li> -->
-							</ul>
-						</div>
-
-						<!-- <div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><path d="m0,0v100h100V0H0Zm16.228,83.772l4.167-20.655,16.485,16.488-20.652,4.167Zm25.889-9.404l-16.485-16.488L69.281,14.228l16.491,16.485-43.656,43.656Z"/></svg>
-								<span>Design Techniques</span>
-							</h5>
-							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="typography" onclick="setFilter('typography')">Typography</li>
-								<li class="controls-option" data-active="0" data-filter="variable fonts" onclick="setFilter('variable fonts')">Variable Fonts</li>
-								<li class="controls-option" data-active="0" data-filter="flexbox" onclick="setFilter('flexbox')">Flexbox</li>
-								<li class="controls-option" data-active="0" data-filter="grid" onclick="setFilter('grid')">Grid</li>
-								<li class="controls-option" data-active="0" data-filter="keyframes" onclick="setFilter('keyframes')">Keyframes</li>
-								<li class="controls-option" data-active="0" data-filter="hover states" onclick="setFilter('hover states')">Hover States</li>
-							</ul>
-						</div> -->
-
-						<!-- <div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><path d="m0,0v100h100V0H0Zm69.872,77.949H30.128v-6.882h39.743v6.882Zm0-32.585h-16.43v16.43h-6.882v-16.43h-16.43v-6.882h16.43v-16.43h6.882v16.43h16.43v6.882Z"/></svg>
-								<span>Programming Techniques</span>
-							</h5>
-							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="math" onclick="setFilter('math')">Math</li>
-								<li class="controls-option" data-active="0" data-filter="variables" onclick="setFilter('variables')">Variables</li>
-								<li class="controls-option" data-active="0" data-filter="arrays" onclick="setFilter('arrays')">Arrays</li>
-								<li class="controls-option" data-active="0" data-filter="objects" onclick="setFilter('objects')">Objects</li>
-								<li class="controls-option" data-active="0" data-filter="if then else" onclick="setFilter('if/then/else')">If/Then/Else</li>
-								<li class="controls-option" data-active="0" data-filter="loops" onclick="setFilter('loops')">Loops</li>
-								<li class="controls-option" data-active="0" data-filter="randomization" onclick="setFilter('randomization')">Randomization</li>
-								<li class="controls-option" data-active="0" data-filter="classes" onclick="setFilter('classes')">Classes</li>
-							</ul>
-						</div> -->
-
-						<!-- <div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><rect x="32.193" y="23.29" width="35.614" height="53.421"/><path d="m0,0v100h100V0H0Zm72.5,85H27.5V15h45v70Z"/></svg>
-								<span>Compatible Devices</span>
-							</h5>
-							<ul class="controls-options">
-								<li class="controls-option" data-active="0" data-filter="desktop" onclick="setFilter('desktop')">Desktop</li>
-								<li class="controls-option" data-active="0" data-filter="mobile" onclick="setFilter('mobile')">Mobile</li>
-							</ul>
-						</div> -->
-
-						<div class="controls-subsection" data-storyonly="1">
-							<h5 class="controls-subheading">
-								<svg viewBox="0 0 100 100"><path d="m0,0v100h100V0H0Zm84.988,85H15.016l-.016-2.765c-.027-7.373.292-11.589,8.75-13.549,9.267-2.147,20.37-7.754,15.972-15.89-13.028-24.123-3.714-37.796,10.282-37.796,13.72,0,23.267,13.168,10.274,37.796-4.266,8.089,6.502,13.697,15.972,15.89,8.493,1.968,8.777,6.211,8.75,13.634l-.012,2.679Z"/></svg>
-								<span>Author</span>
-							</h5>
-							<ul class="controls-options" id="filters-authors"></ul>
-						</div>
-					</div>
-
-					<div class="controls-clear" data-active="0" onclick="clearFilters();">
-						Clear Filters
-					</div>
-
-				</div>
-			</div>
-
-			<section class="index" data-controls="1">
-				<div class="index-flash"></div>
-				<!-- Builds on page load -->
-				<div class="index-items" id="index" data-active="1" data-view="story">
-					<div class="index-empty" data-active="0">
-						No results match those settings!
-					</div>
-				</div>
-			</section>
-
-		</div>
-
-	</div>
-
-	<script src="script.js"></script>
-</body>
-</html>

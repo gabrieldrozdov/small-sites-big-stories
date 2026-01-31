@@ -67,6 +67,9 @@ async function fetchStory() {
 	const navNext = document.querySelector('#nav-next');
 	navNext.href = `./?story=${nextStory}`;
 
+	const newtab = document.querySelector("#newtab");
+	newtab.href = `${activeStory}.html`;
+
 	// Fetch story data
 	try {
 		let response = await fetch(`./${activeStory}.html`);

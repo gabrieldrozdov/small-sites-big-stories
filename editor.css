@@ -334,7 +334,8 @@ body {
 	border: 6px double var(--off-black);
 	background-color: var(--light-gray);
 }
-.code-controls button {
+.code-controls button,
+.code-controls a {
 	display: flex;
 	align-items: center;
 	font-family: inherit;
@@ -352,20 +353,25 @@ body {
 	gap: 5px;
 	transition: color .2s, fill .2s, opacity .2s, background-color .2s;
 	cursor: pointer;
+	text-decoration: none;
 }
-.code-controls button svg {
+.code-controls button svg,
+.code-controls a svg {
 	width: 18px;
 	height: 18px;
 }
-.code-controls button span {
+.code-controls button span,
+.code-controls a span {
 	padding-top: .2em;
 }
-.code-controls button:hover {
+.code-controls button:hover,
+.code-controls a:hover {
 	background-color: var(--off-black);
 	fill: var(--off-white);
 	color: var(--off-white);
 }
-.code-controls button:active {
+.code-controls button:active,
+.code-controls a:active {
 	opacity: .25;
 }
 .CodeMirror {

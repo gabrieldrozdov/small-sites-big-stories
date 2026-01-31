@@ -60,7 +60,6 @@ body {
 
 /* Homepage */
 .home-container {
-	overflow: hidden;
 	background-color: var(--light-gray);
 }
 .home-floor {

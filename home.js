@@ -109,7 +109,7 @@ setTimeout(() => {
 window.addEventListener('pageshow', (event) => {
 	if (event.persisted) {
 		const container = document.querySelector('.home-container');
-		container.dataset.transition = 1;
+		container.dataset.transition = 0;
 		for (let link of document.querySelectorAll('.home-index-link')) {
 			link.style.transition = '';
 			link.style.transform = '';

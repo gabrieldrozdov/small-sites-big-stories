@@ -113,6 +113,9 @@ window.addEventListener('pageshow', (event) => {
 		for (let link of document.querySelectorAll('.home-index-link')) {
 			link.style.transition = '';
 			link.style.transform = '';
+			let content = link.querySelector('.home-index-link-content');
+			content.style.transition = '';
+			content.style.transform = '';
 		}
 	}
 });

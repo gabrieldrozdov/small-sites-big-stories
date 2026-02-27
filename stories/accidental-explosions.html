@@ -2,8 +2,8 @@
 	/* Missile class */
 	.missile {
 		position: absolute;
-		width: 10vw;
-		height: 10vw;
+		width: 5vmin;
+		height: 5vmin;
 		border-radius: 50%;
 		background-color: red;
 		animation: explosion 1s alternate ease-in-out infinite;
@@ -25,8 +25,8 @@
 			return
 		}
 
-		// 50/50 chance to create a new missile
-		if (Math.random() < .5) {
+		// 25% chance to create a new missile
+		if (Math.random() < .25) {
 			let missile = document.createElement("div");
 			missile.classList.add("missile");
 			missile.style.left = e.clientX + "px";
